@@ -167,16 +167,16 @@ Arguments:
 	if (linked_interface)
 		linked_interface.active = TRUE
 		linked_interface.update_appearance()
-		RegisterSignal(linked_interface, COMSIG_PARENT_QDELETING, PROC_REF(unregister_signals))
+		RegisterSignal(linked_interface, COMSIG_QDELETING, PROC_REF(unregister_signals))
 	linked_input.active = TRUE
 	linked_input.update_appearance()
-	RegisterSignal(linked_input, COMSIG_PARENT_QDELETING, PROC_REF(unregister_signals))
+	RegisterSignal(linked_input, COMSIG_QDELETING, PROC_REF(unregister_signals))
 	linked_output.active = TRUE
 	linked_output.update_appearance()
-	RegisterSignal(linked_output, COMSIG_PARENT_QDELETING, PROC_REF(unregister_signals))
+	RegisterSignal(linked_output, COMSIG_QDELETING, PROC_REF(unregister_signals))
 	linked_moderator.active = TRUE
 	linked_moderator.update_appearance()
-	RegisterSignal(linked_moderator, COMSIG_PARENT_QDELETING, PROC_REF(unregister_signals))
+	RegisterSignal(linked_moderator, COMSIG_QDELETING, PROC_REF(unregister_signals))
 	START_PROCESSING(SSmachines, src)
 	desired_reate_of_reaction = 1
 	var/startup_sound = pick('sound/effects/rbmk/startup.ogg', 'sound/effects/rbmk/startup2.ogg')
@@ -205,13 +205,13 @@ Arguments:
 /obj/machinery/atmospherics/components/unary/rbmk/core/proc/unregister_signals(only_signals = FALSE)
 	SIGNAL_HANDLER
 	if(linked_interface)
-		UnregisterSignal(linked_interface, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(linked_interface, COMSIG_QDELETING)
 	if(linked_input)
-		UnregisterSignal(linked_input, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(linked_input, COMSIG_QDELETING)
 	if(linked_output)
-		UnregisterSignal(linked_output, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(linked_output, COMSIG_QDELETING)
 	if(linked_moderator)
-		UnregisterSignal(linked_moderator, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(linked_moderator, COMSIG_QDELETING)
 	if(!only_signals)
 		deactivate()
 
@@ -498,7 +498,7 @@ Arguments:
 	SSair.atmos_machinery -= src //Annd we're now just a useless brick.
 	update_icon()
 	STOP_PROCESSING(SSmachines, src)
-	AddComponent(/datum/component/radioactive, 15000 , src)
+	AddElement(/datum/element/radioactive, chance = 50, threshold = RAD_EXTREME_INSULATION)
 	var/turf/reactor_turf = get_turf(src)
 	var/rbmkzlevel = reactor_turf.get_virtual_z_level()
 	for(var/mob/player_mob in GLOB.player_list)
@@ -585,7 +585,6 @@ Arguments:
 	if(epicenter)
 		for(var/obj/effect/decal/cleanable/nuclear_waste/waste in floor) //Replace nuclear waste with the stronger version
 			qdel(waste)
-		new /obj/effect/decal/cleanable/nuclear_waste/epicenter (floor)
 		return TRUE
 
 	if(!prob(PLUTONIUM_SLUDGE_CHANCE)) //Scatter the sludge, don't smear it everywhere

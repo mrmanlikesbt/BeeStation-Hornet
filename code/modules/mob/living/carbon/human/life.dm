@@ -36,7 +36,7 @@
 				if(we_breath)
 					adjustOxyLoss(4 * delta_time)
 					Unconscious(80)
-				
+
 				// Tissues die without blood circulation, machines burn without coolant circulation
 				if (HAS_TRAIT(src, TRAIT_BLOOD_COOLANT))
 					adjustFireLoss(0.5 * delta_time)
@@ -77,13 +77,9 @@
 		SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "brain_damage")
 	return ..()
 
-/mob/living/carbon/human/handle_mutations_and_radiation(delta_time, times_fired)
-	if(!dna || !dna.species.handle_mutations_and_radiation(src, delta_time, times_fired))
-		..()
-
 /mob/living/carbon/human/breathe()
 	if(!dna.species.breathe(src))
-		..()
+		return ..()
 
 /mob/living/carbon/human/check_breath(datum/gas_mixture/breath)
 
@@ -102,7 +98,7 @@
 		if(S.breathid == GAS_O2)
 			throw_alert("not_enough_oxy", /atom/movable/screen/alert/not_enough_oxy)
 		else if(S.breathid == "tox")
-			throw_alert("not_enough_tox", /atom/movable/screen/alert/not_enough_tox)
+			throw_alert("not_enough_tox", /atom/movable/screen/alert/not_enough_plas)
 		else if(S.breathid == "co2")
 			throw_alert("not_enough_co2", /atom/movable/screen/alert/not_enough_co2)
 		else if(S.breathid == "n2")

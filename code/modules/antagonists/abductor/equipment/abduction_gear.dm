@@ -36,7 +36,6 @@
 	laser = 50
 	energy = 50
 	bomb = 50
-	rad = 15
 	bio = 50
 	fire = 90
 	acid = 90
@@ -49,7 +48,6 @@
 	laser = 15
 	energy = 25
 	bomb = 15
-	rad = 50
 	bio = 15
 	fire = 70
 	acid = 70
@@ -649,13 +647,13 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 		unregister_target()
 	current_target = new_target
 	if (current_target)
-		RegisterSignal(current_target, COMSIG_PARENT_QDELETING, PROC_REF(unregister_target))
+		RegisterSignal(current_target, COMSIG_QDELETING, PROC_REF(unregister_target))
 		START_PROCESSING(SSprocessing, src)
 
 /// Called when a target is deleted
 /obj/item/melee/baton/abductor/proc/unregister_target()
 	SIGNAL_HANDLER
-	UnregisterSignal(current_target, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(current_target, COMSIG_QDELETING)
 	current_target = null
 	STOP_PROCESSING(SSprocessing, src)
 

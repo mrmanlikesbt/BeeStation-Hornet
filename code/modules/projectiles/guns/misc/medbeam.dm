@@ -69,7 +69,7 @@
 	current_target = target
 	active = TRUE
 	current_beam = user.Beam(current_target, icon_state="medbeam", time = 10 MINUTES, maxdistance = max_range, beam_type = /obj/effect/ebeam/medical)
-	RegisterSignal(current_beam, COMSIG_PARENT_QDELETING, PROC_REF(beam_died))//this is a WAY better rangecheck than what was done before (process check)
+	RegisterSignal(current_beam, COMSIG_QDELETING, PROC_REF(beam_died))//this is a WAY better rangecheck than what was done before (process check)
 
 	SSblackbox.record_feedback("tally", "gun_fired", 1, type)
 
@@ -104,7 +104,7 @@
 	dummy.pass_flags |= PASSTABLE|PASSTRANSPARENT|PASSGRILLE //Grille/Glass so it can be used through common windows
 	var/turf/previous_step = user_turf
 	var/first_step = TRUE
-	for(var/turf/next_step as anything in (getline(user_turf, target) - user_turf))
+	for(var/turf/next_step as anything in (get_line(user_turf, target) - user_turf))
 		if(first_step)
 			for(var/obj/blocker in user_turf)
 				if(!blocker.density || !(blocker.flags_1 & ON_BORDER_1))

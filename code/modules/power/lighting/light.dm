@@ -65,15 +65,15 @@
 
 /obj/machinery/light/proc/store_cell(new_cell)
 	if(cell)
-		UnregisterSignal(cell, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(cell, COMSIG_QDELETING)
 	cell = new_cell
 	if(cell)
-		RegisterSignal(cell, COMSIG_PARENT_QDELETING, PROC_REF(remove_cell))
+		RegisterSignal(cell, COMSIG_QDELETING, PROC_REF(remove_cell))
 
 /obj/machinery/light/proc/remove_cell()
 	SIGNAL_HANDLER
 	if(cell)
-		UnregisterSignal(cell, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(cell, COMSIG_QDELETING)
 		cell = null
 
 // create a new lighting fixture
@@ -642,14 +642,22 @@
 	on = TRUE
 	update()
 
-/obj/machinery/light/tesla_act(power, tesla_flags)
-	if(tesla_flags & TESLA_MACHINE_EXPLOSIVE)
-		//Fire can cause a lot of lag, just do a mini explosion.
-		explosion(src,0,0,1, adminlog = 0)
-		for(var/mob/living/L in range(3, src))
-			L.fire_stacks = max(L.fire_stacks, 3)
-			L.IgniteMob()
-			L.electrocute_act(0, "Tesla Light Zap", flags = SHOCK_TESLA)
+/obj/machinery/light/zap_act(power, zap_flags)
+	if(zap_flags & ZAP_MACHINE_EXPLOSIVE)
+		// Fire can cause a lot of lag, just do a mini explosion.
+		explosion(
+			epicenter = src,
+			devastation_range = 0,
+			heavy_impact_range = 0,
+			light_impact_range = 1,
+			adminlog = FALSE
+		)
+
+		for(var/mob/living/person in range(3, src))
+			person.fire_stacks = max(person.fire_stacks, 3)
+			person.IgniteMob()
+			person.electrocute_act(0, "[src]", flags = SHOCK_TESLA)
+
 		qdel(src)
 	else
 		return ..()

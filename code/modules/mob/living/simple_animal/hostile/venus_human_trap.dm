@@ -177,7 +177,7 @@
 			return
 	if(get_dist(src,the_target) > vine_grab_distance || vines.len == max_vines)
 		return
-	for(var/turf/T in getline(src,target))
+	for(var/turf/T in get_line(src,target))
 		if (T.density)
 			return
 		for(var/obj/O in T)
@@ -185,7 +185,7 @@
 				return
 
 	var/datum/beam/newVine = Beam(the_target, "vine", maxdistance = vine_grab_distance, beam_type=/obj/effect/ebeam/vine)
-	RegisterSignal(newVine, COMSIG_PARENT_QDELETING, PROC_REF(remove_vine), newVine)
+	RegisterSignal(newVine, COMSIG_QDELETING, PROC_REF(remove_vine), newVine)
 	vines += newVine
 	if(isliving(the_target))
 		var/mob/living/L = the_target

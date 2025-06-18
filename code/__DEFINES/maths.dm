@@ -10,9 +10,9 @@
 
 #define NUM_E 2.718282
 
-#define PI						3.1416
-#define INFINITY				1e31	//closer then enough
-#define SYSTEM_TYPE_INFINITY					1.#INF //only for isinf check
+#define PI 3.1416
+#define INFINITY 1e31	//closer then enough
+#define SYSTEM_TYPE_INFINITY 1.#INF //only for isinf check
 
 #define SHORT_REAL_LIMIT 16777216
 
@@ -90,13 +90,14 @@
 // amount=0.5 returns the mean of a and b.
 #define LERP(a, b, amount) ( amount ? ((a) + ((b) - (a)) * (amount)) : a )
 
+/**
+ * Performs an inverse linear interpolation between a, b, and a provided value between a and b
+ * This returns the amount that you would need to feed into a lerp between A and B to return the third value
+**/
+#define INVERSE_LERP(a, b, value) ((value - a) / (b - a))
+
 /// Returns the nth root of x.
 #define ROOT(n, x) ((x) ** (1 / (n)))
-
-/// Low-pass filter a value to smooth out high frequent peaks. This can be thought of as a moving average filter as well.
-/// delta_time is how many seconds since we last ran this command. RC is the filter constant, high RC means more smoothing
-/// See https://en.wikipedia.org/wiki/Low-pass_filter#Simple_infinite_impulse_response_filter for the maths
-#define LPFILTER(memory, signal, delta_time, RC) (delta_time / (RC + delta_time)) * signal + (1 - delta_time / (RC + delta_time)) * memory
 
 // The quadratic formula. Returns a list with the solutions, or an empty list
 // if they are imaginary.
@@ -245,3 +246,6 @@
 /// Gives the number of pixels in an orthogonal line of tiles.
 #define TILES_TO_PIXELS(tiles)			(tiles * PIXELS)
 // )
+
+#define SI_COEFFICIENT "coefficient"
+#define SI_UNIT "unit"

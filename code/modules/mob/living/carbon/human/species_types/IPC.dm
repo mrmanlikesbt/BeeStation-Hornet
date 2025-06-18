@@ -12,7 +12,7 @@
 		MUTCOLORS,
 		REVIVESBYHEALING,
 		NOHUSK,
-		NOMOUTH, 
+		NOMOUTH,
 		MUTCOLORS
 	)
 	inherent_traits = list(
@@ -20,10 +20,11 @@
 		TRAIT_RESISTCOLD,
 		TRAIT_NOBREATH,
 		TRAIT_RADIMMUNE,
+		TRAIT_GENELESS,
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_POWERHUNGRY,
-		TRAIT_XENO_IMMUNE, 
+		TRAIT_XENO_IMMUNE,
 		TRAIT_TOXIMMUNE
 	)
 	inherent_biotypes = list(MOB_ROBOTIC, MOB_HUMANOID)
@@ -124,7 +125,7 @@
 	C.update_body()
 
 /datum/action/innate/change_screen
-	name = "Change Display"	
+	name = "Change Display"
 	check_flags = AB_CHECK_CONSCIOUS
 	icon_icon = 'icons/hud/actions/actions_silicon.dmi'
 	button_icon_state = "drone_vision"
