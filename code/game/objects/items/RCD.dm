@@ -457,6 +457,7 @@ GLOBAL_VAR_INIT(icon_holographic_window, init_holographic_window())
 		"Security" = get_airlock_image(/obj/machinery/door/airlock/security/glass),
 		"Command" = get_airlock_image(/obj/machinery/door/airlock/command/glass),
 		"Medical" = get_airlock_image(/obj/machinery/door/airlock/medical/glass),
+		"Hydroponics" = get_airlock_image(/obj/machinery/door/airlock/hydroponics),
 		"Research" = get_airlock_image(/obj/machinery/door/airlock/research/glass),
 		"Science" = get_airlock_image(/obj/machinery/door/airlock/science/glass),
 		"Virology" = get_airlock_image(/obj/machinery/door/airlock/virology/glass),

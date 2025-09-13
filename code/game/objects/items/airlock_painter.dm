@@ -34,6 +34,7 @@
 		"Command" = /obj/machinery/door/airlock/command,
 		"Medical" = /obj/machinery/door/airlock/medical,
 		"Research" = /obj/machinery/door/airlock/research,
+		"Hydroponics" = /obj/machinery/door/airlock/hydroponics,
 		"Freezer" = /obj/machinery/door/airlock/freezer,
 		"Science" = /obj/machinery/door/airlock/science,
 		"Mining" = /obj/machinery/door/airlock/mining,
