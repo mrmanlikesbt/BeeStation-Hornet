@@ -21659,10 +21659,6 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/wideplating_new/dark,
-/obj/machinery/door/airlock{
-	name = "Hydroponics";
-	req_access_txt = "35"
-	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
@@ -21672,6 +21668,8 @@
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer4{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/hydroponics,
+/obj/machinery/door/airlock/hydroponics,
 /turf/open/floor/iron/dark/textured_half,
 /area/hydroponics)
 "etH" = (
@@ -34553,8 +34551,7 @@
 	dir = 1
 	},
 /obj/machinery/door/airlock{
-	name = "Kitchen Storage";
-	req_access_txt = "28"
+	name = "Kitchen Storage"
 	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -34569,6 +34566,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/kitchen,
 /turf/open/floor/iron/dark/textured_half,
 /area/crew_quarters/kitchen)
 "gYo" = (
@@ -39891,9 +39889,7 @@
 /area/crew_quarters/heads/chief)
 "icq" = (
 /obj/machinery/door/airlock{
-	name = "Service Hall";
-	req_access_txt = "null";
-	req_one_access_txt = "25;26;35;28;22;37;46;38"
+	name = "Service Hall"
 	},
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -39914,6 +39910,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/general,
 /turf/open/floor/iron/dark/textured_half{
 	dir = 1
 	},
@@ -43711,8 +43708,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock{
-	name = "Kitchen Storage";
-	req_access_txt = "28"
+	name = "Kitchen Storage"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -43724,6 +43720,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/kitchen,
 /turf/open/floor/iron/textured_half{
 	dir = 1
 	},
@@ -51975,12 +51972,12 @@
 /area/maintenance/department/chapel)
 "kzz" = (
 /obj/machinery/door/airlock/maintenance_hatch{
-	name = "Maintenance Hatch";
-	req_access_txt = "26"
+	name = "Maintenance Hatch"
 	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/janitor,
 /turf/open/floor/plating,
 /area/maintenance/port/central)
 "kzD" = (
@@ -55647,8 +55644,10 @@
 	dir = 8
 	},
 /obj/machinery/door/airlock/maintenance{
-	req_one_access_txt = "35"
+	req_one_access_txt = "35";
+	name = "Hydroponics Maintenance"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/hydroponics,
 /turf/open/floor/plating,
 /area/maintenance/department/chapel)
 "lnk" = (
@@ -73842,9 +73841,7 @@
 /area/hydroponics)
 "oWK" = (
 /obj/machinery/door/airlock{
-	name = "Service Hall";
-	req_access_txt = "null";
-	req_one_access_txt = "25;26;35;28;22;37;46;38"
+	name = "Service Hall"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/siding/wideplating_new/dark{
@@ -73856,6 +73853,7 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/general,
 /turf/open/floor/iron/dark/textured_half{
 	dir = 1
 	},
@@ -80103,8 +80101,7 @@
 /area/engine/supermatter)
 "qkp" = (
 /obj/machinery/door/airlock/maintenance_hatch{
-	name = "Maintenance Hatch";
-	req_one_access_txt = "25;26;35;28;22;37;46;38"
+	name = "Maintenance Hatch"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -80115,6 +80112,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/general,
 /turf/open/floor/plating,
 /area/maintenance/department/chapel)
 "qku" = (
@@ -89892,16 +89890,14 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/wideplating_new/dark,
-/obj/machinery/door/airlock{
-	name = "Hydroponics";
-	req_access_txt = "35"
-	},
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer4{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/hydroponics,
+/obj/machinery/door/airlock/hydroponics,
 /turf/open/floor/iron/dark/textured_half,
 /area/hydroponics)
 "slf" = (
@@ -97748,8 +97744,7 @@
 /area/space/nearstation)
 "tRq" = (
 /obj/machinery/door/airlock{
-	name = "Custodial Closet";
-	req_access_txt = "26"
+	name = "Custodial Closet"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/yellow{
@@ -97768,6 +97763,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/hidden/layer4{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/janitor,
 /turf/open/floor/iron/textured_half,
 /area/janitor)
 "tRu" = (
@@ -101789,8 +101785,7 @@
 	dir = 1
 	},
 /obj/machinery/door/airlock{
-	name = "Kitchen Coldroom";
-	req_access_txt = "28"
+	name = "Kitchen Coldroom"
 	},
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -101802,6 +101797,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/supply/hidden/layer2{
 	dir = 1
 	},
+/obj/effect/mapping_helpers/airlock/access/all/service/kitchen,
 /turf/open/floor/iron/textured_half,
 /area/crew_quarters/kitchen/coldroom)
 "uHk" = (
@@ -117947,10 +117943,6 @@
 	},
 /turf/open/floor/iron/techmaint,
 /area/maintenance/department/engine/atmos)
-"xUf" = (
-/obj/effect/turf_decal/siding/wood,
-/turf/open/floor/wood,
-/area/bridge/showroom/corporate)
 "xUx" = (
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
 /obj/effect/turf_decal/siding/dark{
