@@ -979,31 +979,6 @@
 			return
 		M.mind_initialize()
 
-	else if(href_list["create_object"])
-		if(!check_rights(R_SPAWN))
-			return
-		return create_object(usr)
-
-	else if(href_list["quick_create_object"])
-		if(!check_rights(R_SPAWN))
-			return
-		return quick_create_object(usr)
-
-	else if(href_list["create_turf"])
-		if(!check_rights(R_SPAWN))
-			return
-		return create_turf(usr)
-
-	else if(href_list["create_mob"])
-		if(!check_rights(R_SPAWN))
-			return
-		return create_mob(usr)
-
-	else if(href_list["dupe_marked_datum"])
-		if(!check_rights(R_SPAWN))
-			return
-		return DuplicateObject(marked_datum, perfectcopy=1, newloc=get_turf(usr))
-
 	else if(href_list["object_list"])			//this is the laggiest thing ever
 		if(!check_rights(R_SPAWN))
 			return

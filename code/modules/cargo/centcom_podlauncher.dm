@@ -193,9 +193,11 @@
 		return
 	switch(action)
 		////////////////////////////UTILITIES//////////////////
-		if("gamePanel")
-			owner_client.holder.Game()
-			SSblackbox.record_feedback("tally", "admin_verb", 1, "Game Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		if("spawnPanel")
+			var/datum/spawnpanel/panel = get_spawnpanel_for_admin(owner_client.mob)
+			if(panel)
+				panel.ui_interact(owner_client.mob)
+			SSblackbox.record_feedback("tally", "admin_verb", 1, "Spawn Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 			. = TRUE
 		if("buildMode")
 			var/mob/owner_client_mob = owner_client.mob

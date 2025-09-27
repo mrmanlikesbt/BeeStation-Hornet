@@ -645,9 +645,9 @@ const PodStatusPage = (props) => {
                     inline
                     color="transparent"
                     icon="list-alt"
-                    tooltip="Game Panel"
+                    tooltip="Spawn Panel"
                     tooltipPosition="top-start"
-                    onClick={() => act('gamePanel')}
+                    onClick={() => act('spawnPanel')}
                   />
                   <Button
                     inline

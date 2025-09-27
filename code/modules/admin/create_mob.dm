@@ -1,15 +1,6 @@
-
-/datum/admins/proc/create_mob(mob/user)
-	var/static/create_mob_html
-	if (!create_mob_html)
-		var/mobjs = null
-		mobjs = jointext(typesof(/mob), ";")
-		create_mob_html = rustg_file_read('html/create_object.html')
-		create_mob_html = replacetext(create_mob_html, "Create Object", "Create Mob")
-		create_mob_html = replacetext(create_mob_html, "null /* object types */", "\"[mobjs]\"")
-
-	user << browse(create_panel_helper(create_mob_html), "window=create_mob;size=425x475")
-
+/**
+ * Fully randomizes everything about a human, including DNA and name.
+ */
 /proc/randomize_human(mob/living/carbon/human/H, unique = FALSE)
 	H.gender = pick(MALE, FEMALE)
 	H.real_name = random_unique_name(H.gender)
