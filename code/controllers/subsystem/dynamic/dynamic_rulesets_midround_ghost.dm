@@ -165,9 +165,14 @@
  * Spawn a body for the chosen candidate
  */
 /datum/dynamic_ruleset/midround/ghost/proc/generate_ruleset_body(mob/dead/observer/chosen_mob)
-	var/mob/living/carbon/human/new_body = makeBody(chosen_mob)
-	new_body.clean_dna()
-	return new_body
+	var/datum/mind/player_mind = new /datum/mind(chosen_mob.key)
+	player_mind.active = TRUE
+
+	var/mob/living/carbon/human/new_character = new()
+	new_character.dna.update_dna_identity()
+	new_character.key = chosen_mob.key
+
+	return new_character
 
 /**
  * Finalize the candidate's body
