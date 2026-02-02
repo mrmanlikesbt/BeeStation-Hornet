@@ -86,7 +86,6 @@
 	set waitfor = FALSE
 
 	// We need to compile the overlays now, otherwise we're basically copying an empty icon.
-	COMPILE_OVERLAYS(person)
 	var/mutable_appearance/character_appearance = new(person.appearance)
 	var/datum/dna/stored/record_dna = new()
 	person.dna.copy_dna(record_dna)

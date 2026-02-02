@@ -1134,7 +1134,6 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 		body.equipOutfit(outfit_override,visuals_only = TRUE)
 
 	var/icon/out_icon = icon('icons/effects/effects.dmi', "nothing")
-	COMPILE_OVERLAYS(body)
 	for(var/D in showDirs)
 		var/icon/partial = getFlatIcon(body, defdir=D)
 		out_icon.Insert(partial,dir=D)
@@ -1163,7 +1162,6 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 	var/initial_human_dir = existing_human.dir
 	existing_human.dir = SOUTH
 	var/icon/out_icon = icon('icons/effects/effects.dmi', "nothing")
-	COMPILE_OVERLAYS(existing_human)
 	for(var/direction in directions_to_output)
 		var/icon/partial = getFlatIcon(existing_human, defdir = direction)
 		out_icon.Insert(partial, dir = direction)

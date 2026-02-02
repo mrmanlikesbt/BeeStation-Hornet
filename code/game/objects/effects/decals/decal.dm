@@ -52,3 +52,13 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/effect/turf_decal)
 	SHOULD_CALL_PARENT(FALSE)
 	loc = null
 	return QDEL_HINT_QUEUE
+
+#ifdef UNIT_TESTS
+// If we don't do this, turf decals will end up stacking up on a tile, and break the overlay limit
+// I hate it too bestie
+/obj/effect/turf_decal/Destroy()
+	if(GLOB.running_create_and_destroy)
+		var/turf/our_turf = loc
+		our_turf.RemoveElement(/datum/element/decal, icon, icon_state, dir, null, null, alpha, color, null, FALSE, null)
+	return ..()
+#endif
