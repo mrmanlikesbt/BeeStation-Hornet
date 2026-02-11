@@ -62,3 +62,14 @@
   - bugfix: Fixed megafauna legion splitting into 3 instead of 2 in rare cases.
   - balance: The mentioned invisibility fix also means that the Legion will have slightly
       more health than before upon splitting but only in the cases where it gets overkilled.
+2026-02-11:
+  rkz, Fikou, Thunder12345:
+  - rscadd: adds suicide act for carp plushies
+  - rscadd: GAGs carp and snake plushies. They now can be in different colors.
+  - tweak: dehydrated carps can transform when exposed to any reagent
+  - tweak: dehydrated carps have a 25% chance to spawn a cayenne plushy, which will
+      spawn cayenne when rehydrated.
+  - tweak: Cayenne will spawn as the rare Albino/Silver carp, rather than randomized
+      colors
+  - balance: Cayenne has been buffed to have health just slightly above half of what
+      spacedragon carps have, and a movespeed similiar to humans.
