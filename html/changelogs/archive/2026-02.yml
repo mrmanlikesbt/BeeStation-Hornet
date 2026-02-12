@@ -73,3 +73,9 @@
       colors
   - balance: Cayenne has been buffed to have health just slightly above half of what
       spacedragon carps have, and a movespeed similiar to humans.
+2026-02-12:
+  mrmanlikesbt:
+  - refactor: Reebe is now a virtual z-level, what this really means is that clock
+      cult will load instantly now and you can no longer tell that it has been picked
+      from a delayed roundstart.
+  - balance: Removed the 0.5x TTV bombcap from Reebe
