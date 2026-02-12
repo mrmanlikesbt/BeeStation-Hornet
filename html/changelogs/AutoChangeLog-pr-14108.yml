@@ -1,0 +1,4 @@
+author: BotTierPC, MrMan, WhiskeyMarten
+delete-after: true
+changes:
+  - tweak: Fixed All Access not having access to service doors by default
