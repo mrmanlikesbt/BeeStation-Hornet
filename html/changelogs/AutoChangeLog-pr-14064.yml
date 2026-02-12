@@ -1,0 +1,6 @@
+author: mrmanlikesbt, Seris02, ninjanomnom, LemonInTheDark
+delete-after: true
+changes:
+  - code_imp: Replaced most color values with their defines from the colors file
+  - refactor: Implements rgb2num()
+  - refactor: Gas visuals send less data to clients now, increasing performance
