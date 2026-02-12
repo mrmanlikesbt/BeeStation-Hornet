@@ -1,0 +1,7 @@
+author: mrmanlikesbt
+delete-after: true
+changes:
+  - refactor: Reebe is now a virtual z-level, what this really means is that clock
+      cult will load instantly now and you can no longer tell that it has been picked
+      from a delayed roundstart.
+  - balance: Removed the 0.5x TTV bombcap from Reebe
