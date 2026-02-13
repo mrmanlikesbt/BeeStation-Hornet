@@ -82,6 +82,9 @@
 2026-02-13:
   BotTierPC, MrMan, WhiskeyMarten:
   - tweak: Fixed All Access not having access to service doors by default
+  SirYoshimoto:
+  - bugfix: fixed shipping containers not having any solidness, decreases integrity
+      to 500
   mrmanlikesbt, Seris02, ninjanomnom, LemonInTheDark:
   - code_imp: Replaced most color values with their defines from the colors file
   - refactor: Implements rgb2num()
