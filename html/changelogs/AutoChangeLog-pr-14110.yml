@@ -1,0 +1,5 @@
+author: SirYoshimoto
+delete-after: true
+changes:
+  - bugfix: fixed shipping containers not having any solidness, decreases integrity
+      to 500
