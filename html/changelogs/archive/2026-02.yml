@@ -86,3 +86,11 @@
   - code_imp: Replaced most color values with their defines from the colors file
   - refactor: Implements rgb2num()
   - refactor: Gas visuals send less data to clients now, increasing performance
+  rkz, melbert, kriskog:
+  - bugfix: fixes blindness persisting past removal and re-insertion of eyes
+  - refactor: Drowsiness and Blurred Eyes are now tracked via status effect.
+  - refactor: Drugginess is now a status effect. Now any living mob can be high and
+      speak beach-bum instead of just carbons and humanoids. Drug effects should also
+      be more consistently removed on aheal / in rare cases.
+  - admin: Admin basic disease trigger and custom disease renaming should now work
+      properly.
