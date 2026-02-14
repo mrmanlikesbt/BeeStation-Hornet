@@ -1,0 +1,5 @@
+author: r1ks-iwnl
+delete-after: true
+changes:
+  - bugfix: Fixes confusion fully randomizing movement every time
+  - bugfix: Fixes dizziness offsetting your screen improperly
