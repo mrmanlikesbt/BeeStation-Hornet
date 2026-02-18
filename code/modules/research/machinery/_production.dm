@@ -38,7 +38,7 @@
 	. = ..()
 
 	cached_designs = list()
-	create_reagents(0, OPENCONTAINER)
+	create_reagents(100, OPENCONTAINER)
 
 	RegisterSignal(src, COMSIG_MATERIAL_CONTAINER_CHANGED, PROC_REF(on_materials_changed))
 	RegisterSignal(src, COMSIG_REMOTE_MATERIALS_CHANGED, PROC_REF(on_materials_changed))
@@ -128,7 +128,7 @@
 
 /obj/machinery/rnd/production/attackby(obj/item/attacking_item, mob/user, params)
 	if(is_refillable() && attacking_item.is_drainable())
-		return TRUE
+		return FALSE // it's stupid that this has to be false, but whatever
 	return ..()
 
 /obj/machinery/rnd/production/ui_interact(mob/user, datum/tgui/ui)
