@@ -1,0 +1,6 @@
+author: mrmanlikesbt
+delete-after: true
+changes:
+  - bugfix: Player keybinds are now sanitized. What this really means is that people
+      who played before combat-mode no longer cause 2 runtimes every time they press
+      1.
