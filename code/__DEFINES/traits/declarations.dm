@@ -293,6 +293,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Trait which means whatever has this is dancing by a dance machine
 #define TRAIT_DISCO_DANCER "disco_dancer"
 
+/// Marks an atom when the cleaning of it is first started, so that the cleaning overlay doesn't get removed prematurely
+#define TRAIT_CURRENTLY_CLEANING "currently_cleaning"
+
 /**
  * Atom Traits
  */

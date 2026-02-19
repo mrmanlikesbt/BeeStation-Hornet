@@ -142,6 +142,11 @@
 ///from base of atom/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 #define COMSIG_ATOM_HITBY "atom_hitby"
 
+/// From /datum/compomnent/cleaner/clean()
+#define COMSIG_ATOM_PRE_CLEAN "atom_pre_clean"
+	///cancel clean
+	#define COMSIG_ATOM_CANCEL_CLEAN (1<<0)
+
 ///from base of atom/set_opacity(): (new_opacity)
 #define COMSIG_ATOM_SET_OPACITY "atom_set_opacity"
 

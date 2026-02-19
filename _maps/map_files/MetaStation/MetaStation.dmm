@@ -2434,7 +2434,7 @@
 "azI" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/cup/glass/shaker,
-/obj/item/reagent_containers/cup/rag,
+/obj/item/rag,
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /obj/machinery/requests_console/auto_name/directional/east,
 /turf/open/floor/iron/dark,

@@ -41915,7 +41915,7 @@
 /obj/structure/table/wood,
 /obj/item/reagent_containers/cup/glass/shaker,
 /obj/item/book/manual/wiki/barman_recipes,
-/obj/item/reagent_containers/cup/rag,
+/obj/item/rag,
 /obj/structure/noticeboard{
 	pixel_y = 29
 	},

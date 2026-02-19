@@ -542,24 +542,23 @@
 	return TRUE
 
 /**
-  * Wash this atom
-  *
-  * This will clean it off any temporary stuff like blood. Override this in your item to add custom cleaning behavior.
-  * Returns true if any washing was necessary and thus performed
-  * Arguments:
-  * * clean_types: any of the CLEAN_ constants
-  */
+ * Wash this atom
+ *
+ * This will clean it off any temporary stuff like blood. Override this in your item to add custom cleaning behavior.
+ * Arguments:
+ * * clean_types: any of the CLEAN_ defines
+ * Returns: A bitflag if it successfully cleaned something: e.g. COMPONENT_CLEANED, or NONE if not. COMPONENT_CLEANED_GAIN_XP being flipped on signals whether the cleaning should yield cleaning xp.
+ */
 /atom/proc/wash(clean_types)
 	SHOULD_CALL_PARENT(TRUE)
-
-	. = FALSE
-	if(SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, clean_types))
-		. = TRUE
+	. = SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, clean_types)
+	if(.)
+		return
 
 	// Basically "if has washable coloration"
 	if(length(atom_colours) >= WASHABLE_COLOUR_PRIORITY && atom_colours[WASHABLE_COLOUR_PRIORITY])
 		remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
-		return TRUE
+		return COMPONENT_CLEANED
 
 ///Where atoms should drop if taken from this atom
 /atom/proc/drop_location()

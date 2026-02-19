@@ -41871,7 +41871,7 @@
 	pixel_x = -3;
 	pixel_y = 15
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_y = 4;
 	pixel_x = -7
 	},
@@ -63402,7 +63402,7 @@
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_y = 3
 	},
 /turf/open/floor/prison,
@@ -89893,7 +89893,7 @@
 /obj/item/taperecorder{
 	pixel_x = -3
 	},
-/obj/item/reagent_containers/cup/rag{
+/obj/item/rag{
 	pixel_y = 6;
 	pixel_x = 10
 	},
@@ -98647,7 +98647,7 @@
 /obj/structure/mirror/directional/east,
 /obj/structure/wall_closet/science/directional/south,
 /obj/item/soap/nanotrasen,
-/obj/item/reagent_containers/cup/rag,
+/obj/item/rag,
 /obj/item/reagent_containers/spray/cleaner,
 /turf/open/floor/iron/showroomfloor,
 /area/crew_quarters/heads/hor)

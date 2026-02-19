@@ -30720,7 +30720,7 @@
 	pixel_x = 8;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/cup/rag,
+/obj/item/rag,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},

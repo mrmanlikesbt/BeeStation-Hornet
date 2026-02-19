@@ -885,27 +885,37 @@
  * Amount checks for having a specific amount of that chemical.
  * Needs metabolizing takes into consideration if the chemical is metabolizing when it's checked.
  */
-/datum/reagents/proc/has_reagent(datum/reagent/target_reagent, amount = -1, needs_metabolizing = FALSE)
+/datum/reagents/proc/has_reagent(
+	datum/reagent/target_reagent,
+	amount = -1,
+	needs_metabolizing = FALSE,
+	check_subtypes = FALSE,
+	chemical_flags = NONE,
+)
 	if(!ispath(target_reagent))
 		stack_trace("invalid reagent path passed to has reagent [target_reagent]")
 		return FALSE
 
 	var/list/cached_reagents = reagent_list
 	for(var/datum/reagent/holder_reagent as anything in cached_reagents)
-		if (holder_reagent.type == target_reagent)
-			if(!amount)
-				if(needs_metabolizing && !holder_reagent.metabolizing)
-					return
-				return holder_reagent
-			else
-				if(FLOOR(holder_reagent.volume, CHEMICAL_QUANTISATION_LEVEL) >= amount)
-					if(needs_metabolizing && !holder_reagent.metabolizing)
-						return
-					return holder_reagent
-				else
-					return
+		// check if holder_reagent is compatible with target_reagent
+		if(holder_reagent.type != target_reagent && !check_subtypes && !istype(holder_reagent, target_reagent))
+			continue
 
-	return
+		//next check if we have the requested amount
+		if(amount > 0 && holder_reagent.volume < amount)
+			continue
+
+		//next check for metabolization
+		if(needs_metabolizing && !holder_reagent.metabolizing)
+			continue
+
+		//next check if it has the specified flag
+		if(chemical_flags && !(holder_reagent.chemical_flags & chemical_flags))
+			continue
+
+		//after all that if we get here then we have found our reagent
+		return holder_reagent
 
 /**
  * Get the amount of this reagent or the sum of all its subtypes if specified

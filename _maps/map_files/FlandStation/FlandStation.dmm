@@ -87543,7 +87543,7 @@
 "xxe" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/cup/glass/shaker,
-/obj/item/reagent_containers/cup/rag,
+/obj/item/rag,
 /obj/structure/sign/plaques/deempisi{
 	pixel_y = 28
 	},
