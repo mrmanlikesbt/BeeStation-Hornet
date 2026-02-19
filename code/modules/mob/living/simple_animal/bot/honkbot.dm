@@ -1,7 +1,7 @@
 /mob/living/simple_animal/bot/honkbot
 	name = "\improper honkbot"
 	desc = "A little robot. It looks happy with its bike horn."
-	icon = 'icons/mob/aibots.dmi'
+	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "honkbot"
 	density = FALSE
 	anchored = FALSE
