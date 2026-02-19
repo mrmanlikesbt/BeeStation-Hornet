@@ -188,7 +188,7 @@
 	robot.set_anchored(FALSE)
 	robot.notransform = FALSE
 	robot.update_icons()
-	robot.notify_ai(NEW_MODEL)
+	robot.notify_ai(AI_NOTIFICATION_NEW_MODEL)
 	if(robot.hud_used)
 		robot.hud_used.update_robot_modules_display()
 	SSblackbox.record_feedback("tally", "cyborg_modules", 1, robot.model)

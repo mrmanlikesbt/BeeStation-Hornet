@@ -1029,7 +1029,7 @@
 
 /datum/status_effect/cyborg_malfunction
 	id = "cyborg_malfunction"
-	duration = MALFUNCTION_DURATION
+	duration = 30 SECONDS
 	alert_type = /atom/movable/screen/alert/status_effect/generic_malfunction
 	status_type = STATUS_EFFECT_REFRESH
 
@@ -1051,7 +1051,7 @@
 
 /datum/status_effect/cyborg_malfunction/vine
 	id = "cyborg_malfunction_vine"
-	duration = MALFUNCTION_DURATION_VINE
+	duration = 10 SECONDS
 	alert_type = /atom/movable/screen/alert/status_effect/malfunction_vine
 
 /atom/movable/screen/alert/status_effect/malfunction_vine
