@@ -126,6 +126,9 @@
   r1ks-iwnl:
   - balance: Maintenance pumpup pen spawn rate has been heavily reduced.
 2026-02-22:
+  mrmanlikesbt:
+  - bugfix: Fixed there being no dynamic storytellers (the testmerge version define
+      was still active)
   mrmanlikesbt, Absolucy, SyncIt21:
   - code_imp: Subtypes of [/obj/item/storage] no longer delete their base storage
       datum, instead, the base storage datum isn't made in the first place. This saves
@@ -150,3 +153,15 @@
       more tame now
   - refactor: Refactored zombies to use the regenerator component. Now they'll have
       a slight glow/animation when the regeneration actually kicks in.
+  rkz, ghommie, colovorat, winter:
+  - tweak: lclick with batons will stun, rclick with them will harm
+  - rscdel: removes snowflakey stunbaton shoves (rclick)
+  - balance: implements code to prevent dual-wielding bypassing baton click cooldown
+  - refactor: all batontypes now are typed under the same parent
+  - tweak: TENTATIVE, all batons obey the same click cooldown code
+  - bugfix: reagents that were supposed to provide resistance to stunning hits for
+      the past 6 years by batons now actually do so
+  - rscadd: being electrocuted will forcesay the mob, much like glorfing
+  - rscadd: batons now produce light when on, about the same as a cigarette
+  - rscadd: batons will now flicker between off/on when emp'd, rather than a base
+      cell charge reduction
