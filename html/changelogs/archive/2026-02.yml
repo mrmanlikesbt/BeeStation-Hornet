@@ -133,3 +133,20 @@
   - code_imp: Material storage boxes now make use of the amount argument when initializing
       stacks. This saves ~0.1 seconds of init time when they are present
   - bugfix: Fixed item stacks sometimes having a zero amount
+  rkz, Mothblocks, VinylSpiders, Melbert, Jacquerel:
+  - bugfix: cryocells/medbots will no longer attempt to endlessly heal carbons with
+      robotic limbs
+  - refactor: fixed many instances of updatehealth() either being called needlessly
+      or not at all within on_mob_life() and in various other parts of the code
+  - refactor: damage procs now return useful information--the actual net change in
+      damage on the mob. added a unit test for this
+  - bugfix: Regenerating mobs no longer stop regenerating no matter hit with what.
+  - bugfix: Pressure damage is now properly modified by a mob's brute damage modifier.
+  - bugfix: Fixes some occasions which some effects (explodable worn items) won't
+      respond to hits.
+  - refactor: Refactored core code related to mobs sustaining damage.
+  - bugfix: Fixes holy water exiting your system at double the rate on metabolism
+  - bugfix: Holy Water no longer spams cultists with big text every time, it's much
+      more tame now
+  - refactor: Refactored zombies to use the regenerator component. Now they'll have
+      a slight glow/animation when the regeneration actually kicks in.
