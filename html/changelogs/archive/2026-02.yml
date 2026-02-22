@@ -136,6 +136,10 @@
   - code_imp: Material storage boxes now make use of the amount argument when initializing
       stacks. This saves ~0.1 seconds of init time when they are present
   - bugfix: Fixed item stacks sometimes having a zero amount
+  rkz, Azlan/SomeAngryMiner, Baystation Coders:
+  - rscadd: SMES are now emissive
+  - rscadd: PACMAN generators now have thermodynamics, animations, emit smoke when
+      overheated, and the uranium one now does special radiating
   rkz, Mothblocks, VinylSpiders, Melbert, Jacquerel:
   - bugfix: cryocells/medbots will no longer attempt to endlessly heal carbons with
       robotic limbs
