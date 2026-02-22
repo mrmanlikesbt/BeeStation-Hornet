@@ -248,7 +248,7 @@
 
 		//All in all this does 16.5 burn damage to an IPC if using a standard 40 stamina stun baton.
 		ipc.electrocute_act(1, src, flags = SHOCK_NOGLOVES|SHOCK_NOSTUN)
-		apply_damage((item.force/4), BURN, def_zone, armor_block, ipc)
+		ipc.apply_damage((item.force/4), BURN, def_zone, armor_block)
 
 /datum/species/ipc/proc/mechanical_revival(mob/living/carbon/human/H)
 
