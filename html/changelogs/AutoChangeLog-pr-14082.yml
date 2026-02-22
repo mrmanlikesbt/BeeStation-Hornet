@@ -1,0 +1,6 @@
+author: rkz, Azlan/SomeAngryMiner, Baystation Coders
+delete-after: true
+changes:
+  - rscadd: SMES are now emissive
+  - rscadd: PACMAN generators now have thermodynamics, animations, emit smoke when
+      overheated, and the uranium one now does special radiating
