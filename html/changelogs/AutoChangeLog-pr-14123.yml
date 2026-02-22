@@ -1,0 +1,9 @@
+author: mrmanlikesbt, Absolucy, SyncIt21
+delete-after: true
+changes:
+  - code_imp: Subtypes of [/obj/item/storage] no longer delete their base storage
+      datum, instead, the base storage datum isn't made in the first place. This saves
+      ~0.1 seconds of init time
+  - code_imp: Material storage boxes now make use of the amount argument when initializing
+      stacks. This saves ~0.1 seconds of init time when they are present
+  - bugfix: Fixed item stacks sometimes having a zero amount
