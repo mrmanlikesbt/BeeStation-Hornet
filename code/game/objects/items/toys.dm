@@ -401,7 +401,7 @@
 /obj/item/toy/batong
 	name = "batong"
 	desc = "Despite being a cheap plastic imitation of a stunbaton, it can still be charged."
-	icon = 'icons/obj/items_and_weapons.dmi'
+	icon = 'icons/obj/weapons/baton.dmi'
 	icon_state = "stunbaton"
 	inhand_icon_state = "baton"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'

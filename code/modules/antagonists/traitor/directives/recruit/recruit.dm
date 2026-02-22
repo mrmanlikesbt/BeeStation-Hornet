@@ -134,5 +134,5 @@
 		if (3)
 			var/obj/item/spawned = new /obj/item/jammer(user.loc)
 			user.put_in_active_hand(spawned)
-			spawned = new /obj/item/melee/baton/loaded(user.loc)
+			spawned = new /obj/item/melee/baton/security/loaded(user.loc)
 			user.put_in_inactive_hand(spawned)

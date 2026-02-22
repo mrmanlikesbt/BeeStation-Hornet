@@ -317,3 +317,11 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define ENERGY_SHIELD_EMP_VULNERABLE (1 << 3)
 /// Energy shield starts at 0 health
 #define ENERGY_SHIELD_DEPLETE_EQUIP (1 << 4)
+
+/// Return values used in item/melee/baton/baton_attack.
+/// Does a normal item attack.
+#define BATON_DO_NORMAL_ATTACK 1
+/// The attack has been stopped. Either because the user was clumsy or the attack was blocked.
+#define BATON_ATTACK_DONE 2
+/// The baton attack is still going. baton_effect() is called.
+#define BATON_ATTACKING 3

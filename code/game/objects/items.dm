@@ -611,7 +611,6 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	return GetAllContents() - src
 
 // afterattack() and attack() prototypes moved to _onclick/item_attack.dm for consistency
-
 /obj/item/proc/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
 	SHOULD_NOT_SLEEP(TRUE)
 

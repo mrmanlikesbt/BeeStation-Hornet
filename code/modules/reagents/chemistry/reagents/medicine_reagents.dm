@@ -1060,7 +1060,7 @@
 	chemical_flags = CHEMICAL_RNG_GENERAL | CHEMICAL_RNG_FUN | CHEMICAL_RNG_BOTANY
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	overdose_threshold = 60
-	metabolized_traits = list(TRAIT_SLEEPIMMUNE, TRAIT_STUNRESISTANCE, TRAIT_IGNOREDAMAGESLOWDOWN)
+	metabolized_traits = list(TRAIT_SLEEPIMMUNE, TRAIT_BATON_RESISTANCE, TRAIT_IGNOREDAMAGESLOWDOWN)
 	addiction_types = list(/datum/addiction/stimulants = 6) //2.6 per 2 seconds
 
 /datum/reagent/medicine/pumpup/on_mob_life(mob/living/carbon/affected_mob, delta_time, times_fired)

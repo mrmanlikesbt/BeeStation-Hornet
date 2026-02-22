@@ -1773,10 +1773,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	)
 	var/limb_damage = affecting.get_damage() //We need to save this for later to simplify dismemberment
 
-	//This must be placed after blocking checks
-	if(istype(weapon, /obj/item/melee/baton) && weapon.damtype == STAMINA)
-		human.batong_act(weapon, user, affecting, armor_block)
-
 	if (weapon.bleed_force)
 		var/armour_block = user.run_armor_check(affecting, BLEED, armour_penetration = weapon.armour_penetration, silent = (weapon.force > 0))
 		var/hit_amount = (100 - armour_block) / 100
