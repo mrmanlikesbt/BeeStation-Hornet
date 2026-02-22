@@ -1,0 +1,5 @@
+author: mrmanlikesbt
+delete-after: true
+changes:
+  - bugfix: Fixed there being no dynamic storytellers (the testmerge version define
+      was still active)
