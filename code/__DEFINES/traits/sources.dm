@@ -187,3 +187,5 @@
 #define TRAIT_AI_PAUSED "TRAIT_AI_PAUSED"
 /// Source for chameleon ietms
 #define FROM_CHAMELEON "from_chameleon"
+/// Source for innate toggleable silicon HUDs
+#define SILICON_HUD_TRAIT "silicon_hud"

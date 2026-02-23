@@ -5,8 +5,9 @@
 	banning_key = ROLE_TRAITOR
 	required_living_playtime = 4
 	antag_moodlet = /datum/mood_event/focused
-	hijack_speed = 0.5				//10 seconds per hijack stage by default
+	hijack_speed = 0.5 //10 seconds per hijack stage by default
 	leave_behaviour = ANTAGONIST_LEAVE_KEEP
+	antag_hud_name = "traitor"
 	var/special_role = ROLE_TRAITOR
 	/// Shown when giving uplinks and codewords to the player
 	var/employer = "The Syndicate"
@@ -60,27 +61,14 @@
 
 	to_chat(owner.current, examine_block(msg.Join("\n")))
 
-
-/datum/antagonist/traitor/proc/update_traitor_icons_added(datum/mind/traitor_mind)
-	var/datum/atom_hud/antag/traitorhud = GLOB.huds[ANTAG_HUD_TRAITOR]
-	traitorhud.join_hud(owner.current)
-	set_antag_hud(owner.current, "traitor")
-
-/datum/antagonist/traitor/proc/update_traitor_icons_removed(datum/mind/traitor_mind)
-	var/datum/atom_hud/antag/traitorhud = GLOB.huds[ANTAG_HUD_TRAITOR]
-	traitorhud.leave_hud(owner.current)
-	set_antag_hud(owner.current, null)
-
 /datum/antagonist/traitor/apply_innate_effects(mob/living/mob_override)
 	. = ..()
-	update_traitor_icons_added()
 	// Give codewords to the new mob on mind transfer.
 	if(mob_override && istype(faction) && faction.give_codewords)
 		give_codewords(mob_override)
 
 /datum/antagonist/traitor/remove_innate_effects(mob/living/mob_override)
 	. = ..()
-	update_traitor_icons_removed()
 	// Remove codewords from the old mob on mind transfer.
 	if(mob_override && istype(faction) && faction.give_codewords)
 		remove_codewords(mob_override)

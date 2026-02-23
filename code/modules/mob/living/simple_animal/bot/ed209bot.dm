@@ -20,7 +20,7 @@
 	window_id = "autoed209"
 	window_name = "Automatic Security Unit v2.6"
 	allow_pai = 0
-	data_hud_type = DATA_HUD_SECURITY_ADVANCED
+	data_hud_type = TRAIT_SECURITY_HUD
 	path_image_color = COLOR_RED
 	carryable = FALSE
 
@@ -72,7 +72,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/mob/living/simple_animal/bot/ed209)
 
 	//SECHUD
 	var/datum/atom_hud/secsensor = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
-	secsensor.add_hud_to(src)
+	secsensor.show_to(src)
 
 /mob/living/simple_animal/bot/ed209/turn_on()
 	. = ..()

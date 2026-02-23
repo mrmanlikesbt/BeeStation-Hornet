@@ -262,9 +262,6 @@
 
 				make_new_construct_from_class(construct_class, theme, A, user, FALSE, T.loc)
 
-				for(var/datum/antagonist/cult/cultist in GLOB.antagonists)
-					if(cultist.owner == A.mind)
-						cultist.remove_antag_hud(ANTAG_HUD_CULT, cultist.owner.current)
 				qdel(T)
 				qdel(src)
 			else

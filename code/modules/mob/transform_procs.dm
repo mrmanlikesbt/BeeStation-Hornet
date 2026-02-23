@@ -648,21 +648,6 @@
 	. = new_gorilla
 	qdel(src)
 
-/mob/living/carbon/proc/junglegorillize()
-	if(pre_transform())
-		return
-	var/mob/living/simple_animal/hostile/gorilla/rabid/new_gorilla = new (get_turf(src))
-	new_gorilla.set_combat_mode(TRUE)
-	var/datum/atom_hud/H = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
-	H.add_hud_to(new_gorilla)
-	if(mind)
-		mind.transfer_to(new_gorilla)
-	else
-		new_gorilla.key = key
-	to_chat(new_gorilla, "<B>You are now a gorilla. Ooga ooga!</B>")
-	. = new_gorilla
-	qdel(src)
-
 /mob/living/carbon/human/Animalize()
 
 	var/list/mobtypes = typesof(/mob/living/simple_animal)

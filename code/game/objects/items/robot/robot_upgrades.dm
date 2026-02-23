@@ -347,11 +347,11 @@
 /obj/item/borg/upgrade/selfrepair/ui_action_click()
 	on = !on
 	if(on)
-		playsound(cyborg.loc, 'sound/machines/terminal_processing.ogg', 30)
+		playsound(cyborg, 'sound/machines/terminal_processing.ogg', 30)
 		to_chat(cyborg, span_notice("You activate the self-repair module."))
 		START_PROCESSING(SSobj, src)
 	else
-		playsound(cyborg.loc, 'sound/effects/turbolift/turbolift-close.ogg', 90)
+		playsound(cyborg, 'sound/effects/turbolift/turbolift-close.ogg', 90)
 		to_chat(cyborg, span_notice("You deactivate the self-repair module."))
 		STOP_PROCESSING(SSobj, src)
 	update_appearance()
@@ -364,7 +364,7 @@
 	return ..()
 
 /obj/item/borg/upgrade/selfrepair/proc/deactivate_sr()
-	playsound(cyborg.loc, 'sound/effects/turbolift/turbolift-close.ogg', 90)
+	playsound(cyborg, 'sound/effects/turbolift/turbolift-close.ogg', 90)
 	STOP_PROCESSING(SSobj, src)
 	on = FALSE
 	update_appearance()
@@ -399,7 +399,7 @@
 				cyborg.adjustBruteLoss(repair_amount)
 			else if(cyborg.getFireLoss())
 				cyborg.adjustFireLoss(repair_amount)
-			playsound(cyborg.loc, 'sound/items/welder2.ogg', 10) //Quiet so it isn't obnoxious, but still making itself known
+			playsound(cyborg, 'sound/items/welder2.ogg', 10) //Quiet so it isn't obnoxious, but still making itself known
 			cyborg.cell.use(powercost)
 			cyborg.updatehealth()
 		else

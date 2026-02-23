@@ -8,6 +8,7 @@
 	antagpanel_category = "Changeling"
 	banning_key = ROLE_CHANGELING
 	required_living_playtime = 4
+	antag_hud_name = "changeling"
 	ui_name = "AntagInfoChangeling"
 	antag_moodlet = /datum/mood_event/focused
 	hijack_speed = 0.5
@@ -690,16 +691,6 @@
 			objectives += identity_theft
 			log_objective(owner, identity_theft.explanation_text)
 		escape_objective_possible = FALSE
-
-/datum/antagonist/changeling/proc/update_changeling_icons_added()
-	var/datum/atom_hud/antag/hud = GLOB.huds[ANTAG_HUD_CHANGELING]
-	hud.join_hud(owner.current)
-	set_antag_hud(owner.current, "changeling")
-
-/datum/antagonist/changeling/proc/update_changeling_icons_removed()
-	var/datum/atom_hud/antag/hud = GLOB.huds[ANTAG_HUD_CHANGELING]
-	hud.leave_hud(owner.current)
-	set_antag_hud(owner.current, null)
 
 /datum/antagonist/changeling/admin_add(datum/mind/new_owner,mob/admin)
 	. = ..()

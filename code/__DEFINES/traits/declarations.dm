@@ -172,34 +172,32 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_REAGENT_SCANNER "reagent_scanner"
 #define TRAIT_ABDUCTOR_TRAINING "abductor-training"
 #define TRAIT_ABDUCTOR_SCIENTIST_TRAINING "abductor-scientist-training"
-#define TRAIT_SURGEON           "surgeon" //Grants access to all surgeries
-#define TRAIT_ABDUCTOR_SURGEON  "abductor-surgery-training" //Grants access to all surgeries except for certain blacklisted ones
-#define	TRAIT_STRONG_GRABBER	"strong_grabber"
-#define	TRAIT_MAGIC_CHOKE		"magic_choke"
-#define TRAIT_SOOTHED_THROAT    "soothed-throat"
+#define TRAIT_SURGEON "surgeon" //Grants access to all surgeries
+#define TRAIT_ABDUCTOR_SURGEON "abductor-surgery-training" //Grants access to all surgeries except for certain blacklisted ones
+#define	TRAIT_STRONG_GRABBER "strong_grabber"
+#define	TRAIT_MAGIC_CHOKE "magic_choke"
+#define TRAIT_SOOTHED_THROAT "soothed-throat"
 #define TRAIT_LAW_ENFORCEMENT_METABOLISM "law-enforcement-metabolism"
 #define TRAIT_MEDICAL_METABOLISM "medical-metabolism"
-#define TRAIT_BOOZE_SLIDER      "booze-slider"
+#define TRAIT_BOOZE_SLIDER "booze-slider"
 /// We place people into a fireman carry quicker than standard
 #define TRAIT_QUICK_CARRY "quick-carry"
 /// We place people into a fireman carry especially quickly compared to quick_carry
 #define TRAIT_QUICKER_CARRY "quicker-carry"
+/// Having this trait allows the basic health hud to show up for this mob
+#define TRAIT_BASIC_HEALTH_HUD_VISIBLE "basic_health_hud_visible"
 #define TRAIT_QUICK_BUILD "quick-build"
 #define TRAIT_UNINTELLIGIBLE_SPEECH "unintelligible-speech"
 #define TRAIT_UNSTABLE "unstable"
 #define TRAIT_OIL_FRIED "oil_fried"
 #define TRAIT_XENO_IMMUNE "xeno_immune" //prevents facehuggers implanting races that wouldn't be able to host an egg
 #define TRAIT_NECROPOLIS_INFECTED "necropolis-infection"
-#define TRAIT_BEEFRIEND 		"beefriend"
-#define TRAIT_MEDICAL_HUD "med_hud"
-#define TRAIT_SECURITY_HUD "sec_hud"
-/// for something granting you a diagnostic hud
-#define TRAIT_DIAGNOSTIC_HUD "diag_hud"
-#define TRAIT_PASSTABLE			"passtable"
-#define TRAIT_BLUSHING 			"blushing"
-#define TRAIT_CRYING			"crying"
-#define TRAIT_NOBLOCK			"noblock"
-#define TRAIT_NANITECOMPATIBLE	"nanitecompatible"
+#define TRAIT_BEEFRIEND "beefriend"
+#define TRAIT_PASSTABLE "passtable"
+#define TRAIT_BLUSHING "blushing"
+#define TRAIT_CRYING "crying"
+#define TRAIT_NOBLOCK "noblock"
+#define TRAIT_NANITECOMPATIBLE "nanitecompatible"
 #define TRAIT_NICE_SHOT "nice_shot" //hnnnnnnnggggg..... you're pretty good....
 /// Prevents hallucinations from the hallucination brain trauma (RDS)
 #define TRAIT_HALLUCINATION_SUPPRESSED "hallucination_suppressed"
@@ -209,9 +207,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SPACEWALK "spacewalk"
 #define TRAIT_DROPS_ITEMS_ON_DEATH "drops_items_on_death" //used for battle royale
 #define TRAIT_DRINKSBLOOD "drinks_blood"
-#define TRAIT_SOMMELIER			"sommelier"  // shows different booze power flavor texts
-#define TRAIT_BARMASTER			"bar_master" // always can identify reagents
-#define TRAIT_MOTH_BURNT		"moth_burnt"
+#define TRAIT_SOMMELIER "sommelier"  // shows different booze power flavor texts
+#define TRAIT_BARMASTER "bar_master" // always can identify reagents
+#define TRAIT_MOTH_BURNT "moth_burnt"
 /// From anti-convulsant medication against seizures.
 #define TRAIT_ANTICONVULSANT "anticonvulsant"
 #define TRAIT_BLOODSHOT_EYES "bloodshot_eyes"
@@ -222,11 +220,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HYPERSPACED "hyperspaced" // Sanity trait to keep track of when we're in hyperspace and add the appropriate element if we werent
 #define TRAIT_FREE_HYPERSPACE_MOVEMENT "free_hyperspace_movement" // Gives the movable free hyperspace movement without being pulled during shuttle transit
 #define TRAIT_FAST_CUFF_REMOVAL "fast_cuff_removal" // Faster cuff removal
-#define TRAIT_BLEED_HELD		"bleed_held" // For when a mob is holding their wounds, preventing them from bleeding further
-#define TRAIT_NO_BLOOD			"no_blood" // Bleeding heals itself and bleeding is impossible
-#define TRAIT_NO_BLEEDING		"no_bleed" // The user can acquire the bleeding status effect, but will no lose blood
-#define TRAIT_BLOOD_COOLANT		"blood_coolant" // Replaces blood with coolant, meaning we overheat instead of losing air
-#define TRAIT_NO_BUMP_SLAM		"no_bump_slam"	// Disables the ability to slam into walls
+#define TRAIT_BLEED_HELD "bleed_held" // For when a mob is holding their wounds, preventing them from bleeding further
+#define TRAIT_NO_BLOOD "no_blood" // Bleeding heals itself and bleeding is impossible
+#define TRAIT_NO_BLEEDING "no_bleed" // The user can acquire the bleeding status effect, but will no lose blood
+#define TRAIT_BLOOD_COOLANT "blood_coolant" // Replaces blood with coolant, meaning we overheat instead of losing air
+#define TRAIT_NO_BUMP_SLAM "no_bump_slam"	// Disables the ability to slam into walls
 /// Trait given by being a hulk
 #define TRAIT_HULK "hulk"
 /// Trait that stores the skin colour of a mob
@@ -494,5 +492,25 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Object is dangerous to mobs buckled to it
 #define TRAIT_DANGEROUS_BUCKLE "dangerous_buckle"
+
+// HUD traits
+/// Basic health info: dead/alive/sick and a bar showing their health. Requires suit sensors
+#define TRAIT_MEDICAL_HUD "med_hud"
+/// Same as above but requires suit sensors on the target
+#define TRAIT_MEDICAL_HUD_SENSOR_ONLY "med_hud_lesser"
+/// Shows ID info, tracking implants, mindshields, chemical implants, wanted hud, nanite sensor hud
+#define TRAIT_SECURITY_HUD "sec_hud"
+/// Only shows ID info
+#define TRAIT_SECURITY_HUD_ID_ONLY "sec_hud_lesser"
+/// Shows abductor glands
+#define TRAIT_ABDUCTOR_HUD "abductor_hud"
+/// Stop the user from seeing the sechud. Only works for trait handled sechuds.
+#define TRAIT_BLOCK_SECHUD "block_sechud"
+/// Shows the diagnostic hud (there's a lot, see /datum/atom_hud/data/diagnostic for specifics)
+#define TRAIT_DIAGNOSTIC_HUD "diag_hud"
+/// Shows bot paths
+#define TRAIT_BOT_PATH_HUD "bot_path_hud"
+/// Shows malf hacked APCs
+#define TRAIT_HACKED_APC_HUD "hacked_apc_hud"
 
 // END TRAIT DEFINES

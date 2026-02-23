@@ -135,8 +135,6 @@
 				data_entry["related_accounts_cid"] = player.client.related_accounts_cid
 				if(player.client.byond_version)
 					data_entry["byond_version"] = "[player.client.byond_version].[player.client.byond_build ? player.client.byond_build : "xxx"]"
-		if(player.mind)
-			data_entry["antag_hud"] = player.mind.antag_hud_icon_state
 		if(ckey == selected_ckey)
 			for(var/log_type in player.logging)
 				var/list/log_type_data = list()
@@ -334,5 +332,5 @@
 	// Scale it up
 	transform.scale(16, 16)
 
-	for (var/icon_state_name in icon_states('icons/mob/hud.dmi'))
-		insert_icon("antag-hud-[icon_state_name]", uni_icon('icons/mob/hud.dmi', icon_state_name, transform=transform))
+	for (var/icon_state_name in icon_states('icons/mob/huds/hud.dmi'))
+		insert_icon("antag-hud-[icon_state_name]", uni_icon('icons/mob/huds/hud.dmi', icon_state_name, transform=transform))

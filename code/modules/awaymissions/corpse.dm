@@ -115,8 +115,6 @@ CREATION_TEST_IGNORE_SELF(/obj/effect/mob_spawn)
 			if(!A)
 				A = MM.add_antag_datum(/datum/antagonist/custom)
 				//Don't delay roundend with ghost role created antags
-				A.delay_roundend = FALSE
-				A.prevent_roundtype_conversion = FALSE
 			for(var/objective in objectives)
 				var/datum/objective/O = new/datum/objective(objective)
 				O.owner = MM

@@ -18,7 +18,7 @@
 	window_id = "autosec"
 	window_name = "Automatic Security Unit v1.6"
 	allow_pai = 0
-	data_hud_type = DATA_HUD_SECURITY_ADVANCED
+	data_hud_type = TRAIT_SECURITY_HUD
 	path_image_color = COLOR_RED
 	boot_delay = 8 SECONDS
 
@@ -74,7 +74,7 @@
 
 	//SECHUD
 	var/datum/atom_hud/secsensor = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
-	secsensor.add_hud_to(src)
+	secsensor.show_to(src)
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
 	)

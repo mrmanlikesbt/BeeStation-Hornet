@@ -36,7 +36,7 @@ GLOBAL_VAR(medibot_unique_id_gen)
 	bot_core_type = /obj/machinery/bot_core/medbot
 	window_id = "automed"
 	window_name = "Automatic Medical Unit v1.1"
-	data_hud_type = DATA_HUD_MEDICAL_ADVANCED
+	data_hud_type = TRAIT_MEDICAL_HUD
 	path_image_color = "#DDDDFF"
 	var/obj/item/reagent_containers/reagent_glass = null //Can be set to draw from this for reagents.
 	var/healthanalyzer = /obj/item/healthanalyzer

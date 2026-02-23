@@ -109,25 +109,18 @@
 /mob/living/simple_animal/hostile/swarmer/Initialize(mapload)
 	. = ..()
 	remove_verb(/mob/living/verb/pulled)
-	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
-		diag_hud.add_to_hud(src)
+	var/datum/atom_hud/data/diagnostic/diag_hud = GLOB.huds[DATA_HUD_DIAGNOSTIC]
+	diag_hud.add_atom_to_hud(src)
 
 /mob/living/simple_animal/hostile/swarmer/mind_initialize()
 	. = ..()
-	var/datum/antagonist/swarmer/S = new()
-	mind.add_antag_datum(S)
+	mind.add_antag_datum(/datum/antagonist/swarmer)
 
 /mob/living/simple_animal/hostile/swarmer/med_hud_set_health()
-	var/image/holder = hud_list[DIAG_HUD]
-	var/icon/I = icon(icon, icon_state, dir)
-	holder.pixel_y = I.Height() - world.icon_size
-	holder.icon_state = "huddiag[RoundDiagBar(health/maxHealth)]"
+	set_hud_image_state(DIAG_HUD, "huddiag[RoundDiagBar(health/maxHealth)]")
 
 /mob/living/simple_animal/hostile/swarmer/med_hud_set_status()
-	var/image/holder = hud_list[DIAG_STAT_HUD]
-	var/icon/I = icon(icon, icon_state, dir)
-	holder.pixel_y = I.Height() - world.icon_size
-	holder.icon_state = "hudstat"
+	set_hud_image_state(DIAG_STAT_HUD, "hudstat")
 
 /mob/living/simple_animal/hostile/swarmer/get_stat_tab_status()
 	var/list/tab_data = ..()
@@ -743,6 +736,7 @@
 	show_to_ghosts = TRUE
 	required_living_playtime = 4
 	leave_behaviour = ANTAGONIST_LEAVE_DESPAWN
+	antag_hud_name = "swarmer"
 	var/datum/team/swarmer/swarm
 
 /datum/antagonist/swarmer/on_gain()
@@ -800,20 +794,7 @@
 	return ..()
 
 /datum/antagonist/swarmer/apply_innate_effects(mob/living/mob_override)
-	. = ..()
-	//Give swarmer appearance on hud (If they are not an antag already)
-	var/datum/atom_hud/antag/swarmerhud = GLOB.huds[ANTAG_HUD_SWARMER]
-	swarmerhud.join_hud(owner.current)
-	if(!owner.antag_hud_icon_state)
-		set_antag_hud(owner.current, "swarmer")
-
-/datum/antagonist/swarmer/remove_innate_effects(mob/living/mob_override)
-	. = ..()
-	//Clear the hud if they haven't become something else and had the hud overwritten
-	var/datum/atom_hud/antag/swarmerhud = GLOB.huds[ANTAG_HUD_SWARMER]
-	swarmerhud.leave_hud(owner.current)
-	if(owner.antag_hud_icon_state == "swarmer")
-		set_antag_hud(owner.current, null)
+	add_team_hud(mob_override || owner.current)
 
 /datum/antagonist/swarmer/admin_add(datum/mind/new_owner,mob/admin)
 	var/mob/living/M = new_owner.current

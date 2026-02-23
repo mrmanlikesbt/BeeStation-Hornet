@@ -8,14 +8,15 @@
 
 /mob/living/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/movetype_handler)
 	register_init_signals()
 	if(unique_name)
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
 	var/datum/atom_hud/data/human/medical/advanced/medhud = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
-	medhud.add_to_hud(src)
-	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
-		diag_hud.add_to_hud(src)
+	medhud.add_atom_to_hud(src)
+	var/datum/atom_hud/data/diagnostic/diag_hud = GLOB.huds[DATA_HUD_DIAGNOSTIC]
+	diag_hud.add_atom_to_hud(src)
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
 	if (playable)
@@ -25,7 +26,6 @@
 	//color correction
 	RegisterSignal(src, COMSIG_MOVABLE_ENTERED_AREA, PROC_REF(apply_color_correction))
 	gravity_setup()
-	AddElement(/datum/element/movetype_handler)
 
 /mob/living/prepare_huds()
 	..()
@@ -379,12 +379,12 @@
 		if(SOUTH)
 			animate(M, pixel_x = M.base_pixel_x, pixel_y = M.base_pixel_y - offset, 3)
 		if(EAST)
-			if(M.lying_angle == 270) //update the dragged dude's direction if we've turned
-				M.set_lying_angle(90)
+			if(M.lying_angle == LYING_ANGLE_WEST) //update the dragged dude's direction if we've turned
+				M.set_lying_angle(LYING_ANGLE_EAST)
 			animate(M, pixel_x = M.base_pixel_x + offset, pixel_y = M.base_pixel_y, 3)
 		if(WEST)
-			if(M.lying_angle == 90)
-				M.set_lying_angle(270)
+			if(M.lying_angle == LYING_ANGLE_EAST)
+				M.set_lying_angle(LYING_ANGLE_WEST)
 			animate(M, pixel_x = M.base_pixel_x - offset, pixel_y = M.base_pixel_y, 3)
 
 /mob/living/proc/reset_pull_offsets(mob/living/M, override)
@@ -598,7 +598,6 @@
 	if(HAS_TRAIT(src, TRAIT_FLOORED) && !(dir & (NORTH|SOUTH)))
 		setDir(pick(NORTH, SOUTH)) // We are and look helpless.
 
-
 /// Proc to append behavior related to lying down.
 /mob/living/proc/on_standing_up()
 	if(layer == LYING_MOB_LAYER)
@@ -701,7 +700,7 @@
 		if(!livingdoll.filtered)
 			livingdoll.filtered = TRUE
 			var/icon/mob_mask = icon(icon, icon_state)
-			if(mob_mask.Height() > world.icon_size || mob_mask.Width() > world.icon_size)
+			if(get_cached_height() > ICON_SIZE_Y || get_cached_width() > ICON_SIZE_X)
 				var/health_doll_icon_state = health_doll_icon ? health_doll_icon : "megasprite"
 				mob_mask = icon('icons/hud/screen_gen.dmi', health_doll_icon_state) //swap to something generic if they have no special doll
 			livingdoll.add_filter("mob_shape_mask", 1, alpha_mask_filter(icon = mob_mask))
@@ -918,9 +917,9 @@
 ///Called by mob Move() when the lying_angle is different than zero, to better visually simulate crawling.
 /mob/living/proc/lying_angle_on_movement(direct)
 	if(direct & EAST)
-		set_lying_angle(90)
+		set_lying_angle(LYING_ANGLE_EAST)
 	else if(direct & WEST)
-		set_lying_angle(270)
+		set_lying_angle(LYING_ANGLE_WEST)
 
 /mob/living/carbon/alien/humanoid/lying_angle_on_movement(direct)
 	return
@@ -2096,7 +2095,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 /mob/living/proc/on_floored_start()
 	if(body_position == STANDING_UP) //force them on the ground
 		set_body_position(LYING_DOWN)
-		set_lying_angle(pick(90, 270))
+		set_lying_angle(pick(LYING_ANGLE_EAST, LYING_ANGLE_WEST))
 		on_fall()
 
 

@@ -520,10 +520,10 @@ world
 				continue
 
 			// Find the new dimensions of the flat icon to fit the added overlay
-			addX1 = min(flatX1, layer_image.pixel_x + 1)
-			addX2 = max(flatX2, layer_image.pixel_x + add.Width())
-			addY1 = min(flatY1, layer_image.pixel_y + 1)
-			addY2 = max(flatY2, layer_image.pixel_y + add.Height())
+			addX1 = min(flatX1, layer_image.pixel_x + layer_image.pixel_w + 1)
+			addX2 = max(flatX2, layer_image.pixel_x + layer_image.pixel_w + add.Width())
+			addY1 = min(flatY1, layer_image.pixel_y + layer_image.pixel_z + 1)
+			addY2 = max(flatY2, layer_image.pixel_y + layer_image.pixel_z + add.Height())
 
 			if (
 				addX1 != flatX1 \
@@ -545,7 +545,7 @@ world
 				flatY2 = addY2
 
 			// Blend the overlay into the flattened icon
-			flat.Blend(add, blendMode2iconMode(curblend), layer_image.pixel_x + 2 - flatX1, layer_image.pixel_y + 2 - flatY1)
+			flat.Blend(add, blendMode2iconMode(curblend), layer_image.pixel_x + layer_image.pixel_w + 2 - flatX1, layer_image.pixel_y + layer_image.pixel_z + 2 - flatY1)
 
 		if(appearance.alpha < 255)
 			flat.Blend(rgb(255, 255, 255, appearance.alpha), ICON_MULTIPLY)
@@ -768,30 +768,30 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 
 //Interface for using DrawBox() to draw 1 pixel on a coordinate.
 //Returns the same icon specifed in the argument, but with the pixel drawn
-/proc/DrawPixel(icon/I,colour,drawX,drawY)
-	if(!I)
-		return 0
+/proc/DrawPixel(icon/icon_to_use, colour, draw_x, draw_y)
+	if(!icon_to_use)
+		return FALSE
 
-	var/Iwidth = I.Width()
-	var/Iheight = I.Height()
+	var/icon_width = icon_to_use.Width()
+	var/icon_height = icon_to_use.Height()
 
-	if(drawX > Iwidth || drawX <= 0)
-		return 0
-	if(drawY > Iheight || drawY <= 0)
-		return 0
+	if(draw_x > icon_width || draw_x <= 0)
+		return FALSE
+	if(draw_y > icon_height || draw_y <= 0)
+		return FALSE
 
-	I.DrawBox(colour,drawX, drawY)
-	return I
+	icon_to_use.DrawBox(colour, draw_x, draw_y)
+	return icon_to_use
 
 
 //Interface for easy drawing of one pixel on an atom.
-/atom/proc/DrawPixelOn(colour, drawX, drawY)
-	var/icon/I = new(icon)
-	var/icon/J = DrawPixel(I, colour, drawX, drawY)
-	if(J) //Only set the icon if it succeeded, the icon without the pixel is 1000x better than a black square.
-		icon = J
-		return J
-	return 0
+/atom/proc/DrawPixelOn(colour, draw_x, draw_y)
+	var/icon/icon_one = new(icon)
+	var/icon/result = DrawPixel(icon_one, colour, draw_x, draw_y)
+	if(result) //Only set the icon if it succeeded, the icon without the pixel is 1000x better than a black square.
+		icon = result
+		return result
+	return FALSE
 
 /// # If you already have a human and need to get its flat icon, call `get_flat_existing_human_icon()` instead.
 /// For creating consistent icons for human looking simple animals.
@@ -1048,7 +1048,7 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 		var/icon/I = thing
 		var/icon_base64 = icon2base64(I)
 
-		if (I.Height() > world.icon_size || I.Width() > world.icon_size)
+		if (I.Height() > ICON_SIZE_Y || I.Width() > ICON_SIZE_X)
 			var/icon_md5 = rustg_hash_string(RUSTG_HASH_MD5, icon_base64)
 			icon_base64 = bicon_cache[icon_md5]
 			if (!icon_base64) // Doesn't exist yet, make it.
@@ -1109,7 +1109,7 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 		return FALSE
 
 /**
- * Center's an image.
+ * Center's an image. Only run this on float overlays and not physical
  * Requires:
  * The Image
  * The x dimension of the icon file used in the image
@@ -1124,23 +1124,23 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 	if(!x_dimension || !y_dimension)
 		return
 
-	if((x_dimension == world.icon_size) && (y_dimension == world.icon_size))
+	if((x_dimension == ICON_SIZE_X) && (y_dimension == ICON_SIZE_Y))
 		return image_to_center
 
 	//Offset the image so that it's bottom left corner is shifted this many pixels
 	//This makes it infinitely easier to draw larger inhands/images larger than world.iconsize
 	//but still use them in game
-	var/x_offset = -((x_dimension / world.icon_size) - 1) * (world.icon_size * 0.5)
-	var/y_offset = -((y_dimension / world.icon_size) - 1) * (world.icon_size * 0.5)
+	var/x_offset = -((x_dimension / ICON_SIZE_X) - 1) * (ICON_SIZE_X * 0.5)
+	var/y_offset = -((y_dimension / ICON_SIZE_Y) - 1) * (ICON_SIZE_Y * 0.5)
 
-	//Correct values under world.icon_size
-	if(x_dimension < world.icon_size)
+	//Correct values under icon_size
+	if(x_dimension < ICON_SIZE_X)
 		x_offset *= -1
-	if(y_dimension < world.icon_size)
+	if(y_dimension < ICON_SIZE_Y)
 		y_offset *= -1
 
-	image_to_center.pixel_x = x_offset
-	image_to_center.pixel_y = y_offset
+	image_to_center.pixel_w = x_offset
+	image_to_center.pixel_z = y_offset
 
 	return image_to_center
 
