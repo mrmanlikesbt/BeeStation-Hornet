@@ -34133,6 +34133,16 @@
 	},
 /turf/open/floor/iron/solarpanel/airless,
 /area/solar/starboard/fore)
+"iUh" = (
+/obj/machinery/door/window/westright{
+	req_access_txt = "12;22;25;26;28;35;37;38;46";
+	name = "Service Access"
+	},
+/obj/effect/turf_decal/trimline/green/line,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/iron,
+/area/hallway/secondary/service)
 "iUk" = (
 /turf/closed/wall/r_wall,
 /area/hallway/primary/aft)
@@ -45874,18 +45884,6 @@
 /obj/machinery/light/floor,
 /turf/open/floor/iron,
 /area/engine/atmos)
-"ncE" = (
-/obj/effect/turf_decal/trimline/green/line,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/delivery,
-/obj/effect/turf_decal/tile/bar{
-	dir = 1
-	},
-/obj/machinery/door/window/westright{
-	req_one_access_txt = "22;25;26;28;35;37"
-	},
-/turf/open/floor/iron,
-/area/hallway/secondary/service)
 "ncI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4,
@@ -58614,30 +58612,6 @@
 	},
 /turf/open/floor/wood,
 /area/library)
-"rCi" = (
-/obj/structure/extinguisher_cabinet{
-	pixel_y = 30;
-	pixel_x = 6
-	},
-/obj/structure/bed/dogbed,
-/mob/living/basic/mouse/white{
-	name = "Cheddar";
-	desc = "It's a nasty, disease-ridden rodent covered in cheese dust. This one seems to be wearing a small name tag."
-	},
-/obj/item/food/cheese/wedge{
-	pixel_x = 9;
-	pixel_y = 11
-	},
-/obj/machinery/camera/directional/north{
-	c_tag = "Locker Room Starboard"
-	},
-/obj/effect/turf_decal/siding/thinplating_new/dark{
-	dir = 4
-	},
-/turf/open/floor/iron/dark/smooth_corner{
-	dir = 1
-	},
-/area/crew_quarters/locker)
 "rCq" = (
 /obj/effect/landmark/start/assistant,
 /obj/effect/turf_decal/siding/wood,
@@ -65496,6 +65470,30 @@
 	},
 /turf/open/floor/plating,
 /area/science/misc_lab/range)
+"tYL" = (
+/obj/structure/extinguisher_cabinet{
+	pixel_y = 30;
+	pixel_x = 6
+	},
+/obj/structure/bed/dogbed,
+/mob/living/basic/mouse/white{
+	name = "Cheddar";
+	desc = "It's a nasty, disease-ridden rodent covered in cheese dust. This one seems to be wearing a small name tag."
+	},
+/obj/item/food/cheese/wedge{
+	pixel_x = 9;
+	pixel_y = 11
+	},
+/obj/machinery/camera/directional/north{
+	c_tag = "Locker Room Starboard"
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_corner{
+	dir = 1
+	},
+/area/crew_quarters/locker)
 "tYR" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/smart/simple/orange/visible,
@@ -111551,7 +111549,7 @@ xVl
 hzB
 mBD
 mjO
-ncE
+iUh
 oxa
 jyn
 xVl
@@ -112801,7 +112799,7 @@ cXL
 eFo
 ptZ
 axC
-rCi
+tYL
 eCt
 qfX
 bUH
