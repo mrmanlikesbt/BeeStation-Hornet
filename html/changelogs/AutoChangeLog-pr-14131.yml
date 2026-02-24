@@ -1,4 +1,0 @@
-author: mrmanlikesbt
-delete-after: true
-changes:
-  - bugfix: Fixed AI core construction being able to make infinite AIs

@@ -184,3 +184,6 @@
   - balance: Nerfs the Cult Golem Jaunt, reducing their cooldown in return
   r1ks-iwnl:
   - bugfix: Fixed mining scanner not showing ore past line of sight
+2026-02-24:
+  mrmanlikesbt:
+  - bugfix: Fixed AI core construction being able to make infinite AIs
