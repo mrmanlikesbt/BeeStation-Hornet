@@ -65,7 +65,7 @@
 		return FALSE
 	var/mob/living/target = target_atom
 	// Mice check
-	if(istype(target, /mob/living/simple_animal/mouse))
+	if(ismouse(target))
 		if(vampiredatum_power.my_clan?.blood_drink_type == VAMPIRE_DRINK_SNOBBY)
 			target.balloon_alert(owner, "too disgusting!")
 			return FALSE
@@ -107,7 +107,7 @@
 	target_ref = WEAKREF(feed_target)
 
 	// Mice
-	if(istype(feed_target, /mob/living/simple_animal/mouse))
+	if(ismouse(feed_target))
 		to_chat(owner, span_notice("You recoil at the taste of a lesser lifeform."))
 		vampiredatum_power.AddBloodVolume(FEED_BLOOD_FROM_MICE)
 		power_activated_sucessfully()
@@ -148,8 +148,8 @@
 	// Check if our feed target was moved, if so, let's get freaky
 	if(!continue_active())
 		owner.visible_message(
-			span_boldwarning("[owner] is ripped from [feed_target]'s throat. [feed_target.p_their(TRUE)] blood sprays everywhere!"),
-			span_boldwarning("Your teeth are ripped from [feed_target]'s throat. [feed_target.p_their(TRUE)] blood sprays everywhere!"),
+			span_boldwarning("[owner] is ripped from [feed_target]'s throat. [feed_target.p_Their()] blood sprays everywhere!"),
+			span_boldwarning("Your teeth are ripped from [feed_target]'s throat. [feed_target.p_Their()] blood sprays everywhere!"),
 		)
 
 		// Time to start bleeding
@@ -226,7 +226,7 @@
 		to_chat(owner, span_notice("You slowly release [feed_target]."))
 
 		if(feed_target.stat != DEAD)
-			to_chat(owner, span_notice("<i>[feed_target.p_they(TRUE)] look[feed_target.p_s()] dazed, and will not remember this.</i>"))
+			to_chat(owner, span_notice("<i>[feed_target.p_They()] look[feed_target.p_s()] dazed, and will not remember this.</i>"))
 			to_chat(feed_target, span_bighypnophrase("You don't remember how you got here..."))
 
 		if(feed_target.stat == DEAD)

@@ -102,12 +102,15 @@
 		owner.apply_status_effect(/datum/status_effect/his_wrath)
 		qdel(src)
 		return
-	var/grace_heal = bloodlust * 0.05
-	owner.adjustBruteLoss(-grace_heal)
-	owner.adjustFireLoss(-grace_heal)
-	owner.adjustToxLoss(-grace_heal, TRUE, TRUE)
-	owner.adjustOxyLoss(-(grace_heal * 2))
-	owner.adjustCloneLoss(-grace_heal)
+	var/grace_heal = bloodlust * 0.02
+	var/need_mob_update = FALSE
+	need_mob_update += owner.adjustBruteLoss(-grace_heal * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
+	need_mob_update += owner.adjustFireLoss(-grace_heal * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
+	need_mob_update += owner.adjustToxLoss(-grace_heal * seconds_between_ticks, forced = TRUE)
+	need_mob_update += owner.adjustOxyLoss(-(grace_heal * 2) * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
+	need_mob_update += owner.adjustCloneLoss(-grace_heal * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
+	if(need_mob_update)
+		owner.updatehealth()
 
 /datum/status_effect/his_grace/on_remove()
 	owner.log_message("lost His Grace's stun immunity", LOG_ATTACK)
@@ -144,9 +147,9 @@
 	if(!QDELETED(GLOB.narsie))
 		return //if Nar'Sie is alive, don't even worry about it
 	var/area/area = get_area(owner)
-	for(var/datum/antagonist/cult/cultist in GLOB.antagonists)
-		if(isliving(cultist.owner))
-			var/mob/living/cultist_body = cultist.owner.current
+	for(var/datum/mind/cult_mind in get_antag_minds(/datum/antagonist/cult))
+		if(isliving(cult_mind.current))
+			var/mob/living/cultist_body = cult_mind.current
 			SEND_SOUND(cultist_body, sound('sound/hallucinations/veryfar_noise.ogg'))
 			to_chat(cultist_body, span_cultlarge("The Cult's Master, [owner], has fallen in \the [area]!"))
 
@@ -256,7 +259,7 @@
 		var/new_staminaloss = owner.getStaminaLoss()
 		if(new_staminaloss < last_staminaloss)
 			var/heal_amount = (new_staminaloss - last_staminaloss) * 10
-			owner.adjustStaminaLoss(heal_amount, updating_health = FALSE)
+			owner.adjustStaminaLoss(heal_amount, updating_stamina = FALSE)
 			new_staminaloss = owner.getStaminaLoss()
 			needs_health_update = TRUE
 		last_staminaloss = new_staminaloss
@@ -298,7 +301,7 @@
 /datum/status_effect/sword_spin/on_apply()
 	owner.visible_message(span_danger("[owner] begins swinging the sword with inhuman strength!"))
 	var/oldcolor = owner.color
-	owner.color = "#ff0000"
+	owner.color = COLOR_RED
 	owner.add_stun_absorption("bloody bastard sword", duration, 2, "doesn't even flinch as the sword's power courses through them!", "You shrug off the stun!", " glowing with a blazing red aura!")
 	owner.spin(duration,1)
 	animate(owner, color = oldcolor, time = duration, easing = EASE_IN)
@@ -344,14 +347,18 @@
 		return
 	else if(ticks_passed == 2)
 		to_chat(owner, span_changeling("We begin to repair our tissue damage..."))
+
+	var/need_mob_update = FALSE
 	//Heals 2 brute per second, for a total of 60
-	owner.adjustBruteLoss(-2, FALSE, TRUE)
+	need_mob_update += owner.adjustBruteLoss(-4 * seconds_between_ticks, updating_health = FALSE)
 	//Heals 1 fireloss per second, for a total of 30
-	owner.adjustFireLoss(-1, FALSE, TRUE)
+	need_mob_update += owner.adjustFireLoss(-2 * seconds_between_ticks, updating_health = FALSE)
 	//Heals 5 oxyloss per second for a total of 150
-	owner.adjustOxyLoss(-5, FALSE, TRUE)
+	need_mob_update += owner.adjustOxyLoss(-4 * seconds_between_ticks, updating_health = FALSE)
 	//Heals 0.5 cloneloss per second for a total of 15
-	owner.adjustCloneLoss(-0.5, TRUE, TRUE)
+	need_mob_update += owner.adjustCloneLoss(-1 * seconds_between_ticks, updating_health = FALSE)
+	if(need_mob_update)
+		owner.updatehealth()
 
 /datum/status_effect/fleshmend/proc/on_ignited(datum/source)
 	SIGNAL_HANDLER
@@ -463,7 +470,7 @@
 	var/deathTick = 0
 
 /datum/status_effect/hippocratic_oath/get_examine_text()
-	return span_notice("[owner.p_they(TRUE)] seem[owner.p_s()] to have an aura of healing and helpfulness about [owner.p_them()].")
+	return span_notice("[owner.p_They()] seem[owner.p_s()] to have an aura of healing and helpfulness about [owner.p_them()].")
 
 /datum/status_effect/hippocratic_oath/on_apply()
 	//Makes the user passive, it's in their oath not to harm!
@@ -518,13 +525,17 @@
 			//Because a servant of medicines stops at nothing to help others, lets keep them on their toes and give them an additional boost.
 			if(itemUser.health < itemUser.maxHealth)
 				new /obj/effect/temp_visual/heal(get_turf(itemUser), "#375637")
-			itemUser.adjustBruteLoss(-1.5)
-			itemUser.adjustFireLoss(-1.5)
-			itemUser.adjustToxLoss(-1.5, forced = TRUE) //Because Slime People are people too
-			itemUser.adjustOxyLoss(-1.5)
-			itemUser.adjustStaminaLoss(-1.5)
-			itemUser.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1.5)
-			itemUser.adjustCloneLoss(-0.5) //Becasue apparently clone damage is the bastion of all health
+			var/need_mob_update = FALSE
+			need_mob_update += itemUser.adjustBruteLoss(-0.6 * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
+			need_mob_update += itemUser.adjustFireLoss(-0.6 * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
+			need_mob_update += itemUser.adjustToxLoss(-0.6 * seconds_between_ticks, updating_health = FALSE, forced = TRUE) //Because Slime People are people too
+			need_mob_update += itemUser.adjustOxyLoss(-0.6 * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
+			need_mob_update += itemUser.adjustStaminaLoss(-0.6 * seconds_between_ticks, updating_stamina = FALSE, forced = TRUE)
+			need_mob_update += itemUser.adjustOrganLoss(ORGAN_SLOT_BRAIN, -0.6 * seconds_between_ticks)
+			need_mob_update += itemUser.adjustCloneLoss(-0.2 * seconds_between_ticks, updating_health = FALSE, forced = TRUE) //Because apparently clone damage is the bastion of all health
+			if(need_mob_update)
+				itemUser.updatehealth()
+
 		//Heal all those around you, unbiased
 		for(var/mob/living/L in hearers(7, owner))
 			if(L.health < L.maxHealth)
@@ -553,7 +564,7 @@
 
 /datum/status_effect/regenerative_core
 	id = "Regenerative Core"
-	duration = 300
+	duration = 1 MINUTES
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = /atom/movable/screen/alert/status_effect/regenerative_core
 	show_duration = TRUE
@@ -579,7 +590,6 @@
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/humi = owner
 		humi.coretemperature = humi.get_body_temp_normal()
-	owner.restoreEars()
 	duration = rand(150, 450) * duration_mod
 	return TRUE
 
@@ -618,7 +628,7 @@
 	return ..()
 
 /datum/status_effect/antimagic/get_examine_text()
-	return span_notice("[owner.p_they(TRUE)] seem[owner.p_s()] to be covered in a dull, grey aura.")
+	return span_notice("[owner.p_They()] seem[owner.p_s()] to be covered in a dull, grey aura.")
 
 /datum/status_effect/planthealing
 	id = "Photosynthesis"
@@ -628,19 +638,12 @@
 	alert_type = /atom/movable/screen/alert/status_effect/planthealing
 
 /datum/status_effect/planthealing/get_examine_text()
-	return span_notice("[owner.p_they(TRUE)] leaves seem[owner.p_s()] to be flourishing in the light!")
+	return span_notice("[owner.p_They()] leaves seem[owner.p_s()] to be flourishing in the light!")
 
 /atom/movable/screen/alert/status_effect/planthealing
 	name = "Photosynthesis"
 	desc = "Your wounds seem to be healing from the light."
 	icon_state = "blooming"
-
-/datum/status_effect/planthealing/on_apply()
-	ADD_TRAIT(owner, TRAIT_PLANTHEALING, "Light Source")
-	return ..()
-
-/datum/status_effect/planthealing/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_PLANTHEALING, "Light Source")
 
 /datum/status_effect/planthealing/tick()
 	owner.heal_overall_damage(1,1, 0, BODYTYPE_ORGANIC) //one unit of brute and burn healing should be good with the amount of times this is ran. Much slower than spec_life
@@ -654,7 +657,7 @@
 	var/turf/location
 
 /datum/status_effect/crucible_soul/get_examine_text()
-	return span_notice("[owner.p_they(TRUE)] [owner.p_do()]n't seem to be all here.")
+	return span_notice("[owner.p_They()] [owner.p_do()]n't seem to be all here.")
 
 /datum/status_effect/crucible_soul/on_apply()
 	to_chat(owner,span_notice("You phase through reality, nothing is out of bounds!"))
@@ -699,16 +702,17 @@
 /datum/status_effect/cloaked
 	id = "invisibility"
 	alert_type = /atom/movable/screen/alert/status_effect/cloaked
-	tick_interval = 2
-	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_AUTO_TICK
+	duration = 40 SECONDS
 	show_duration = TRUE
 	var/can_see_self = FALSE
+	var/last_time_update = 0
 
-/datum/status_effect/cloaked/tick()
+/datum/status_effect/cloaked/tick(delta_time)
 	if(owner.on_fire)
 		terminate_effect()
 		return
-	owner.alpha = max(owner.alpha - 10, 0)
+	owner.alpha = max(owner.alpha - 50 * delta_time, 0)
 	if (owner.alpha <= 100 && !can_see_self)
 		// Make it so the user can always see themselves while cloaked
 		var/mutable_appearance/self_appearance = mutable_appearance('icons/hud/actions/actions_minor_antag.dmi', "ninja_cloak")
@@ -718,6 +722,15 @@
 		can_see_self = TRUE
 	if (owner.alpha > 100 && can_see_self)
 		owner.remove_alt_appearance(REF(src))
+	// Check for restoring the duration
+	var/turf/location = get_turf(owner)
+	if (location.get_lumcount() < LIGHTING_TILE_IS_DARK)
+		var/time_left = duration - world.time
+		// Calculate how much real time has passed
+		// Add on tick interval + 1 to make it never stutter when increasing
+		var/new_time = min(time_left + ((world.time - last_time_update) / (1 SECONDS)) * 2 SECONDS, initial(duration))
+		duration = world.time + new_time
+	last_time_update = world.time
 
 /datum/status_effect/cloaked/on_apply()
 	if(!..())
@@ -735,11 +748,11 @@
 	RegisterSignal(owner, COMSIG_ATOM_HULK_ATTACK, PROC_REF(terminate_effect))
 	RegisterSignal(owner, COMSIG_ATOM_ATTACK_PAW, PROC_REF(terminate_effect))
 	RegisterSignal(owner, COMSIG_CARBON_CUFF_ATTEMPTED, PROC_REF(terminate_effect))
+	RegisterSignal(owner, COMSIG_MOB_ABILITY_STARTED, PROC_REF(terminate_effect))
 	return TRUE
 
 /datum/status_effect/cloaked/on_remove()
 	owner.remove_alt_appearance(REF(src))
-	UnregisterSignal(owner, list(COMSIG_MOVABLE_MOVED, COMSIG_MOB_APPLY_DAMAGE, COMSIG_ATOM_BUMPED))
 	animate(owner, time = 0.5 SECONDS, alpha = 255)
 
 /datum/status_effect/cloaked/proc/bump_alpha()
