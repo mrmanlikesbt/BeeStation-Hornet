@@ -2,7 +2,6 @@
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 	. = ..()
-	adjustOxyLoss(-10) //we're a robot! //looks like shitcode cuh, ngl
 	handle_robot_hud_updates()
 	handle_robot_cell(delta_time, times_fired)
 

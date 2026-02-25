@@ -734,7 +734,6 @@
 	roundend_category = "Swarmer"
 	antagpanel_category = "Swarmer"
 	show_to_ghosts = TRUE
-	required_living_playtime = 4
 	leave_behaviour = ANTAGONIST_LEAVE_DESPAWN
 	antag_hud_name = "swarmer"
 	var/datum/team/swarmer/swarm

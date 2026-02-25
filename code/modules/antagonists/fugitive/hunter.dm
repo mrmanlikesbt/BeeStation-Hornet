@@ -5,7 +5,7 @@
 	show_in_antagpanel = TRUE
 	antagpanel_category = "Fugitive Hunters"
 	show_to_ghosts = TRUE
-	required_living_playtime = 4
+	required_living_playtime = 0
 	antag_hud_name = "fugitive_hunter"
 	var/datum/team/fugitive_hunters/hunter_team
 	var/datum/fugitive_type/hunter/backstory

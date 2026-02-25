@@ -155,7 +155,7 @@
 	name = "Head Revolutionary"
 	antag_hud_name = "rev_head"
 	banning_key = ROLE_REV_HEAD
-	required_living_playtime = 4
+	required_living_playtime = 8
 	leave_behaviour = ANTAGONIST_LEAVE_KEEP
 	var/remove_clumsy = FALSE
 	var/give_flash = FALSE

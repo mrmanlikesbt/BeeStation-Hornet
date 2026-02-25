@@ -8,7 +8,6 @@
 	show_in_antagpanel = FALSE
 	show_to_ghosts = TRUE
 	antagpanel_category = "Ash Walkers"
-	required_living_playtime = 1
 	leave_behaviour = ANTAGONIST_LEAVE_DESPAWN
 	var/datum/team/ashwalkers/ashie_team
 

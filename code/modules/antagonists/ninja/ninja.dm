@@ -5,7 +5,7 @@
 	show_name_in_check_antagonists = TRUE
 	show_to_ghosts = TRUE
 	antag_moodlet = /datum/mood_event/focused
-	required_living_playtime = 4
+	required_living_playtime = 0
 	antag_hud_name = "ninja"
 	//preview_outfit = /datum/outfit/ninja_preview
 	var/helping_station = FALSE

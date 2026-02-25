@@ -48,7 +48,7 @@
 	show_in_antagpanel = FALSE
 	show_to_ghosts = TRUE
 	ui_name = "AntagInfoSpider"
-	required_living_playtime = 2
+	required_living_playtime = 0
 	antag_hud_name = "spider"
 	var/datum/team/spiders/spider_team
 

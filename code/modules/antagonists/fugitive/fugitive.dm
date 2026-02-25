@@ -5,7 +5,7 @@
 	show_in_antagpanel = TRUE
 	antagpanel_category = "Fugitives"
 	show_to_ghosts = TRUE
-	required_living_playtime = 1
+	required_living_playtime = 0
 	antag_hud_name = "fugitive"
 	var/datum/team/fugitive/fugitive_team
 	var/is_captured = FALSE

@@ -27,7 +27,7 @@ GLOBAL_VAR(clockcult_eminence)
 	// TODO: ui_name = "AntagInfoClockCult"
 	antag_moodlet = /datum/mood_event/cult
 	banning_key = ROLE_SERVANT_OF_RATVAR
-	required_living_playtime = 4
+	required_living_playtime = 6
 	antag_hud_name = "clockwork"
 
 	//The class of the servant

@@ -194,16 +194,34 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	return FALSE
 
 /datum/atom_hud/alternate_appearance/basic/one_person
-	var/mob/seer
+	var/datum/weakref/seer
 
 /datum/atom_hud/alternate_appearance/basic/one_person/mobShouldSee(mob/M)
-	return M == seer
+	var/mob/seer_reference = seer.resolve()
+	if (!seer_reference)
+		qdel(src)
+		return FALSE
+	if(M == seer_reference)
+		return TRUE
+	return FALSE
 
 /datum/atom_hud/alternate_appearance/basic/one_person/New(key, image/I, options = NONE, mob/living/seer)
-	src.seer = seer
+	src.seer = WEAKREF(seer)
 	return ..()
 
 /datum/atom_hud/alternate_appearance/basic/mimites
 
 /datum/atom_hud/alternate_appearance/basic/mimites/mobShouldSee(mob/M)
 	return ismimite(M) || isobserver(M)
+
+/datum/atom_hud/alternate_appearance/basic/minds
+	var/list/datum/mind/seers
+
+/datum/atom_hud/alternate_appearance/basic/minds/mobShouldSee(mob/M)
+	return (M.mind in seers)
+
+/datum/atom_hud/alternate_appearance/basic/minds/New(key, image/I, options = NONE, list/minds)
+	for (var/datum/mind/mind in minds)
+		seers += mind
+		add_hud_to(mind.current)
+	return ..()

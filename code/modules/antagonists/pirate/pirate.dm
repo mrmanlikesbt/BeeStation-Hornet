@@ -5,7 +5,7 @@
 	antagpanel_category = "Pirate"
 	show_to_ghosts = TRUE
 	antag_hud_name = "pirate"
-	required_living_playtime = 4
+	required_living_playtime = 0
 	var/datum/team/pirate/crew
 
 /datum/antagonist/pirate/captain
