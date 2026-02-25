@@ -353,7 +353,7 @@
 	if(!. || !isliving(A))
 		return
 	var/mob/living/L = A
-	set_pull_offsets(L, grab_state)
+	set_pull_offsets(L, grab_state, animate = FALSE)
 
 /atom/movable/proc/check_pulling()
 	if(pulling)
@@ -601,6 +601,11 @@
 		move_stacks = 0 //setting it to 0 so that we dont get every movable with negative move_stacks runtiming on every movement
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs)
+
+	if(old_loc)
+		SEND_SIGNAL(old_loc, COMSIG_ATOM_ABSTRACT_EXITED, src, movement_dir)
+	if(loc)
+		SEND_SIGNAL(loc, COMSIG_ATOM_ABSTRACT_ENTERED, src, old_loc, old_locs)
 
 	// Z-Mimic hook
 	if (bound_overlay)

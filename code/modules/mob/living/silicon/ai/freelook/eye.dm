@@ -8,7 +8,7 @@
 	icon_state = "ai_camera"
 	icon = 'icons/mob/cameramob.dmi'
 	invisibility = INVISIBILITY_MAXIMUM
-	hud_possible = list(ANTAG_HUD, AI_DETECT_HUD = HUD_LIST_LIST)
+	hud_possible = list(AI_DETECT_HUD = HUD_LIST_LIST)
 	var/list/visibleCameraChunks = list()
 	var/mob/living/silicon/ai/ai = null
 	var/relay_speech = FALSE
@@ -25,7 +25,7 @@
 
 /mob/camera/ai_eye/proc/update_ai_detect_hud()
 	var/datum/atom_hud/ai_detector/hud = GLOB.huds[DATA_HUD_AI_DETECT]
-	var/list/old_images = hud_list[AI_DETECT_HUD]
+	var/list/old_images = active_hud_list[AI_DETECT_HUD]
 	if(!ai_detector_visible)
 		hud.remove_atom_from_hud(src)
 		QDEL_LIST(old_images)

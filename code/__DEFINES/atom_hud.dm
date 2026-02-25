@@ -43,12 +43,10 @@
 #define DIAG_NANITE_FULL_HUD "19"
 /// Displays launchpads' targeting reticle
 #define DIAG_LAUNCHPAD_HUD "20"
-/// for antag huds. these are used at the /mob level
-#define ANTAG_HUD "21"
 /// Bluespace Wakes
-#define BLUESPACE_WAKE_HUD "22"
+#define BLUESPACE_WAKE_HUD "21"
 /// Gives permanent visibility of hacked APCs
-#define HACKED_APC_HUD "23"
+#define HACKED_APC_HUD "22"
 
 //by default everything in the hud_list of an atom is an image
 //a value in hud_list with one of these will change that behavior

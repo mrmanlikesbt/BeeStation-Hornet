@@ -22,22 +22,9 @@
 
 /datum/atom_hud/data/human/medical/basic
 
-/datum/atom_hud/data/human/medical/basic/proc/check_sensors(mob/living/carbon/human/H)
-	if(!istype(H) && !ismonkey(H))
-		return FALSE
-	var/obj/item/clothing/under/U = H.w_uniform
-	if(!istype(U))
-		return FALSE
-	if(U.sensor_mode <= SENSOR_VITALS)
-		return FALSE
-	return TRUE
-
 /datum/atom_hud/data/human/medical/basic/add_atom_to_single_mob_hud(mob/requesting_mob, atom/hud_atom)
-	if(check_sensors(requesting_mob))
+	if(HAS_TRAIT(hud_atom, TRAIT_BASIC_HEALTH_HUD_VISIBLE))
 		return ..()
-
-/datum/atom_hud/data/human/medical/basic/proc/update_suit_sensors(mob/living/carbon/H)
-	check_sensors(H) ? add_atom_to_hud(H) : remove_atom_from_hud(H)
 
 /datum/atom_hud/data/human/medical/advanced
 
@@ -151,11 +138,6 @@
 			return "health-100"
 
 //HOOKS
-
-//called when a human changes suit sensors
-/mob/living/carbon/proc/update_suit_sensors()
-	var/datum/atom_hud/data/human/medical/basic/B = GLOB.huds[DATA_HUD_MEDICAL_BASIC]
-	B.update_suit_sensors(src)
 
 //called when a living mob changes health
 /mob/living/proc/med_hud_set_health()
@@ -309,7 +291,7 @@
 ************************************************/
 
 /mob/living/proc/hud_set_nanite_indicator()
-	if(HAS_TRAIT(src, TRAIT_NANITE_SENSORS))
+	if(HAS_TRAIT_FROM(src, TRAIT_TRACKED_SENSORS, NANITES_TRAIT))
 		set_hud_image_state(NANITE_HUD, "nanite_ping")
 		set_hud_image_active(NANITE_HUD)
 	else

@@ -125,7 +125,7 @@
 		if(cult_team.cult_ascendent)
 			cult_team.ascend(current)
 
-	add_team_hud(current)
+	add_team_hud(current, /datum/antagonist/cult)
 
 /datum/antagonist/cult/master/apply_innate_effects(mob/living/mob_override)
 	. = ..()

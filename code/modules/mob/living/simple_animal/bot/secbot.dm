@@ -45,12 +45,7 @@
 /mob/living/simple_animal/bot/secbot/beepsky/jr
 	name = "Officer Pipsqueak"
 	desc = "It's Officer Beep O'sky's smaller, just-as aggressive cousin, Pipsqueak."
-
-/mob/living/simple_animal/bot/secbot/beepsky/jr/Initialize(mapload)
-	. = ..()
-	resize = 0.8
-	update_transform()
-
+	initial_size = 0.8
 
 /mob/living/simple_animal/bot/secbot/beepsky/explode()
 	var/atom/Tsec = drop_location()

@@ -203,18 +203,6 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	src.seer = seer
 	return ..()
 
-/// Shows the image to everyone but one person
-/datum/atom_hud/alternate_appearance/basic/one_person/reversed
-
-/datum/atom_hud/alternate_appearance/basic/one_person/reversed/mobShouldSee(mob/M)
-	return M != seer
-
-/datum/atom_hud/alternate_appearance/basic/heretic
-
-/datum/atom_hud/alternate_appearance/basic/heretic/mobShouldSee(mob/viewer)
-	if(IS_HERETIC_OR_MONSTER(viewer))
-		return TRUE
-
 /datum/atom_hud/alternate_appearance/basic/mimites
 
 /datum/atom_hud/alternate_appearance/basic/mimites/mobShouldSee(mob/M)

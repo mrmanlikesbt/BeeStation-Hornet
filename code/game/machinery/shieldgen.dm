@@ -661,4 +661,5 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/shieldwall)
 
 /obj/machinery/shieldwall/atmos/Initialize(mapload)
 	. = ..()
-	air_update_turf(TRUE)
+	air_update_turf(TRUE, TRUE)
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_FIREDOOR_STOP)))

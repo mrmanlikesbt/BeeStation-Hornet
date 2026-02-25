@@ -216,7 +216,7 @@ CREATION_TEST_IGNORE_SELF(/obj/effect/mob_spawn)
 			// Using crew monitors to find corpses while creative makes finding certain ruins too easy.
 			var/obj/item/clothing/under/C = H.w_uniform
 			if(istype(C))
-				C.update_sensors(NO_SENSORS)
+				C.set_sensor_mode(NO_SENSORS)
 
 	var/obj/item/card/id/W = H.wear_id
 	if(W)

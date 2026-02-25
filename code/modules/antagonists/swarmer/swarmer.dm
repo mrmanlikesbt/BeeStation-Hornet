@@ -74,7 +74,7 @@
 	melee_damage = 35
 	melee_damage_type = STAMINA
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
-	hud_possible = list(ANTAG_HUD, DIAG_STAT_HUD, DIAG_HUD)
+	hud_possible = list(DIAG_STAT_HUD, DIAG_HUD)
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	attack_verb_continuous = "shocks"
@@ -240,7 +240,7 @@
 	return FALSE
 
 /turf/open/lava/swarmer_act()
-	if(!is_safe())
+	if(!HAS_TRAIT(src, TRAIT_LAVA_STOPPED))
 		new /obj/structure/lattice/catwalk/swarmer_catwalk(src)
 	return FALSE
 
@@ -799,8 +799,7 @@
 /datum/antagonist/swarmer/admin_add(datum/mind/new_owner,mob/admin)
 	var/mob/living/M = new_owner.current
 	if(alert(admin,"Transform the player into a swarmer?","Species Change","Yes","No") == "Yes")
-		if(!QDELETED(M) && !M.notransform)
-			M.notransform = 1
+		if(!QDELETED(M))
 			M.unequip_everything()
 			var/mob/living/new_mob = new /mob/living/simple_animal/hostile/swarmer(M.loc)
 			if(istype(new_mob))

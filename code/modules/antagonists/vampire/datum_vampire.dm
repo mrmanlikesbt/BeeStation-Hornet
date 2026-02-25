@@ -127,7 +127,7 @@
 	RegisterSignal(current_mob, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
 	handle_clown_mutation(current_mob, "Your clownish nature has been subdued by your thirst for blood.")
 
-	add_team_hud(mob_override || owner.current)
+	add_team_hud(current_mob)
 
 	current_mob.faction |= FACTION_VAMPIRE
 
@@ -549,7 +549,7 @@
 
 /datum/antagonist/vampire/create_team()
 	vampire_team = new(owner)
-	vampire_team.name = "[ADMIN_LOOKUP(owner.current)]'s vampire team" // only displayed to admins
+	vampire_team.name = "[owner.current]'s vampire team" // only displayed to admins
 
 /datum/antagonist/vampire/get_team()
 	return vampire_team

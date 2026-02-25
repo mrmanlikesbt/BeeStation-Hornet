@@ -154,6 +154,9 @@
 	return new_model
 
 /obj/item/robot_model/proc/be_transformed_to(obj/item/robot_model/old_module)
+	if(HAS_TRAIT(robot, TRAIT_NO_TRANSFORM))
+		robot.balloon_alert(robot, "can't transform right now!")
+		return FALSE
 	for(var/i in old_module.added_modules)
 		added_modules += i
 		old_module.added_modules -= i
@@ -174,7 +177,7 @@
 	var/prev_lockcharge = robot.lockcharge
 	sleep(1)
 	flick("[cyborg_base_icon]_transform", robot)
-	robot.notransform = TRUE
+	ADD_TRAIT(robot, TRAIT_NO_TRANSFORM, REF(src))
 	robot.SetLockdown(TRUE)
 	robot.set_anchored(TRUE)
 	robot.logevent("Chassis configuration has been set to [name].")
@@ -186,7 +189,7 @@
 		robot.SetLockdown(FALSE)
 	robot.setDir(SOUTH)
 	robot.set_anchored(FALSE)
-	robot.notransform = FALSE
+	REMOVE_TRAIT(robot, TRAIT_NO_TRANSFORM, REF(src))
 	robot.update_icons()
 	robot.notify_ai(AI_NOTIFICATION_NEW_MODEL)
 	if(robot.hud_used)

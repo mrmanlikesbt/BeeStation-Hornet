@@ -27,12 +27,11 @@
 	explanation_text = "Eat everything and anything to sate your never-ending hunger."
 	completed = TRUE
 
-/datum/antagonist/morph/admin_add(datum/mind/new_owner,mob/admin)
+/datum/antagonist/morph/admin_add(datum/mind/new_owner, mob/admin)
 	if(alert(admin,"Transform the player into a morph?","Species Change","Yes","No") != "Yes")
 		return ..()
 	var/mob/living/M = new_owner.current
-	if(!QDELETED(M) && !M.notransform)
-		M.notransform = 1
+	if(!QDELETED(M))
 		M.unequip_everything()
 		var/mob/living/new_mob = new /mob/living/simple_animal/hostile/morph(M.loc)
 		if(istype(new_mob))

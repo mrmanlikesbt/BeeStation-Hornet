@@ -1,7 +1,12 @@
-#define TRANSFORMATION_DURATION 22
+#define TRANSFORMATION_DURATION (2.2 SECONDS)
+/// Considered "permanent" since we'll be deleting the old mob and the client will be inserted into a new one (without this trait)
+#define PERMANENT_TRANSFORMATION_TRAIT "permanent_transformation"
 
 /mob/living/carbon/proc/monkeyize(tr_flags = (TR_KEEPITEMS | TR_KEEPVIRUS | TR_DEFAULTMSG | TR_KEEPAI), skip_animation = FALSE, keep_original_species = FALSE)
-	if (notransform || transformation_timer)
+	if (transformation_timer || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
+		return
+
+	if(ismonkey(src))
 		return
 
 	var/list/missing_bodyparts_zones = get_missing_limbs()
@@ -17,7 +22,7 @@
 		unequip_everything()
 
 	//Make mob invisible and spawn animation
-	notransform = TRUE
+	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, PERMANENT_TRANSFORMATION_TRAIT)
 	Paralyze(TRANSFORMATION_DURATION, ignore_canstun = TRUE)
 	icon = null
 	cut_overlays()
@@ -158,7 +163,7 @@
 //Mostly same as monkey but turns target into teratoma
 
 /mob/living/carbon/proc/teratomize(tr_flags = (TR_KEEPITEMS | TR_KEEPVIRUS | TR_DEFAULTMSG))
-	if (notransform || transformation_timer)
+	if (transformation_timer || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 	//Handle items on mob
 
@@ -177,7 +182,7 @@
 		unequip_everything()
 
 	//Make mob invisible and spawn animation
-	notransform = TRUE
+	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, PERMANENT_TRANSFORMATION_TRAIT)
 	Paralyze(TRANSFORMATION_DURATION, ignore_canstun = TRUE)
 	icon = null
 	cut_overlays()
@@ -303,7 +308,7 @@
 //Could probably be merged with monkeyize but other transformations got their own procs, too
 
 /mob/living/carbon/proc/humanize(tr_flags = (TR_KEEPITEMS | TR_KEEPVIRUS | TR_DEFAULTMSG | TR_KEEPAI), keep_original_species = FALSE, datum/species/original_species, species = /datum/species/human)
-	if (notransform || transformation_timer)
+	if (transformation_timer || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
 	var/list/int_organs = list()
@@ -322,7 +327,7 @@
 		unequip_everything()
 
 	//Make mob invisible and spawn animation
-	notransform = TRUE
+	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, PERMANENT_TRANSFORMATION_TRAIT)
 	Paralyze(TRANSFORMATION_DURATION, ignore_canstun = TRUE)
 
 	icon = null
@@ -473,15 +478,13 @@
 
 //A common proc to start an -ize transformation
 /mob/living/carbon/proc/pre_transform(delete_items = FALSE)
-	if(notransform)
+	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return TRUE
-	notransform = TRUE
-	ADD_TRAIT(src, TRAIT_IMMOBILIZED, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, TRAIT_GENERIC)
+	add_traits(list(TRAIT_NO_TRANSFORM, TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), PERMANENT_TRANSFORMATION_TRAIT)
 	Paralyze(1, ignore_canstun = TRUE)
 
 	if(delete_items)
-		for(var/obj/item/W in get_equipped_items(INCLUDE_POCKETS) | held_items)
+		for(var/obj/item/W in get_equipped_items(INCLUDE_POCKETS | INCLUDE_HELD))
 			qdel(W)
 	else
 		unequip_everything()
@@ -690,3 +693,4 @@
 	qdel(src)
 
 #undef TRANSFORMATION_DURATION
+#undef PERMANENT_TRANSFORMATION_TRAIT

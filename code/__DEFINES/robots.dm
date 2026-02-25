@@ -72,3 +72,6 @@
 #define ASSEMBLY_THIRD_STEP     2
 #define ASSEMBLY_FOURTH_STEP    3
 #define ASSEMBLY_FIFTH_STEP     4
+
+/// Default offsets for riding a cyborg
+#define DEFAULT_ROBOT_RIDING_OFFSETS list(TEXT_NORTH = list(0, 4), TEXT_SOUTH = list(0, 4), TEXT_EAST = list(-6, 3), TEXT_WEST = list(6, 3))

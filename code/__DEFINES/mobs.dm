@@ -352,7 +352,8 @@ GLOBAL_LIST_INIT(available_random_trauma_list, list(
 #define GALOSHES_DONT_HELP		(1<<2)
 #define SLIDE_ICE				(1<<3)
 #define SLIP_WHEN_CRAWLING		(1<<4) //clown planet ruin
-#define NO_SLIP_ON_CATWALK      (1<<5)
+/// the mob won't slip if the turf has the TRAIT_TURF_IGNORE_SLIPPERY trait.
+#define SLIPPERY_TURF (1<<5)
 
 ///Flags used by the flags parameter of electrocute act.
 ///Makes it so that the shock doesn't take gloves into account.
@@ -644,6 +645,9 @@ GLOBAL_LIST_INIT(available_random_trauma_list, list(
 #define STANDING_UP 0
 /// Mob is lying down, usually associated with lying_angle values of 90 or 270.
 #define LYING_DOWN 1
+
+/// Possible value of [/atom/movable/buckle_dir]. If set to a different (positive-or-zero) value than this, the buckling thing will force a dir on the buckled.
+#define BUCKLE_MATCH_DIR -1
 
 // Flags for fully_heal().
 

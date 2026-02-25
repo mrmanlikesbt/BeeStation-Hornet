@@ -2,8 +2,10 @@
 // When the signal is called: (signal arguments)
 // All signals send the source datum of the signal as the first argument
 
-#define COMSIG_MOVABLE_ENTERED_AREA "enter_area" 							//! from base of area/Entered(): (/area)
-#define COMSIG_MOVABLE_EXITTED_AREA "exit_area" 							//! from base of area/Exited(): (/area)
+/// From base of area/Entered(): (area/entered)
+#define COMSIG_MOVABLE_ENTERED_AREA "movable_entered_area"
+/// From base of area/Exited(): (area/left)
+#define COMSIG_MOVABLE_EXITED_AREA "movable_exited_area"
 
 // /atom/movable signals
 
@@ -80,6 +82,9 @@
 	/// Return to prevent the movable from talking into the radio.
 	#define COMPONENT_CANNOT_USE_RADIO (1<<0)
 
+/// From /datum/element/immerse/proc/add_immerse_overlay(): (atom/movable/immerse_mask/effect_relay)
+#define COMSIG_MOVABLE_EDIT_UNIQUE_IMMERSE_OVERLAY "movable_edit_unique_submerge_overlay"
+
 ///from base of atom/movable/newtonian_move(): (inertia_direction)
 #define COMSIG_MOVABLE_NEWTONIAN_MOVE "movable_newtonian_move"
 	#define COMPONENT_MOVABLE_NEWTONIAN_BLOCK (1<<0)
@@ -90,8 +95,6 @@
 	#define COMSIG_ATOM_BLOCKS_PRESSURE (1<<0)
 
 // /datum/element/movetype_handler signals
-/// Called when the floating anim has to be temporarily stopped and restarted later: (timer)
-#define COMSIG_PAUSE_FLOATING_ANIM "pause_floating_anim"
 /// From base of datum/element/movetype_handler/on_movement_type_trait_gain: (flag, old_movement_type)
 #define COMSIG_MOVETYPE_FLAG_ENABLED "movetype_flag_enabled"
 /// From base of datum/element/movetype_handler/on_movement_type_trait_loss: (flag, old_movement_type)

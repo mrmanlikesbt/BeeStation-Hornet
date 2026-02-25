@@ -18,7 +18,7 @@
 /datum/antagonist/nukeop/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/current_mob = mob_override || owner.current
 	ADD_TRAIT(current_mob, TRAIT_DISK_VERIFIER, NUKEOP_TRAIT)
-	add_team_hud(current_mob)
+	add_team_hud(current_mob, /datum/antagonist/nukeop)
 	owner.remove_all_quirks()
 
 /datum/antagonist/nukeop/remove_innate_effects(mob/living/mob_override)

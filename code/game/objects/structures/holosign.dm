@@ -152,19 +152,11 @@
 
 /obj/structure/holosign/barrier/atmos/Initialize(mapload)
 	. = ..()
-	var/turf/local = get_turf(loc)
-	ADD_TRAIT(local, TRAIT_FIREDOOR_STOP, TRAIT_GENERIC)
 	air_update_turf(TRUE, TRUE)
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_FIREDOOR_STOP)))
 
 /obj/structure/holosign/barrier/atmos/Destroy()
-	var/turf/local = get_turf(loc)
-	REMOVE_TRAIT(local, TRAIT_FIREDOOR_STOP, TRAIT_GENERIC)
 	air_update_turf(TRUE, FALSE)
-	return ..()
-
-/obj/structure/holosign/barrier/atmos/Move(atom/newloc, direct)
-	var/turf/local = get_turf(loc)
-	REMOVE_TRAIT(local, TRAIT_FIREDOOR_STOP, TRAIT_GENERIC)
 	return ..()
 
 /obj/structure/holosign/barrier/cyborg

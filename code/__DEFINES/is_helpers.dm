@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define ishuman(A) (istype(A, /mob/living/carbon/human))
 
-#define ishumantesting(A) (istype(A, /mob/living/carbon/human/consistent) || istype(A, /mob/living/carbon/human/dummy))
+#define isdummy(A) (istype(A, /mob/living/carbon/human/dummy))
 
 //Human sub-species
 #define isabductor(A) (is_species(A, /datum/species/abductor))

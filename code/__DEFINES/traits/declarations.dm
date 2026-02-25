@@ -61,6 +61,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEATHCOMA "deathcoma"
 #define TRAIT_FAKEDEATH "fakedeath" //Makes the owner appear as dead to most forms of medical examination
 #define TRAIT_DISFIGURED		"disfigured"
+/// "Magic" trait that blocks the mob from moving or interacting with anything. Used for transient stuff like mob transformations or incorporality in special cases.
+/// Will block movement, `Life()` (!!!), and other stuff based on the mob.
+#define TRAIT_NO_TRANSFORM "block_transformations"
 #define TRAIT_XENO_HOST			"xeno_host"	//Tracks whether we're gonna be a baby alien's mummy.
 #define TRAIT_STUNIMMUNE		"stun_immunity"
 #define TRAIT_STUNRESISTANCE    "stun_resistance"
@@ -272,6 +275,20 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This object has been slathered with a speed potion
 #define TRAIT_SPEED_POTIONED "speed_potioned"
 
+/// Lava will be safe to cross while it has this trait.
+#define TRAIT_LAVA_STOPPED "lava_stopped"
+/// Chasms will be safe to cross while they've this trait.
+#define TRAIT_CHASM_STOPPED "chasm_stopped"
+/// The effects of the immerse element will be halted while this trait is present.
+#define TRAIT_IMMERSE_STOPPED "immerse_stopped"
+/// The effects of hyperspace drift are blocked when the tile has this trait
+#define TRAIT_HYPERSPACE_STOPPED "hyperspace_stopped"
+
+///Turf slowdown will be ignored when this trait is added to a turf.
+#define TRAIT_TURF_IGNORE_SLOWDOWN "turf_ignore_slowdown"
+///Mobs won't slip on a wet turf while it has this trait
+#define TRAIT_TURF_IGNORE_SLIPPERY "turf_ignore_slippery"
+
 /// Can use the nuclear device's UI, regardless of a lack of hands
 #define TRAIT_CAN_USE_NUKE "can_use_nuke"
 
@@ -280,19 +297,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 ///Mob is being tracked on glob suit sensors list
 #define TRAIT_TRACKED_SENSORS "tracked_sensors"
-///Mob is tracked by suit sensors, and on glob suit sensors list
-#define TRAIT_SUIT_SENSORS "suit_sensors"
-///Mob is tracked by nanites, and on glob suit sensors list
-#define TRAIT_NANITE_SENSORS "nanite_sensors"
 
 /// Trait for psyphoza, flag for examine logic
 #define TRAIT_PSYCHIC_SENSE "psychic_sense"
 
 /// Trait which means whatever has this is dancing by a dance machine
 #define TRAIT_DISCO_DANCER "disco_dancer"
-
-/// Marks an atom when the cleaning of it is first started, so that the cleaning overlay doesn't get removed prematurely
-#define TRAIT_CURRENTLY_CLEANING "currently_cleaning"
 
 /**
  * Atom Traits
@@ -305,6 +315,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_IMMOBILIZE "no_immobilize"
 /// A transforming item that is actively extended / transformed
 #define TRAIT_TRANSFORM_ACTIVE "active_transform"
+/// Marks an atom when the cleaning of it is first started, so that the cleaning overlay doesn't get removed prematurely
+#define TRAIT_CURRENTLY_CLEANING "currently_cleaning"
+/// If this movable is currently treading in a turf with the immerse element.
+#define TRAIT_IMMERSED "immersed"
 
 //important_recursive_contents traits
 /*
@@ -413,8 +427,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This mob can strip other mobs.
 #define TRAIT_CAN_STRIP "can_strip"
 
-///Turf trait for when a turf is transparent
-#define TURF_Z_TRANSPARENT_TRAIT "turf_z_transparent"
+/// Apply this trait to mobs which can "buckle" to humans
+#define TRAIT_CAN_MOUNT_HUMANS "can_mount_humans"
+/// Apply this trait to mobs which can "buckle" to cyborgs
+#define TRAIT_CAN_MOUNT_CYBORGS "can_mount_cyborgs"
+
 ///Traits given by station traits
 #define STATION_TRAIT_BANANIUM_SHIPMENTS "station_trait_bananium_shipments"
 #define STATION_TRAIT_CARP_INFESTATION "station_trait_carp_infestation"
@@ -443,7 +460,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MOVE_FLOATING		"move_floating"
 #define TRAIT_MOVE_PHASING		"move_phasing"
 /// Disables the floating animation. See above.
-#define TRAIT_NO_FLOATING_ANIM		"no-floating-animation"
+#define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
 
 /// Weather immunities, also protect mobs inside them.
 #define TRAIT_LAVA_IMMUNE "lava_immune" //Used by lava turfs and The Floor Is Lava.

@@ -419,7 +419,7 @@ GLOBAL_LIST(admin_antag_list)
 /// Takes a location, returns an image drawing "on" it that matches this antag datum's hud icon
 /datum/antagonist/proc/hud_image_on(mob/hud_loc)
 	var/image/hud = image(hud_icon, hud_loc, antag_hud_name)
-	hud.plane = ABOVE_GAME_PLANE
+	hud.plane = DATA_HUD_PLANE
 	return hud
 
 // Handles adding and removing the clumsy mutation from clown antags. Gets called in apply/remove_innate_effects

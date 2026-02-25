@@ -188,11 +188,8 @@
 		var/turf/open/floor/F = random_location
 		if(!is_turf_safe(F))
 			continue
-		if(extended_safety_checks)
-			if(islava(F)) //chasms aren't /floor, and so are pre-filtered
-				var/turf/open/lava/L = F
-				if(!L.is_safe())
-					continue
+		if(extended_safety_checks && islava(F) && !HAS_TRAIT(F, TRAIT_LAVA_STOPPED)) //chasms aren't /floor, and so are pre-filtered
+			continue
 		// Check that we're not warping onto a table or window
 		if(!dense_atoms)
 			var/density_found = FALSE

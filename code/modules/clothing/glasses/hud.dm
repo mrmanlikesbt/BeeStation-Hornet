@@ -358,8 +358,10 @@
 		return
 	if(xray)
 		vision_flags -= SEE_MOBS|SEE_OBJS
+		detach_clothing_traits(TRAIT_XRAY_VISION)
 	else
 		vision_flags += SEE_MOBS|SEE_OBJS
+		attach_clothing_traits(TRAIT_XRAY_VISION)
 	xray = !xray
 	var/mob/living/carbon/human/wearer = user
 	wearer.update_sight()
