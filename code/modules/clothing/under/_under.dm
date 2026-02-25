@@ -353,7 +353,7 @@
 	else
 		attach_clothing_traits(TRAIT_BASIC_HEALTH_HUD_VISIBLE)
 
-	if(!ishuman(loc) || isdummy(loc))
+	if(!ishuman(loc) || ishumantesting(loc))
 		return
 
 	var/mob/living/carbon/human/wearer = loc

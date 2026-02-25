@@ -72,6 +72,7 @@
 	ui_name = "AntagInfoBrainwashed"
 	roundend_category = "brainwashed victims"
 	show_in_antagpanel = TRUE
+	antagpanel_category = "Other"
 	show_name_in_check_antagonists = TRUE
 	antag_hud_name = "brainwash"
 	banning_key = ROLE_BRAINWASHED

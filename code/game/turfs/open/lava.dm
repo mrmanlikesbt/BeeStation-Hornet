@@ -40,7 +40,7 @@
 
 /turf/open/lava/Destroy()
 	checked_atoms = null
-	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
+	UnregisterSignal(src, list(COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, SIGNAL_REMOVETRAIT(TRAIT_LAVA_STOPPED)))
 	for(var/mob/living/leaving_mob in contents)
 		leaving_mob.RemoveElement(/datum/element/perma_fire_overlay)
 		REMOVE_TRAIT(leaving_mob, TRAIT_NO_EXTINGUISH, TURF_TRAIT)
