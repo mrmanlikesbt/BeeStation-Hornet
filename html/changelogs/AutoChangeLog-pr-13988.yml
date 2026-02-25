@@ -1,0 +1,5 @@
+author: rkz, Absolucy, san7890
+delete-after: true
+changes:
+  - server: standardized CI to use ubuntu-24.04, rather than a mix of latest and 22.04
+  - server: adds error message to hook install
