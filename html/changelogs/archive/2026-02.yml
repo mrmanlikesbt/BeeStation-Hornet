@@ -187,3 +187,7 @@
 2026-02-24:
   mrmanlikesbt:
   - bugfix: Fixed AI core construction being able to make infinite AIs
+2026-02-25:
+  rkz, Absolucy, san7890:
+  - server: standardized CI to use ubuntu-24.04, rather than a mix of latest and 22.04
+  - server: adds error message to hook install
