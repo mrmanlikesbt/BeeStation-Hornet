@@ -37,7 +37,6 @@
 		to_chat(owner.current, span_userdanger("Your mind slips away from the clutches of your blood-brother. You are no longer required to follow their orders, but blackmail of your past crimes may make it difficult for you to find a way out of working with them..."))
 		owner.current.log_message("has had their blood brother removed!", LOG_ATTACK, color="#960000")
 	owner.special_role = null
-	remove_antag_hud(ANTAG_HUD_BROTHER, owner.current)
 	if (owner.current)
 		for (var/obj/item/implant/bloodbrother/brother_implant in owner.current.implants)
 			if (brother_implant.linked_team == team)

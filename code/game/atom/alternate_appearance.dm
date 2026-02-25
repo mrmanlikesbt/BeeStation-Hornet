@@ -223,5 +223,5 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 /datum/atom_hud/alternate_appearance/basic/minds/New(key, image/I, options = NONE, list/minds)
 	for (var/datum/mind/mind in minds)
 		seers += mind
-		add_hud_to(mind.current)
+		show_to(mind.current)
 	return ..()

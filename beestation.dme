@@ -1183,7 +1183,6 @@
 #include "code\datums\mutations\webbing.dm"
 #include "code\datums\objectives\_objective.dm"
 #include "code\datums\objectives\objective_items.dm"
-#include "code\datums\objectives\stash_component.dm"
 #include "code\datums\objectives\basic\assassinate.dm"
 #include "code\datums\objectives\basic\debrain.dm"
 #include "code\datums\objectives\basic\destroy_ai.dm"
