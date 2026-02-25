@@ -1,0 +1,4 @@
+author: mrmanlikesbt
+delete-after: true
+changes:
+  - bugfix: Fixed dynamic sometimes picking humans for malfunctioning AI
