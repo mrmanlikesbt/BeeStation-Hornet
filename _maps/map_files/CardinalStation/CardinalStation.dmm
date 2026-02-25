@@ -3378,7 +3378,7 @@
 /obj/effect/turf_decal/siding/asteroid{
 	dir = 10
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "aMc" = (
 /obj/machinery/door/firedoor,
@@ -6392,7 +6392,7 @@
 /obj/effect/turf_decal/siding/dirt/corner{
 	dir = 4
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "bpQ" = (
 /obj/effect/turf_decal/siding/thinplating_new/light{
@@ -12858,7 +12858,7 @@
 /obj/effect/turf_decal/siding/asteroid{
 	dir = 5
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "cIO" = (
 /obj/structure/cable/yellow{
@@ -14314,7 +14314,7 @@
 	pixel_y = -6;
 	pixel_x = 6
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "cXv" = (
 /obj/effect/turf_decal/siding/dark,
@@ -15209,7 +15209,7 @@
 /obj/effect/turf_decal/siding/asteroid{
 	dir = 1
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "dha" = (
 /obj/machinery/vending/boozeomat,
@@ -17717,7 +17717,7 @@
 /obj/effect/turf_decal/siding/asteroid/corner{
 	dir = 4
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "dLP" = (
 /obj/effect/turf_decal/siding/dirt{
@@ -24219,7 +24219,7 @@
 /area/crew_quarters/cryopods)
 "foR" = (
 /obj/effect/turf_decal/siding/dirt/corner,
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "fpe" = (
 /obj/structure/flora/bigplant{
@@ -28288,7 +28288,7 @@
 /obj/effect/turf_decal/siding/dirt/corner{
 	dir = 8
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "gjA" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -32267,7 +32267,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/theatre)
 "gZk" = (
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "gZm" = (
 /obj/structure/chair/stool/directional/north{
@@ -32969,7 +32969,7 @@
 /area/tcommsat/server)
 "hhd" = (
 /obj/effect/turf_decal/siding/dirt,
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "hhm" = (
 /obj/effect/turf_decal/trimline/neutral/filled/warning{
@@ -35514,7 +35514,7 @@
 /obj/effect/turf_decal/siding/dirt/corner{
 	dir = 1
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "hKF" = (
 /obj/structure/table/reinforced,
@@ -38360,7 +38360,7 @@
 	pixel_y = -6;
 	pixel_x = 6
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "itF" = (
 /obj/effect/turf_decal/siding/yellow,
@@ -40525,7 +40525,7 @@
 /area/ai_monitored/turret_protected/aisat/hallway)
 "iOA" = (
 /obj/effect/turf_decal/siding/asteroid,
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "iOB" = (
 /obj/structure/cable/yellow{
@@ -42489,7 +42489,7 @@
 /obj/effect/turf_decal/siding/asteroid{
 	dir = 6
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "jmM" = (
 /obj/effect/turf_decal/siding/wood{
@@ -44071,7 +44071,7 @@
 /obj/effect/turf_decal/siding/asteroid/corner{
 	dir = 4
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "jFo" = (
 /obj/structure/flora/bigplant,
@@ -54143,7 +54143,7 @@
 /obj/effect/turf_decal/siding/asteroid{
 	dir = 9
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "lOd" = (
 /obj/effect/turf_decal/siding/dark{
@@ -65140,7 +65140,7 @@
 /obj/effect/turf_decal/siding/asteroid/corner{
 	dir = 8
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "olr" = (
 /obj/effect/turf_decal/stripes/line{
@@ -68377,7 +68377,7 @@
 /obj/effect/turf_decal/siding/asteroid{
 	dir = 1
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "oWz" = (
 /obj/machinery/biogenerator,
@@ -71036,7 +71036,7 @@
 /obj/effect/turf_decal/siding/dirt/corner{
 	dir = 8
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "pze" = (
 /turf/closed/wall/r_wall,
@@ -71523,7 +71523,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/siding/dirt/corner,
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "pEI" = (
 /obj/effect/turf_decal/siding/dark{
@@ -75301,7 +75301,7 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/siding/asteroid/corner,
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "qwN" = (
 /obj/structure/table/reinforced,
@@ -84279,7 +84279,7 @@
 "ssU" = (
 /obj/effect/turf_decal/siding/asteroid,
 /obj/effect/turf_decal/siding/asteroid/corner,
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "sta" = (
 /obj/effect/turf_decal/siding/yellow{
@@ -87085,7 +87085,7 @@
 /obj/effect/turf_decal/siding/dirt/corner{
 	dir = 1
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "tcD" = (
 /obj/structure/chair,
@@ -90582,7 +90582,7 @@
 	desc = "This area actually used to be about 4 times the size, but i had to cut it down because the map's huge already - BarteG";
 	name = "CardinalStation - Garden Dome"
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "tOr" = (
 /obj/machinery/door/airlock/maintenance{
@@ -92011,7 +92011,7 @@
 	pixel_y = -6;
 	pixel_x = 6
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "ufA" = (
 /obj/effect/turf_decal/siding/white/corner{
@@ -97862,7 +97862,7 @@
 /obj/effect/turf_decal/siding/dirt/corner{
 	dir = 4
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "vqi" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -104844,7 +104844,7 @@
 	pixel_y = -4;
 	pixel_x = 5
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "wRe" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4,
@@ -109650,7 +109650,7 @@
 	pixel_x = 16;
 	pixel_y = -5
 	},
-/turf/open/water/air/station,
+/turf/open/water/air,
 /area/hydroponics/garden)
 "xVk" = (
 /obj/effect/turf_decal/tile/green/opposingcorners{

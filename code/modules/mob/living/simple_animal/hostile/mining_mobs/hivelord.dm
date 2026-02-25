@@ -33,7 +33,7 @@
 	var/brood_type = /mob/living/simple_animal/hostile/asteroid/hivelordbrood
 	var/has_clickbox = TRUE
 
-/mob/living/simple_animal/hostile/asteroid/hivelord/Initialize()
+/mob/living/simple_animal/hostile/asteroid/hivelord/Initialize(mapload)
 	. = ..()
 	if(has_clickbox)
 		AddComponent(/datum/component/clickbox, icon_state = "hivelord", max_scale = INFINITY, dead_state = "hivelord_dead") //they writhe so much.
