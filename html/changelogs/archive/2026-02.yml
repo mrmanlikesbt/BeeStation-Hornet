@@ -193,3 +193,6 @@
   rkz, Absolucy, san7890:
   - server: standardized CI to use ubuntu-24.04, rather than a mix of latest and 22.04
   - server: adds error message to hook install
+2026-02-26:
+  r1ks-iwnl:
+  - bugfix: Fixes sarin poisoning through gloves.
