@@ -153,7 +153,6 @@
 	info_text = "Spectre Inspector - 1980's. \n" + span_notice("Comes with some anti-spectre grenades")
 
 /obj/item/storage/box/hero/ghostbuster/PopulateContents()
-	return
 	new /obj/item/clothing/glasses/welding/ghostbuster(src)
 	new /obj/item/storage/belt/fannypack/bustin(src)
 	new /obj/item/clothing/gloves/color/black(src)
