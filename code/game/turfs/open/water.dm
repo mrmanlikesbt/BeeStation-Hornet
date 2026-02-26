@@ -58,6 +58,3 @@
 /turf/open/water/air
 	planetary_atmos = FALSE
 
-/turf/open/water/air/station
-	baseturfs = /turf/open/floor/plating
-
