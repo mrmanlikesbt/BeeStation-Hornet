@@ -758,7 +758,7 @@
  * * reagtemp - Temperature of this reagent, will be equalized
  * * no_react - prevents reactions being triggered by this addition
  */
-/datum/reagents/proc/add_reagent(datum/reagent/reagent, amount, list/data=null, reagtemp = DEFAULT_REAGENT_TEMPERATURE, no_react = 0)
+/datum/reagents/proc/add_reagent(datum/reagent/reagent, amount, list/data=null, reagtemp = DEFAULT_REAGENT_TEMPERATURE, no_react = FALSE)
 
 	if(!ispath(reagent))
 		stack_trace("invalid reagent passed to add reagent [reagent]")
@@ -903,7 +903,7 @@
 			continue
 
 		//next check if we have the requested amount
-		if(amount > 0 && holder_reagent.volume < amount)
+		if(amount && FLOOR(holder_reagent.volume, CHEMICAL_QUANTISATION_LEVEL) < amount)
 			continue
 
 		//next check for metabolization
