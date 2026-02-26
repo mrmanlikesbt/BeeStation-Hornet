@@ -899,11 +899,14 @@
 	var/list/cached_reagents = reagent_list
 	for(var/datum/reagent/holder_reagent as anything in cached_reagents)
 		// check if holder_reagent is compatible with target_reagent
-		if(holder_reagent.type != target_reagent && !check_subtypes && !istype(holder_reagent, target_reagent))
-			continue
+		if(!check_subtypes)
+			if(holder_reagent.type != target_reagent)
+				continue
+			else if(!istype(holder_reagent, target_reagent))
+				continue
 
 		//next check if we have the requested amount
-		if(amount && FLOOR(holder_reagent.volume, CHEMICAL_QUANTISATION_LEVEL) < amount)
+		if(amount > 0 && holder_reagent.volume < amount)
 			continue
 
 		//next check for metabolization
