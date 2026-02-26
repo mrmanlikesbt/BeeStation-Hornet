@@ -279,14 +279,8 @@
 	emissive_state = "hud_emissive"
 	actions_types = list(/datum/action/item_action/switch_hud)
 
-/obj/item/clothing/glasses/hud/toggle/sunglasses
-	name = "Toggle HUDSunglasses"
-	desc = "Sunglasses with a Toggle HUD."
-	icon_state = "sunhudtoggle"
-	emissive_state = "sechud_emissive"
-	actions_types = list(/datum/action/item_action/switch_hud)
-
 /obj/item/clothing/glasses/hud/toggle/attack_self(mob/user)
+	. = ..()
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/wearer = user
@@ -304,6 +298,12 @@
 
 /datum/action/item_action/switch_hud
 	name = "Switch HUD"
+
+/obj/item/clothing/glasses/hud/toggle/sunglasses
+	name = "Toggle HUDSunglasses"
+	desc = "Sunglasses with a Toggle HUD."
+	icon_state = "sunhudtoggle"
+	emissive_state = "sechud_emissive"
 
 /obj/item/clothing/glasses/hud/toggle/thermal
 	name = "thermal HUD scanner"

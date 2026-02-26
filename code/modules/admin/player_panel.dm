@@ -135,6 +135,9 @@
 				data_entry["related_accounts_cid"] = player.client.related_accounts_cid
 				if(player.client.byond_version)
 					data_entry["byond_version"] = "[player.client.byond_version].[player.client.byond_build ? player.client.byond_build : "xxx"]"
+				if(player.mind)
+					// code smell
+					data_entry["antag_hud"] = astype(player.mind.antag_hud?.get_antag_image(1), /image)?.icon_state
 		if(ckey == selected_ckey)
 			for(var/log_type in player.logging)
 				var/list/log_type_data = list()
