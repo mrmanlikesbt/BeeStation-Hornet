@@ -57,21 +57,18 @@
 	qdel(overlay)
 	return ..()
 
-/obj/structure/weightmachine/wrench_act(mob/living/user, obj/item/I)
-	if (default_unfasten_wrench(user, I, 50) == 2 && anchored)
+/obj/structure/weightmachine/wrench_act(mob/living/user, obj/item/tool)
+	if (default_unfasten_wrench(user, tool, 50) == 2 && anchored)
 		setDir(SOUTH)
 	unbuckle_all_mobs()
 	return TRUE
 
-/obj/structure/weightmachine/screwdriver_act(mob/living/user, obj/item/I)
+/obj/structure/weightmachine/screwdriver_act(mob/living/user, obj/item/tool)
 	to_chat(user, span_notice("You begin to take apart [src]..."))
-	if(I.use_tool(src, user, 40, volume=50))
+	if(tool.use_tool(src, user, 4 SECONDS, volume=50))
 		to_chat(user, span_notice("You deconstruct [src]."))
 		qdel(src)
 	return TRUE
-
-/obj/structure/weightmachine/buckle_mob(mob/living/buckled, force, check_loc, needs_anchored = TRUE)
-	. = ..()
 
 /obj/structure/weightmachine/post_buckle_mob(mob/living/buckled)
 	weight_action.Grant(buckled)
@@ -111,8 +108,8 @@
 		return FALSE
 	var/mob/living/user = buckled_mobs[1]
 	flick("[base_icon_state]-u", src)
-	animate(user, pixel_z = pixel_shift_z, time = 4, flags = ANIMATION_PARALLEL|ANIMATION_RELATIVE)
-	animate(pixel_z = -pixel_shift_z, time = 4, flags = ANIMATION_PARALLEL)
+	animate(user, pixel_z = user.pixel_z + pixel_shift_z, time = 4, flags = SINE_EASING)
+	animate(pixel_z = user.pixel_z - pixel_shift_z, time = 4, flags = SINE_EASING)
 	playsound(user, 'sound/machines/creak.ogg', 60, TRUE)
 
 	return TRUE
