@@ -215,13 +215,12 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	return ismimite(M) || isobserver(M)
 
 /datum/atom_hud/alternate_appearance/basic/minds
-	var/list/datum/mind/seers
+	var/list/datum/weakref/seers = list()
 
 /datum/atom_hud/alternate_appearance/basic/minds/mobShouldSee(mob/M)
-	return (M.mind in seers)
+	return (WEAKREF(M.mind) in seers)
 
 /datum/atom_hud/alternate_appearance/basic/minds/New(key, image/I, options = NONE, list/minds)
 	for (var/datum/mind/mind in minds)
-		seers += mind
-		show_to(mind.current)
+		seers += WEAKREF(mind)
 	return ..()

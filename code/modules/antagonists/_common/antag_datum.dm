@@ -160,6 +160,9 @@ GLOBAL_LIST(admin_antag_list)
 		owner.current.add_to_current_living_antags()
 	owner.current.update_action_buttons()
 
+	if(antag_hud_name)
+		owner.antag_hud_icon_state ||= antag_hud_name
+
 	for (var/datum/atom_hud/alternate_appearance/basic/antag_hud as anything in GLOB.active_alternate_appearances)
 		antag_hud.apply_to_new_mob(owner.current)
 
@@ -213,9 +216,22 @@ GLOBAL_LIST(admin_antag_list)
 		if(!silent && owner.current)
 			farewell()
 		owner.current.update_action_buttons()
+
+		// clear our icon state from the player panel
+		// if our owner has any antag datums we choose a random one's hud icon state
+		if(owner.antag_hud_icon_state == antag_hud_name)
+			if(length(owner.antag_datums))
+				var/list/other_antag_datums = owner.antag_datums.Copy()
+				var/datum/antagonist/random_antag
+				while(length(other_antag_datums) && !random_antag?.antag_hud_name)
+					random_antag = pick_n_take(other_antag_datums)
+					owner.antag_hud_icon_state = random_antag.antag_hud_name
+			else
+				owner.antag_hud_icon_state = null
 	var/datum/team/team = get_team()
 	if(team)
 		team.remove_member(owner)
+
 	SEND_SIGNAL(owner, COMSIG_ANTAGONIST_REMOVED, src)
 	qdel(src)
 

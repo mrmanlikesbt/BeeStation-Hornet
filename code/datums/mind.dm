@@ -60,6 +60,8 @@
 	var/list/antag_datums
 	/// This mind's antag HUD
 	var/datum/atom_hud/alternate_appearance/basic/antagonist_hud/antag_hud = null
+	/// The icon state of our most recently gained antag datum. Used for the player panel
+	var/antag_hud_icon_state = null
 	/// Is this person a chaplain or admin role allowed to use bibles, Any rank besides 'NONE' allows for this.
 	var/holy_role = NONE
 
