@@ -135,8 +135,8 @@
 				data_entry["related_accounts_cid"] = player.client.related_accounts_cid
 				if(player.client.byond_version)
 					data_entry["byond_version"] = "[player.client.byond_version].[player.client.byond_build ? player.client.byond_build : "xxx"]"
-			if(player.mind)
-				data_entry["antag_hud"] = player.mind.antag_hud_icon_state
+		if(player.mind)
+			data_entry["antag_hud"] = player.mind.antag_hud_icon_state
 		if(ckey == selected_ckey)
 			for(var/log_type in player.logging)
 				var/list/log_type_data = list()
