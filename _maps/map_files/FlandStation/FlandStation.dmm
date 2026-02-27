@@ -1152,7 +1152,7 @@
 /area/ai_monitored/turret_protected/ai)
 "aqD" = (
 /obj/item/caution,
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /turf/open/floor/plating,
 /area/maintenance/port/central)
 "aqJ" = (
@@ -5541,7 +5541,7 @@
 	},
 /area/hallway/primary/central)
 "bxt" = (
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/item/mop,
 /obj/item/storage/pill_bottle,
 /turf/open/floor/plating,
@@ -35225,7 +35225,7 @@
 	name = "old sink";
 	pixel_x = -11
 	},
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/item/reagent_containers/cup/bucket,
 /obj/item/mop,
 /turf/open/floor/iron/dark,
@@ -57165,7 +57165,7 @@
 /turf/open/floor/iron/techmaint,
 /area/science/xenobiology)
 "pCA" = (
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/item/reagent_containers/cup/bucket,
 /obj/item/mop,
 /turf/open/floor/iron/techmaint,
@@ -63990,7 +63990,7 @@
 /turf/open/floor/iron/dark,
 /area/chapel/main)
 "rzd" = (
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/item/mop,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)

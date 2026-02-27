@@ -70,6 +70,7 @@
 /obj/item/soap/proc/decrease_uses(datum/source, atom/target, mob/living/user, clean_succeeded)
 	if(!clean_succeeded)
 		return
+	uses--
 	if(uses <= 0)
 		no_uses(user)
 

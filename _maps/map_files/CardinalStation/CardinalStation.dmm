@@ -79524,7 +79524,7 @@
 /obj/effect/turf_decal/trimline/purple/filled/warning{
 	dir = 8
 	},
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /turf/open/floor/iron,
 /area/janitor)
 "rro" = (
@@ -95677,7 +95677,7 @@
 /obj/item/mop{
 	pixel_y = 3
 	},
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /turf/open/floor/plating,
 /area/maintenance/department/engine)
 "uTc" = (

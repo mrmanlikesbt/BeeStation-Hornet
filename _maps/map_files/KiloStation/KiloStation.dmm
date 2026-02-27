@@ -23781,7 +23781,7 @@
 /turf/open/floor/iron/dark,
 /area/engine/atmos)
 "giB" = (
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/item/reagent_containers/cup/bucket,
 /obj/item/mop,
 /obj/effect/turf_decal/tile/red/opposingcorners,
@@ -57492,7 +57492,7 @@
 /area/security/prison)
 "rLA" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/item/mop,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)

@@ -5297,7 +5297,7 @@
 /turf/open/floor/iron/white,
 /area/crew_quarters/heads/hor)
 "bxq" = (
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/green/opposingcorners,
 /obj/effect/mapping_helpers/tile_breaker,
@@ -35665,7 +35665,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /obj/item/mop,
 /turf/open/floor/plating,
 /area/maintenance/port)
@@ -42172,7 +42172,7 @@
 /area/security/prison)
 "oLL" = (
 /obj/item/caution,
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "oLO" = (

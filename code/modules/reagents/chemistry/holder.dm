@@ -892,16 +892,18 @@
 	check_subtypes = FALSE,
 	chemical_flags = NONE,
 )
-	if(!ispath(target_reagent))
+	if(!isnull(target_reagent) && !ispath(target_reagent))
 		stack_trace("invalid reagent path passed to has reagent [target_reagent]")
 		return FALSE
 
 	var/list/cached_reagents = reagent_list
 	for(var/datum/reagent/holder_reagent as anything in cached_reagents)
-		// check if holder_reagent is compatible with target_reagent
-		if(!check_subtypes)
-			if(holder_reagent.type != target_reagent)
-				continue
+		//finding for a specific reagent
+		if(!isnull(target_reagent))
+			// first find for specific type or subtype
+			if(!check_subtypes)
+				if(holder_reagent.type != target_reagent)
+					continue
 			else if(!istype(holder_reagent, target_reagent))
 				continue
 

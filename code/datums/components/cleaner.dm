@@ -52,6 +52,9 @@
 
 /datum/component/cleaner/proc/on_afterattack(datum/source, atom/target, mob/user, proximity_flag, click_parameters)
 	SIGNAL_HANDLER
+	if(!proximity_flag)
+		return
+
 	var/call_wash = TRUE
 	if(pre_clean_callback)
 		var/callback_return = pre_clean_callback.Invoke(source, target, user)

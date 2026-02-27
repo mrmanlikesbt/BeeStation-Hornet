@@ -22,7 +22,7 @@
 	var/static/list/clean_blacklist = typecacheof(list(
 		/obj/item/reagent_containers/cup/bucket,
 		/obj/structure/janitorialcart,
-		/obj/structure/mopbucket,
+		/obj/structure/mop_bucket,
 	))
 
 /obj/item/mop/Initialize(mapload)

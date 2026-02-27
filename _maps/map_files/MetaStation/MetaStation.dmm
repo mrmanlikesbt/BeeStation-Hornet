@@ -65322,7 +65322,7 @@
 /turf/open/floor/iron,
 /area/hallway/primary/central)
 "tTN" = (
-/obj/structure/mopbucket,
+/obj/structure/mop_bucket,
 /turf/open/floor/plating,
 /area/maintenance/starboard/secondary)
 "tUe" = (
