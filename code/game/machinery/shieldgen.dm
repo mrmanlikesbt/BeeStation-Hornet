@@ -663,3 +663,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/obj/machinery/shieldwall)
 	. = ..()
 	air_update_turf(TRUE, TRUE)
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_FIREDOOR_STOP)))
+
+/obj/machinery/shieldwall/atmos/Destroy()
+	air_update_turf(TRUE, FALSE)
+	return ..()
