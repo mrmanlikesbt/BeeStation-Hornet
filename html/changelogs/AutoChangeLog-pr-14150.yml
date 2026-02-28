@@ -1,5 +1,0 @@
-author: r1ks-iwnl
-delete-after: true
-changes:
-  - bugfix: Fixes binary vitals jumpsuit sensor option
-  - bugfix: Fixes crew monitor status icons showing incorrectly
