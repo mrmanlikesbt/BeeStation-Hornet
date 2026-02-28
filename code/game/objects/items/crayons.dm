@@ -523,8 +523,8 @@
 	custom_price = 15
 
 /obj/item/storage/crayons/Initialize(mapload)
-	. = ..()
 	create_storage(canhold = list(/obj/item/toy/crayon))
+	return ..()
 
 /obj/item/storage/crayons/PopulateContents()
 	new /obj/item/toy/crayon/red(src)
@@ -676,7 +676,7 @@
 		to_chat(target, span_userdanger("[user] sprays [src] into your face!"))
 
 		if(C.client)
-			C.blur_eyes(3)
+			C.set_eye_blur_if_lower(6 SECONDS)
 			C.adjust_blindness(1)
 		if(!C.is_eyes_covered()) // no eye protection? ARGH IT BURNS.
 			C.set_confusion_if_lower(3 SECONDS)

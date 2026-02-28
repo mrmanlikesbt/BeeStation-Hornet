@@ -3717,10 +3717,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/science/xenobiology)
-"aPU" = (
-/mob/living/simple_animal/mouse/brown/Tom,
-/turf/open/floor/wood,
-/area/security/prison)
 "aPW" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-2"
@@ -5868,6 +5864,13 @@
 /obj/machinery/fax/med,
 /turf/open/floor/noslip/white,
 /area/medical/medbay/central)
+"bkE" = (
+/obj/item/radio/intercom/directional/east,
+/obj/machinery/modular_computer/console/preset/engineering{
+	dir = 8
+	},
+/turf/open/floor/iron/tech,
+/area/engine/storage_shared)
 "bkN" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/door/poddoor/shutters/window{
@@ -7877,12 +7880,6 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/crew_quarters/heads/hor)
-"bIx" = (
-/obj/machinery/doppler_array/research{
-	pixel_y = -1
-	},
-/turf/open/floor/iron/techmaint,
-/area/science/mixing)
 "bIA" = (
 /obj/machinery/door/window/brigdoor{
 	dir = 4;
@@ -9755,6 +9752,29 @@
 	},
 /turf/open/floor/plating/airless,
 /area/engine/engine_room/external)
+"cbf" = (
+/obj/structure/bookcase,
+/obj/item/book/manual/wiki/sopcommand,
+/obj/item/book/manual/wiki/sopscience,
+/obj/item/book/manual/wiki/sopsupply,
+/obj/item/book/manual/wiki/telescience,
+/obj/item/book/manual/wiki/robotics_cyborgs,
+/obj/item/book/manual/wiki/plumbing,
+/obj/item/book/manual/wiki/infections,
+/obj/item/book/manual/wiki/engineering_hacking,
+/obj/item/book/manual/wiki/detective,
+/obj/item/book/manual/wiki/barman_recipes,
+/obj/item/toy/plush/carpplushie{
+	greyscale_colors = "#ff5050#000000";
+	name = "Nanotrasen wildlife department space carp plushie";
+	pixel_y = 18;
+	pixel_x = 17
+	},
+/obj/machinery/newscaster/directional/north{
+	pixel_y = 31
+	},
+/turf/open/floor/iron/smooth,
+/area/bridge/meeting_room)
 "cbh" = (
 /obj/effect/turf_decal/stripes/closeup,
 /obj/machinery/door/airlock/external{
@@ -22136,6 +22156,18 @@
 	},
 /turf/open/floor/carpet/grimy,
 /area/security/detectives_office)
+"ePV" = (
+/obj/machinery/computer/rdconsole/unlocked{
+	dir = 8
+	},
+/obj/effect/turf_decal/bot,
+/obj/machinery/light/small/directional/east,
+/obj/structure/sign/poster/official/pda_ad{
+	pixel_x = 32
+	},
+/obj/effect/turf_decal/tile/purple/half/contrasted,
+/turf/open/floor/iron/white,
+/area/science/lab)
 "eQc" = (
 /obj/machinery/nuclearbomb/selfdestruct,
 /obj/effect/turf_decal/stripes/box,
@@ -36388,6 +36420,27 @@
 /obj/structure/railing,
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
+"hWj" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 6
+	},
+/obj/machinery/button/door{
+	id = "robotics_shutters";
+	name = "Robotics Privacy Control";
+	req_access_txt = "29";
+	pixel_y = -34
+	},
+/obj/machinery/button/door{
+	pixel_y = -26;
+	id = "robos";
+	name = "Surgery Privacy Shutters";
+	req_access_txt = "29"
+	},
+/obj/machinery/computer/rdconsole/unlocked{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/science/robotics/lab)
 "hWu" = (
 /obj/machinery/light/directional/south,
 /obj/effect/turf_decal/stripes/line{
@@ -38376,27 +38429,6 @@
 "iub" = (
 /turf/closed/wall/mineral/iron,
 /area/security/nuke_storage)
-"iue" = (
-/obj/effect/turf_decal/siding/thinplating_new/dark{
-	dir = 6
-	},
-/obj/machinery/button/door{
-	id = "robotics_shutters";
-	name = "Robotics Privacy Control";
-	req_access_txt = "29";
-	pixel_y = -34
-	},
-/obj/machinery/button/door{
-	pixel_y = -26;
-	id = "robos";
-	name = "Surgery Privacy Shutters";
-	req_access_txt = "29"
-	},
-/obj/machinery/computer/rdconsole/unlocked{
-	dir = 1
-	},
-/turf/open/floor/iron/dark/smooth_large,
-/area/science/robotics/lab)
 "iui" = (
 /obj/structure/closet/crate,
 /obj/effect/spawner/random/maintenance/two,
@@ -43399,6 +43431,12 @@
 /obj/effect/landmark/start/assistant,
 /turf/open/floor/carpet/purple,
 /area/chapel/main)
+"jxc" = (
+/obj/machinery/doppler_array/research{
+	pixel_y = -1
+	},
+/turf/open/floor/iron/techmaint,
+/area/science/mixing)
 "jxg" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -50304,18 +50342,6 @@
 "kXT" = (
 /turf/closed/wall,
 /area/quartermaster/warehouse)
-"kXW" = (
-/obj/machinery/computer/rdconsole/unlocked{
-	dir = 8
-	},
-/obj/effect/turf_decal/bot,
-/obj/machinery/light/small/directional/east,
-/obj/structure/sign/poster/official/pda_ad{
-	pixel_x = 32
-	},
-/obj/effect/turf_decal/tile/purple/half/contrasted,
-/turf/open/floor/iron/white,
-/area/science/lab)
 "kYj" = (
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
@@ -54540,29 +54566,6 @@
 	},
 /turf/open/floor/iron/techmaint,
 /area/security/warden)
-"lTH" = (
-/obj/structure/bookcase,
-/obj/item/book/manual/wiki/sopcommand,
-/obj/item/book/manual/wiki/sopscience,
-/obj/item/book/manual/wiki/sopsupply,
-/obj/item/book/manual/wiki/telescience,
-/obj/item/book/manual/wiki/robotics_cyborgs,
-/obj/item/book/manual/wiki/plumbing,
-/obj/item/book/manual/wiki/infections,
-/obj/item/book/manual/wiki/engineering_hacking,
-/obj/item/book/manual/wiki/detective,
-/obj/item/book/manual/wiki/barman_recipes,
-/obj/item/toy/plush/carpplushie{
-	greyscale_colors = "#ff5050#000000";
-	name = "Nanotrasen wildlife department space carp plushie";
-	pixel_y = 18;
-	pixel_x = 17
-	},
-/obj/machinery/newscaster/directional/north{
-	pixel_y = 31
-	},
-/turf/open/floor/iron/smooth,
-/area/bridge/meeting_room)
 "lTK" = (
 /obj/structure/platform/wood{
 	dir = 6
@@ -88490,6 +88493,10 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/medical/morgue)
+"tqZ" = (
+/mob/living/basic/mouse/brown/tom,
+/turf/open/floor/wood,
+/area/security/prison)
 "trj" = (
 /obj/structure/platform/black{
 	dir = 4
@@ -109057,13 +109064,6 @@
 	},
 /turf/open/floor/catwalk_floor/iron_smooth,
 /area/hallway/primary/starboard)
-"xPe" = (
-/obj/item/radio/intercom/directional/east,
-/obj/machinery/modular_computer/console/preset/engineering{
-	dir = 8
-	},
-/turf/open/floor/iron/tech,
-/area/engine/storage_shared)
 "xPg" = (
 /obj/effect/turf_decal/siding/yellow{
 	dir = 6
@@ -129885,7 +129885,7 @@ mwO
 mwO
 mwO
 wGn
-lTH
+cbf
 lXZ
 vGv
 pbx
@@ -132010,7 +132010,7 @@ wnp
 wnp
 pKp
 avt
-bIx
+jxc
 fVT
 hyT
 nzj
@@ -138387,7 +138387,7 @@ bID
 ocv
 dxD
 vbE
-kXW
+ePV
 uXh
 hzK
 xQY
@@ -142015,7 +142015,7 @@ dLe
 gTz
 qxw
 bQt
-iue
+hWj
 uDV
 hBa
 xuD
@@ -142285,7 +142285,7 @@ uzp
 aUc
 lpy
 oyZ
-xPe
+bkE
 hth
 eVA
 nUS
@@ -153244,7 +153244,7 @@ rbX
 dbk
 ibw
 qaf
-aPU
+tqZ
 mEr
 bGY
 wDq

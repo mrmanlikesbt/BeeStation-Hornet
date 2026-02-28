@@ -687,11 +687,6 @@
 "cx" = (
 /turf/open/floor/iron,
 /area/ruin/space/derelict/bridge/access)
-"cy" = (
-/obj/structure/rack,
-/obj/item/melee/classic_baton/police,
-/turf/open/floor/iron,
-/area/ruin/space/derelict/bridge/access)
 "cz" = (
 /obj/structure/rack,
 /obj/machinery/light/small{
@@ -1540,6 +1535,11 @@
 	pixel_y = -7
 	},
 /obj/item/stock_parts/matter_bin,
+/turf/open/floor/iron/airless,
+/area/ruin/space/derelict/bridge/access)
+"fB" = (
+/obj/structure/table,
+/obj/item/stock_parts/cell,
 /turf/open/floor/iron/airless,
 /area/ruin/space/derelict/bridge/access)
 "fC" = (
@@ -4014,13 +4014,11 @@
 	},
 /turf/open/floor/iron,
 /area/ruin/space/derelict/bridge)
-"qa" = (
-/obj/structure/frame/computer{
-	dir = 1
-	},
-/obj/item/circuitboard/computer/rdconsole/unlocked,
-/turf/open/floor/iron/airless,
-/area/ruin/space/derelict/bridge/ai_upload)
+"qQ" = (
+/obj/structure/rack,
+/obj/item/melee/baton,
+/turf/open/floor/iron,
+/area/ruin/space/derelict/bridge/access)
 "rK" = (
 /turf/template_noop,
 /area/ruin/space/derelict/medical)
@@ -4111,11 +4109,6 @@
 	},
 /turf/open/floor/iron/airless,
 /area/ruin/space/derelict/se_solar)
-"Nx" = (
-/obj/structure/table,
-/obj/item/stock_parts/cell,
-/turf/open/floor/iron/airless,
-/area/ruin/space/derelict/bridge/access)
 "Oj" = (
 /turf/closed/wall/r_wall,
 /area/ruin/space/derelict/bridge/access)
@@ -4161,6 +4154,13 @@
 "Vz" = (
 /turf/open/floor/iron/airless,
 /area/ruin/space/derelict/hallway/primary/port)
+"Zv" = (
+/obj/structure/frame/computer{
+	dir = 1
+	},
+/obj/item/circuitboard/computer/rdconsole/unlocked,
+/turf/open/floor/iron/airless,
+/area/ruin/space/derelict/bridge/ai_upload)
 "ZB" = (
 /obj/structure/lattice,
 /turf/template_noop,
@@ -10404,7 +10404,7 @@ ax
 bz
 bE
 bE
-qa
+Zv
 cd
 cf
 ci
@@ -10765,7 +10765,7 @@ ZB
 ZB
 ZB
 cs
-Nx
+fB
 fx
 fx
 fS
@@ -11202,7 +11202,7 @@ bj
 bj
 bj
 cs
-cy
+qQ
 cK
 cx
 cT
