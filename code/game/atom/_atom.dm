@@ -118,9 +118,9 @@
 	/// DO NOT EDIT THIS, USE ADD_LUM_SOURCE INSTEAD
 	VAR_PRIVATE/_emissive_count = 0
 
-	/// list of clients that using this atom as their eye. SHOULD BE USED CAREFULLY
-	var/list/eye_users // TO-DO: replace into eye_mobs
-	/// same as 'eye_users', but mobs, instead of client. SHOULD BE USED CAREFULLY
+	/// list of '/client' that using this atom as their eye. SHOULD BE USED CAREFULLY
+	var/list/eye_users // TO-DO: replace into eye_mobs (maybe not)
+	/// list of '/mob' that using this atom as their eye. SHOULD BE USED CAREFULLY
 	var/list/eye_mobs
 	/// Amount of users hovering us, if this is greater than 1 we need to clear references on destroy
 	var/hovered_user_count = 0
@@ -204,7 +204,7 @@
 
 /atom/proc/handle_ricochet(obj/projectile/P)
 	var/turf/p_turf = get_turf(P)
-	var/face_direction = get_dir(src, p_turf)
+	var/face_direction = get_dir(src, p_turf) || get_dir(src, P)
 	var/face_angle = dir2angle(face_direction)
 	var/incidence_s = GET_ANGLE_OF_INCIDENCE(face_angle, (P.Angle + 180))
 	var/a_incidence_s = abs(incidence_s)
@@ -256,7 +256,7 @@
 		return FALSE
 
 	if(is_reserved_level(T.z))
-		for(var/A in SSshuttle.mobile)
+		for(var/A in SSshuttle.mobile_docking_ports)
 			var/obj/docking_port/mobile/M = A
 			if(M.launch_status == ENDGAME_TRANSIT)
 				for(var/place in M.shuttle_areas)
@@ -282,7 +282,7 @@
 	if(isnull(loc_area))
 		return FALSE
 
-	for(var/A in SSshuttle.mobile)
+	for(var/A in SSshuttle.mobile_docking_ports)
 		var/obj/docking_port/mobile/M = A
 		if(M.launch_status == ENDGAME_LAUNCHED)
 			if(loc_area in M.shuttle_areas)
@@ -552,6 +552,7 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_DIR_CHANGE, dir, newdir)
 	. = dir != newdir
 	dir = newdir
+	SEND_SIGNAL(src, COMSIG_ATOM_POST_DIR_CHANGE, dir, newdir)
 
 /// Attempts to turn to the given direction. May fail if anchored/unconscious/etc.
 /atom/proc/try_face(newdir)

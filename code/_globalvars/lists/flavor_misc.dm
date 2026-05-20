@@ -218,18 +218,6 @@ GLOBAL_LIST_INIT(security_depts_prefs, sort_list(list(
 	SEC_DEPT_SUPPLY
 )))
 
-
-GLOBAL_LIST_INIT(backbaglist, list(
-	DBACKPACK,
-	DDUFFELBAG,
-	DSATCHEL,
-	GBACKPACK,
-	GDUFFELBAG,
-	GSATCHEL,
-	LSATCHEL
-))
-
-
 GLOBAL_LIST_INIT(jumpsuitlist, list(
 	PREF_SKIRT,
 	PREF_SUIT,
@@ -364,6 +352,17 @@ GLOBAL_LIST_INIT(accents, list(
 	"Scottish" = SCOTTISH_TALK_FILE,
 	"Medieval" = MEDIEVAL_SPEECH_FILE,
 	"Roadman" = ROADMAN_TALK_FILE,
+))
+
+GLOBAL_LIST_INIT(accents_donator, list(
+	"Cajun" = CAJUN_TALK_FILE,
+	"Texan" = TEXAN_TALK_FILE,
+	"South Metro" = SOUTHMETRO_TALK_FILE,
+	"Big Apple" = BIGAPPLE_TALK_FILE,
+	"Russian" = RUSSIAN_TALK_FILE,
+	"Dutch" = DUTCH_TALK_FILE,
+	"Finnish" = FINNISH_TALK_FILE,
+	"Irish" = IRISH_TALK_FILE,
 ))
 
 GLOBAL_LIST_INIT(smoker_cigarettes, list(
