@@ -157,3 +157,8 @@
       in the correct area with rest of hydroponics.
   mrmanlikesbt:
   - server: The github issue auto-stale has been increased to one year
+2026-05-23:
+  mrmanlikesbt:
+  - bugfix: Fixed assistants not being assigned bank accounts or crew manifest entries
+  - bugfix: Fixed bank account IDs not showing up in your character's notes when joining
+      roundstart
