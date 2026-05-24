@@ -163,6 +163,11 @@
   - bugfix: Fixed bank account IDs not showing up in your character's notes when joining
       roundstart
 2026-05-24:
+  EvilDragonfiend:
+  - tweak: For Psyphoza soul colour, rather than 3 colours (Azure / Vermilion / Sage)
+      are initialised first, 10 colours will be chosen. It doesn't mean low pop will
+      have 10 colours presented at a round. This just lets you to see more colours
+      tweaks rather than lame 3 colours.
   ? mrmanlikesbt, Timberpoes, DeltaFire15, JohnFulpWillard, MrMelbert, SuperNovaa41,
     FernandoJ8, SmArtKar, MTandi, SpaceLoveSs13, Ghommie, Absolucy, Archemagus, StrangeWeirdKitten,
     Kylerace, RikuTheKiller, lajret, Guillaume, grungussuss
