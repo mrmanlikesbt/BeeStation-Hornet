@@ -1,0 +1,12 @@
+author: mrmanlikesbt
+delete-after: true
+changes:
+  - code_imp: Slightly improved antag objective code
+  - tweak: Changelings have objective variety once more. Enjoy more than just killing
+      everyone on the escape shuttle.
+  - config: Traitors, Changelings, and Malfunctioning AIs can no longer roll murderbone
+      objectives when the station has less than 15 crew. When the pop requirement
+      is met, they only have a 10% chance to roll a murderbone objective with the
+      exception of malf which has a 50% chance.
+  - config: Heretic now requires 14 roundstart ready pop to roll.
+  - config: Removed some unused midround antag config entries
