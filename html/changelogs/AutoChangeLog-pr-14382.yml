@@ -1,8 +1,0 @@
-author: mrmanlikesbt, SyncIt21, Absolucy, tontyGH
-delete-after: true
-changes:
-  - code_imp: Some math macros have been replaced with byond built-ins
-  - code_imp: The type2parent() proc has been removed. Access the parent_type var
-  - code_imp: Fixed /datum/component/proc/_GetInverseTypeList() returning unexpected
-      values
-  - code_imp: Fixed the ISEVEN() macro throwing a compiler error
