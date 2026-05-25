@@ -218,3 +218,6 @@
     - rscdel: Removed the /obj/machinery/doppler_array/research/science typepath.
     - rscdel: The destructive analyzer can no longer reclaim materials from the incredibly
         few items it could previously reclaim from.
+2026-05-25:
+  Jacquerel:
+  - bugfix: atmos foam spreads over solid objects again
