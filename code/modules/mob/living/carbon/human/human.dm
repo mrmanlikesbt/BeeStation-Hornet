@@ -17,6 +17,8 @@
 
 	// This needs to be called very very early in human init (before organs / species are created at the minimum)
 	setup_organless_effects()
+	// Physiology needs to be created before species, as some species modify physiology
+	setup_physiology()
 
 	setup_human_dna()
 
@@ -28,7 +30,6 @@
 
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
-	physiology = new()
 
 	. = ..()
 
@@ -47,6 +48,9 @@
 		AddComponent(/datum/component/mood)
 
 	GLOB.human_list += src
+
+/mob/living/carbon/human/proc/setup_physiology()
+	physiology = new()
 
 /// This proc is for holding effects applied when a mob is missing certain organs
 /// It is called very, very early in human init because all humans innately spawn with no organs and gain them during init
@@ -96,7 +100,8 @@
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(changeling)
 			tab_data["Chemical Storage"] = GENERATE_STAT_TEXT("[changeling.chem_charges]/[changeling.total_chem_storage]")
-			tab_data["Absorbed DNA"] = GENERATE_STAT_TEXT("[changeling.absorbed_count]")
+			tab_data["Absorbed Genomes"] = GENERATE_STAT_TEXT("[changeling.absorbed_genomes]")
+			tab_data["Absorbed Humans"] = GENERATE_STAT_TEXT("[changeling.absorbed_people]")
 	return tab_data
 
 // called when something steps onto a human
@@ -107,12 +112,6 @@
 	if(istype(C))
 		INVOKE_ASYNC(C, TYPE_PROC_REF(/obj/vehicle/sealed/car, RunOver), src)
 	spreadFire(AM)
-
-/mob/living/carbon/human/reset_perspective(atom/new_eye, force_reset = FALSE)
-	if(dna?.species?.prevent_perspective_change && !force_reset) // This is in case a species needs to prevent perspective changes in certain cases
-		update_fullscreen()
-		return
-	return ..()
 
 /mob/living/carbon/human/Topic(href, href_list)
 	if(href_list["see_id"])
@@ -134,7 +133,7 @@
 		if(!same_id || (text2num(href_list["examine_time"]) + viable_time) < world.time)
 			to_chat(viewer, span_notice("You don't have that good of a memory. Examine [p_them()] again."))
 			return
-		if(HAS_TRAIT(src, TRAIT_UNKNOWN))
+		if(!isobserver(viewer) && HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE))
 			to_chat(viewer, span_notice("You can't make out that ID anymore."))
 			return
 		if(!isobserver(viewer) && get_dist(viewer, src) > ID_EXAMINE_DISTANCE + 1) // leeway, ignored if the viewer is a ghost
@@ -530,7 +529,7 @@
 			return FALSE
 
 		if (target.is_mouth_covered())
-			to_chat(src, span_warning("Remove [p_their()] mask first!"))
+			to_chat(src, span_warning("Remove [target.p_their()] mask first!"))
 			return FALSE
 
 		if (!get_organ_slot(ORGAN_SLOT_LUNGS))
@@ -778,7 +777,7 @@
 
 /mob/living/carbon/human/fully_heal(heal_flags = HEAL_ALL)
 	if(heal_flags & HEAL_NEGATIVE_MUTATIONS)
-		for(var/datum/mutation/human/existing_mutation in dna.mutations)
+		for(var/datum/mutation/existing_mutation in dna.mutations)
 			if(existing_mutation.quality != POSITIVE)
 				dna.remove_mutation(existing_mutation.name)
 

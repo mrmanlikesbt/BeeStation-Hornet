@@ -184,6 +184,9 @@
 	return ..() || ((obj_flags & CAN_BE_HIT) && attacking_item.attack_atom(src, user, params))
 
 /mob/living/attackby(obj/item/attacking_item, mob/living/user, params)
+	if(can_perform_surgery(user, params))
+		return TRUE
+
 	if(..())
 		return TRUE
 	user.changeNext_move(attacking_item.attack_speed)
@@ -223,11 +226,6 @@
 
 	if(!user.combat_mode && !(item_flags & ISWEAPON))
 		nonharmfulhit = TRUE
-	for(var/datum/surgery/S in target_mob.surgeries)
-		if(S.failed_step)
-			nonharmfulhit = FALSE //No freebies, if you fail a surgery step you should hit your patient
-			S.failed_step = FALSE //In theory the hit should only happen once, upon failing the step
-			break
 
 	if(item_flags & NOBLUDGEON)
 		nonharmfulhit = TRUE
@@ -289,7 +287,7 @@
 	if(!attacking_item.force)
 		return
 
-	var/damage = take_damage(attacking_item.force, attacking_item.damtype, MELEE, 1)
+	var/damage = take_damage(attacking_item.force, attacking_item.damtype, MELEE, 1, get_dir(src, user))
 
 	//only witnesses close by and the victim see a hit message.
 	user.visible_message(span_danger("[user] hits [src] with [attacking_item][damage ? "." : ", without leaving a mark!"]"), \

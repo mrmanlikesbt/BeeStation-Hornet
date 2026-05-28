@@ -16,7 +16,7 @@
 //PRISONER
 /datum/job/prisoner
 	mail_goodies = list(
-		/obj/item/clothing/mask/cigarette = 10,
+		/obj/item/cigarette = 10,
 		/obj/item/stack/spacecash/c20 = 10,
 		/obj/item/stack/spacecash/c50 = 10,
 		/obj/item/food/syndicake = 8,
@@ -83,7 +83,7 @@
 //CAPTAIN
 /datum/job/captain
 	mail_goodies = list(
-		/obj/item/clothing/mask/cigarette/cigar/havana = 10,
+		/obj/item/cigarette/cigar/havana = 10,
 		/obj/item/pen/fountain/captain = 10,
 		/obj/item/coin/plasma = 7,
 		/obj/item/storage/fancy/cigarettes/cigars/havana = 5,
@@ -201,7 +201,7 @@
 		//maybe better than a lame PAi after all
 		/obj/item/toy/plush/flushed = 5,
 		//rare, but not that much...
-		/obj/item/paicard = 2,
+		/obj/item/pai_card = 2,
 		//definetly better than the lame PAi
 		/obj/item/toy/plush/flushed/rainbow = 2,
 	)

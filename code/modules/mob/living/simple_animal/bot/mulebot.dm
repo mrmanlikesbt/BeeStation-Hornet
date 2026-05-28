@@ -470,7 +470,7 @@
 	B.setDir(direct)
 	bloodiness--
 
-/mob/living/simple_animal/bot/mulebot/Moved()
+/mob/living/simple_animal/bot/mulebot/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
 	if(has_gravity())
 		for(var/mob/living/carbon/human/future_pancake in loc)
@@ -791,7 +791,7 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/bot/mulebot/insertpai(mob/user, obj/item/paicard/card)
+/mob/living/simple_animal/bot/mulebot/insertpai(mob/user, obj/item/pai_card/card)
 	. = ..()
 	if(.)
 		visible_message("[src]'s safeties are locked on.")

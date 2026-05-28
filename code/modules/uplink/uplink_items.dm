@@ -177,7 +177,6 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 		A = new spawn_path(get_turf(user))
 	else
 		A = spawn_path
-	put_illegal_bitflag(A, illegal_tech, contents_are_illegal_tech)
 	if(istype(A, /obj/item))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
@@ -188,17 +187,6 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	to_chat(user, "[A] materializes onto the floor.")
 	log_uplink_purchase(user, A, is_bonus = is_bonus)
 	return A
-
-/// Uplink purchased items get ILLEGAL tech bitflag based on given parameter.
-/// Note: This should be a global proc because of surplus crate
-/proc/put_illegal_bitflag(obj/item/target_item, illegal_tech, contents_are_illegal_tech)
-	if(contents_are_illegal_tech)
-		for(var/obj/item/each_item in target_item.contents)
-			put_illegal_bitflag(each_item, contents_are_illegal_tech, TRUE)
-	if(!illegal_tech)
-		return
-	target_item.item_flags |= ILLEGAL
-
 
 /datum/uplink_item/proc/can_be_refunded(obj/item/item, datum/component/uplink/uplink)
 	return refundable
@@ -348,7 +336,6 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 			continue
 		remaining_crate_value -= uplink_entry.cost
 		var/obj/goods = new uplink_entry.item(target_crate)
-		put_illegal_bitflag(goods, uplink_entry.illegal_tech, uplink_entry.contents_are_illegal_tech)
 		if(user_uplink.uplink_log)
 			user_uplink.uplink_log.LogPurchase(goods, uplink_entry, uplink_entry.cost, is_bonus = TRUE)
 	return target_crate
@@ -1147,12 +1134,12 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	item = /obj/item/ammo_casing/caseless/rocket
 	cost = 3
 
-/datum/uplink_item/ammo/rocket/hedp
-	name = "84mm HEDP Rocket"
-	desc = "A high-yield HEDP rocket; extremely effective against armored targets, as well as surrounding personnel. \
+/datum/uplink_item/ammo/rocket/heap
+	name = "84mm HEAP Rocket"
+	desc = "A high-yield HEAP rocket; extremely effective against literally everything and anything near that thing that doesn't exist anymore. \
 			Strike fear into the hearts of your enemies."
-	item = /obj/item/ammo_casing/caseless/rocket/hedp
-	cost = 5
+	item = /obj/item/ammo_casing/caseless/rocket/heap
+	cost = 6
 
 /datum/uplink_item/ammo/toydarts
 	name = "Box of Riot Darts"
@@ -1461,13 +1448,13 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	name = "Dark Gygax Exosuit"
 	desc = "A lightweight exosuit, painted in a dark scheme. Its speed and equipment selection make it excellent \
 			for hit-and-run style attacks. Features an incendiary carbine, flash bang launcher, teleporter, ion thrusters and a Tesla energy array."
-	item = /obj/vehicle/sealed/mecha/combat/gygax/dark/loaded
+	item = /obj/vehicle/sealed/mecha/gygax/dark/loaded
 	cost = 80
 
 /datum/uplink_item/support/honker
 	name = "Dark H.O.N.K."
 	desc = "A clown combat mech equipped with bombanana peel and tearstache grenade launchers, as well as the ubiquitous HoNkER BlAsT 5000."
-	item = /obj/vehicle/sealed/mecha/combat/honker/dark/loaded
+	item = /obj/vehicle/sealed/mecha/honker/dark/loaded
 	cost = 80
 	purchasable_from = UPLINK_CLOWN_OPS
 
@@ -1475,7 +1462,7 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	name = "Mauler Exosuit"
 	desc = "A massive and incredibly deadly military-grade exosuit. Features long-range targeting, thrust vectoring \
 			and deployable smoke. Comes equipped with an LMG, scattershot carbine, missile rack, an antiprojectile armor booster and a Tesla energy array."
-	item = /obj/vehicle/sealed/mecha/combat/marauder/mauler/loaded
+	item = /obj/vehicle/sealed/mecha/marauder/mauler/loaded
 	cost = 140
 
 // Stealth Items
@@ -1521,7 +1508,7 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	name = "Codespeak Manual"
 	desc = "Syndicate agents can be trained to use a series of codewords to convey complex information, which sounds like random concepts and drinks to anyone listening. \
 			This manual teaches you this Codespeak. You can also hit someone else with the manual in order to teach them. This is the deluxe edition, which has unlimited uses."
-	item = /obj/item/codespeak_manual/unlimited
+	item = /obj/item/language_manual/codespeak_manual/unlimited
 	cost = 2
 
 /datum/uplink_item/stealthy_tools/combatbananashoes
@@ -2323,16 +2310,6 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	restricted_roles = list(JOB_NAME_CLOWN, JOB_NAME_CHAPLAIN)
 	reputation_required = REPUTATION_EXCELLENT
 
-/datum/uplink_item/role_restricted/concealed_weapon_bay
-	name = "Concealed Weapon Bay"
-	desc = "A modification for non-combat mechas that allows them to equip one piece of equipment designed for combat mechs. \
-			It also hides the equipped weapon from plain sight. \
-			Only one can fit on a mecha."
-	item = /obj/item/mecha_parts/concealed_weapon_bay
-	cost = 3
-	restricted_roles = list(JOB_NAME_ROBOTICIST, JOB_NAME_RESEARCHDIRECTOR)
-	reputation_required = REPUTATION_GOOD
-
 /datum/uplink_item/role_restricted/haunted_magic_eightball
 	name = "Haunted Magic Eightball"
 	desc = "Most magic eightballs are toys with dice inside. Although identical in appearance to the harmless toys, this occult device reaches into the spirit world to find its answers. \
@@ -2355,6 +2332,17 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	item = /obj/item/prisoncube
 	cost = 5
 	restricted_roles = list(JOB_NAME_CURATOR)
+	reputation_required = REPUTATION_GOOD
+
+/datum/uplink_item/role_restricted/concealed_weapon_bay
+	name = "Concealed Weapon Bay"
+	desc = "A modification for non-combat exosuits that allows them to equip one piece of equipment designed for combat units. \
+			Attach to an exosuit with an existing equipment to disguise the bay as that equipment. The sacrificed equipment will be lost.\
+			Alternatively, you can attach the bay to an empty equipment slot, but the bay will not be concealed. Once the bay is \
+			attached, an exosuit weapon can be fitted inside."
+	item = /obj/item/mecha_parts/mecha_equipment/concealed_weapon_bay
+	cost = 3
+	restricted_roles = list(JOB_NAME_SCIENTIST, JOB_NAME_ROBOTICIST, JOB_NAME_RESEARCHDIRECTOR)
 	reputation_required = REPUTATION_GOOD
 
 /datum/uplink_item/role_restricted/rewind_camera
@@ -2673,7 +2661,6 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	item = /obj/item/mob_lasso/traitor
 	cost = 3
 	surplus = 0
-	disabled = TRUE	// #11346 Currently in a broken state, lasso'd mobs will never unregister a target once they have locked onto one, making them unusable.
 
 /datum/uplink_item/support/nukielawnmower
 	name = "Syndicate Organism Shredder"
@@ -2682,3 +2669,10 @@ GLOBAL_LIST_INIT(illegal_tech_blacklist, typecacheof(list(
 	cost = 15
 	surplus = 0
 	purchasable_from = UPLINK_NUKE_OPS
+
+/datum/uplink_item/dangerous/cat
+	name = "Feral cat grenade"
+	desc = "This grenade is filled with 5 feral cats in stasis. Upon activation, the feral cats are awoken and unleashed unto unlucky bystanders. WARNING: The cats are not trained to discern friend from foe!"
+	cost = 3
+	item = /obj/item/grenade/spawnergrenade/cat
+	surplus = 30

@@ -142,6 +142,7 @@
 
 	if (tr_flags & TR_DEFAULTMSG)
 		to_chat(O, "<B>You are now a monkey.</B>")
+	SEND_SIGNAL(src, COMSIG_HUMAN_MONKEYIZE)
 	SEND_SIGNAL(src, COMSIG_CARBON_TRANSFORMED, O)
 
 	for(var/A in loc.vars)
@@ -342,8 +343,6 @@
 
 	dna.transfer_identity(O, tr_flags & TR_KEEPSE)
 	O.dna.set_se(FALSE, GET_INITIALIZED_MUTATION(/datum/mutation/race))
-	//Reset offsets to match human settings, in-case they have been changed
-	O.dna.species.offset_features = list(OFFSET_UNIFORM = list(0,0), OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0), OFFSET_GLASSES = list(0,0), OFFSET_EARS = list(0,0), OFFSET_SHOES = list(0,0), OFFSET_S_STORE = list(0,0), OFFSET_FACEMASK = list(0,0), OFFSET_HEAD = list(0,0), OFFSET_FACE = list(0,0), OFFSET_BELT = list(0,0), OFFSET_BACK = list(0,0), OFFSET_SUIT = list(0,0), OFFSET_NECK = list(0,0), OFFSET_RIGHT_HAND = list(0,0), OFFSET_LEFT_HAND = list(0,0))
 	O.updateappearance(mutcolor_update=1)
 
 	if(findtext(O.dna.real_name, "monkey", 1, 7)) //7 == length("monkey") + 1
@@ -459,6 +458,7 @@
 	if (tr_flags & TR_DEFAULTMSG)
 		to_chat(O, "<B>You are now \a [O.dna.species]].</B>")
 
+	SEND_SIGNAL(src, COMSIG_HUMAN_MONKEYIZE)
 	SEND_SIGNAL(src, COMSIG_CARBON_TRANSFORMED, O)
 
 	transfer_observers_to(O, TRUE)
@@ -558,12 +558,14 @@
 	to_chat(src, span_userdanger("You are job banned from cyborg! Appeal your job ban if you want to avoid this in the future!"))
 	ghostize(FALSE)
 
-	var/datum/poll_config/config = new()
-	config.check_jobban = JOB_NAME_CYBORG
-	config.poll_time = 10 SECONDS
-	config.jump_target = src
-	config.role_name_text = name
-	config.alert_pic = src
+	var/datum/poll_config/config = new(
+		check_jobban = JOB_NAME_CYBORG,
+		poll_time = 10 SECONDS,
+		jump_target = src,
+		role_name_text = name,
+		alert_pic = src,
+		amount_to_pick = 1,
+	)
 	var/mob/dead/observer/candidate = SSpolling.poll_ghosts_one_choice(config)
 	if(candidate)
 		message_admins("[key_name_admin(candidate)] has taken control of ([key_name_admin(src)]) to replace a jobbanned player.")

@@ -1,6 +1,5 @@
 // common trait sources
 #define TRAIT_GENERIC "generic"
-#define GENERIC_ITEM_TRAIT "generic_item"
 #define UNCONSCIOUS_TRAIT "unconscious"
 #define EYE_DAMAGE "eye_damage"
 #define EAR_DAMAGE "ear_damage"
@@ -57,6 +56,9 @@
 #define TRAIT_LEANING "leaning"
 #define TRAIT_REGEN_COMA "regencoma"
 
+/// Trait given to you by shapeshifting
+#define SHAPESHIFT_TRAIT "shapeshift_trait"
+
 // unique trait sources, still defines
 #define CLONING_POD_TRAIT "cloning-pod"
 #define STATUE_MUTE "statue"
@@ -67,7 +69,6 @@
 #define STASIS_MUTE "stasis"
 #define GENETICS_SPELL "genetics_spell"
 #define EYES_COVERED "eyes_covered"
-#define CULT_EYES "cult_eyes"
 #define TRAIT_SANTA "santa"
 #define SCRYING_ORB "scrying-orb"
 #define ABDUCTOR_ANTAGONIST "abductor-antagonist"
@@ -106,10 +107,8 @@
 #define HOLOPARASITE_SCOUT_TRAIT	"holopara_scout_trait"
 #define HOLOPARASITE_STAT_TRAIT		"holopara_stat_trait"
 #define PARRY_TRAIT	"parry_trait"
-#define LIGHTPINK_TRAIT "lightpinktrait"
 #define BATTLE_ROYALE_TRAIT "battleroyale_trait"
 #define MADE_UNCLONEABLE "made-uncloneable"
-#define TRAIT_JAWS_OF_LIFE "jaws-of-life"
 #define STICKY_NODROP "sticky-nodrop" //sticky nodrop sounds like a good soundcloud rapper's name
 //#define SKILLCHIP_TRAIT "skillchip"
 #define BUSY_FLOORBOT_TRAIT "busy-floorbot"
@@ -136,17 +135,22 @@
 #define BRAIN_UNAIDED "brain-unaided"
 /// Trait applied by MODsuits.
 #define MOD_TRAIT "mod"
-#define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client" //this mob should never close ui even if it doesn't have a client
 #define EXPERIMENTAL_SURGERY_TRAIT "experimental_surgery"
 #define NINJA_KIDNAPPED_TRAIT "ninja_kidnapped"
 #define TABLE_TRAIT "table_trait"
 #define LICH_TRAIT "lich_trait"
+/// Trait given by stabilized light pink extracts
+#define STABILIZED_LIGHT_PINK_EXTRACT_TRAIT "stabilized_light_pink"
+/// Trait given by adamantine extracts
+#define ADAMANTINE_EXTRACT_TRAIT "adamantine_extract"
 /// Trait given to an atom/movable when they orbit something.
 #define ORBITING_TRAIT "orbiting"
 /// Trait given by simple/basic mob death
 #define BASIC_MOB_DEATH_TRAIT "basic_mob_death"
 /// Trait applied to a mob when it gets a required "operational datum" (components/elements). Sends out the source as the type of the element.
 #define TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM "element-required"
+/// Trait given by mech equipment
+#define TRAIT_MECH_EQUIPMENT(equipment_type) "mech_equipment_[equipment_type]"
 
 /// This trait comes from when a mob is currently typing.
 #define CURRENTLY_TYPING_TRAIT "currently_typing"
@@ -165,6 +169,15 @@
 #define FROM_SHADOW_SECT "shadow_sect"
 /// From a priority directive
 #define FROM_DIRECTIVE "directive"
+
+/// some trait sources dirived from bodyparts BODYPART_TRAIT is generic.
+#define BODYPART_TRAIT "bodypart"
+#define HEAD_TRAIT "head"
+#define CHEST_TRAIT "chest"
+#define RIGHT_ARM_TRAIT "right_arm"
+#define LEFT_ARM_TRAIT "left_arm"
+#define RIGHT_LEG_TRAIT "right_leg"
+#define LEFT_LEG_TRAIT "left_leg"
 
 /**
 * Trait granted by [/mob/living/carbon/Initialize] and

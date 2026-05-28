@@ -11,6 +11,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 // more... RPG-like.
 
 /obj/item
+	abstract_type = /obj/item
 	name = "item"
 	icon = 'icons/obj/items_and_weapons.dmi'
 	blocks_emissive = EMISSIVE_BLOCK_GENERIC
@@ -450,7 +451,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	// Deliver to a console to know whether the boosts have already been used.
 	var/list/research_msg = list("<font color='purple'>Research prospects:</font> ")
 	var/sep = ""
-	var/list/boostable_nodes = techweb_item_boost_check(src)
+	var/list/boostable_nodes = techweb_item_unlock_check(src)
 	if (boostable_nodes)
 		for(var/id in boostable_nodes)
 			var/datum/techweb_node/node = SSresearch.techweb_node_by_id(id)
@@ -489,7 +490,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	add_fingerprint(user)
 	ui_interact(user)
 
-/obj/item/ui_act(action, params)
+/obj/item/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	add_fingerprint(usr)
 	return ..()
 
@@ -606,9 +607,6 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		if(!R.low_power_mode) //can't equip modules with an empty cell.
 			R.activate_module(src)
 			R.hud_used.update_robot_modules_display()
-
-/obj/item/proc/GetDeconstructableContents()
-	return GetAllContents() - src
 
 // afterattack() and attack() prototypes moved to _onclick/item_attack.dm for consistency
 /obj/item/proc/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", damage = 0, attack_type = MELEE_ATTACK)
@@ -749,8 +747,23 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		take_damage(attackforce)
 	return TRUE
 
-/obj/item/proc/talk_into(mob/M, input, channel, spans, datum/language/language, list/message_mods)
-	return ITALICS | REDUCE_RANGE
+/**
+ * Handles someone talking INTO an item
+ *
+ * Commonly used by someone holding it and using .r or .l
+ * Also used by radios
+ *
+ * * speaker - the atom that is doing the talking
+ * * message - the message being spoken
+ * * channel - the channel the message is being spoken on, only really used for radios
+ * * spans - the spans of the message
+ * * language - the language the message is in
+ * * message_mods - any message mods that should be applied to the message
+ *
+ * Return a flag that modifies the original message
+ */
+/obj/item/proc/talk_into(atom/movable/speaker, message, channel, list/spans, datum/language/language, list/message_mods)
+	return SEND_SIGNAL(src, COMSIG_ITEM_TALK_INTO, speaker, message, channel, spans, language, message_mods) || (ITALICS|REDUCE_RANGE)
 
 /// Called when a mob drops an item.
 /obj/item/proc/dropped(mob/user, silent = FALSE)

@@ -85,7 +85,7 @@
 			var/mob/living/carbon/exposed_carbon = exposed_mob
 			var/power_multiplier = boozepwr / 65 // Weak alcohol has less sterilizing power
 
-			for(var/datum/surgery/surgery in exposed_carbon.surgeries)
+			for(var/datum/surgery/surgery as anything in exposed_carbon.surgeries)
 				surgery.speed_modifier = max(0.1 * power_multiplier, surgery.speed_modifier)
 				// +10% surgery speed on each step, useful while operating in less-than-perfect conditions
 
@@ -1568,7 +1568,7 @@
 /datum/reagent/consumable/ethanol/silencer/on_mob_life(mob/living/carbon/affected_mob, delta_time, times_fired)
 	. = ..()
 	affected_mob.set_silence_if_lower(MIMEDRINK_SILENCE_DURATION)
-	if(ishuman(affected_mob) && HAS_TRAIT(affected_mob, TRAIT_MIMING))
+	if(ishuman(affected_mob) && HAS_MIND_TRAIT(affected_mob, TRAIT_MIMING))
 		if(affected_mob.heal_bodypart_damage(brute = 1 * REM * delta_time, burn = 1 * REM * delta_time, updating_health = FALSE))
 			return UPDATE_MOB_HEALTH
 
@@ -2439,7 +2439,7 @@
 /datum/reagent/consumable/ethanol/blank_paper/on_mob_life(mob/living/carbon/affected_mob, delta_time, times_fired)
 	. = ..()
 	affected_mob.set_silence_if_lower(MIMEDRINK_SILENCE_DURATION)
-	if(ishuman(affected_mob) && HAS_TRAIT(affected_mob, TRAIT_MIMING))
+	if(ishuman(affected_mob) && HAS_MIND_TRAIT(affected_mob, TRAIT_MIMING))
 		if(affected_mob.heal_bodypart_damage(brute = 1 * REM * delta_time, burn = 1 * REM * delta_time, updating_health = FALSE))
 			return UPDATE_MOB_HEALTH
 

@@ -54,18 +54,24 @@
 #define COMSIG_ATOM_UPDATED_ICON "atom_updated_icon"
 ///from base of [/atom/proc/smooth_icon]: ()
 #define COMSIG_ATOM_SMOOTHED_ICON "atom_smoothed_icon"
-///! from base of atom/Entered(): (atom/movable/entering, /atom)
+///from base of atom/Entered(): (atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 #define COMSIG_ATOM_ENTERED "atom_entered"
+///from base of atom/movable/Moved(): (atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+#define COMSIG_ATOM_ABSTRACT_ENTERED "atom_abstract_entered"
 ///! from base of atom/Exit(): (/atom/movable/exiting, /atom/newloc)
 #define COMSIG_ATOM_EXIT "atom_exit"
-	#define COMPONENT_ATOM_BLOCK_EXIT 1
-///! from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
+	#define COMPONENT_ATOM_BLOCK_EXIT (1<<0)
+///from base of atom/Exited(): (atom/movable/gone, direction)
 #define COMSIG_ATOM_EXITED "atom_exited"
+///from base of atom/movable/Moved(): (atom/movable/gone, direction)
+#define COMSIG_ATOM_ABSTRACT_EXITED "atom_abstract_exited"
 ///from the [EX_ACT] wrapper macro: (severity, target)
 #define COMSIG_ATOM_EX_ACT "atom_ex_act"
 ///from base of atom/Bumped(): (/atom/movable)
 #define COMSIG_ATOM_BUMPED "atom_bumped"
-///! from base of atom/emp_act(): (severity)
+///from base of atom/emp_act(severity): (severity). return EMP protection flags
+#define COMSIG_ATOM_PRE_EMP_ACT "atom_emp_act"
+///from base of atom/emp_act(severity): (severity, protection)
 #define COMSIG_ATOM_EMP_ACT "atom_emp_act"
 ///! from base of atom/fire_act(): (exposed_temperature, exposed_volume)
 #define COMSIG_ATOM_FIRE_ACT "atom_fire_act"
@@ -105,6 +111,14 @@
 	#define COMSIG_ATOM_BLOCKS_BSA_BEAM 1
 ///from base of atom/setDir(): (old_dir, new_dir). Called before the direction changes.
 #define COMSIG_ATOM_DIR_CHANGE "atom_dir_change"
+///from base of atom/setDir(): (old_dir, new_dir). Called after the direction changes.
+#define COMSIG_ATOM_POST_DIR_CHANGE "atom_dir_change"
+
+///from base of atom/movable/keybind_face_direction(): (dir). Called before turning with the movement lock key.
+#define COMSIG_MOVABLE_KEYBIND_FACE_DIR "keybind_face_dir"
+	///ignores the movement lock key, used for turning while strafing in a mech
+	#define COMSIG_IGNORE_MOVEMENT_LOCK (1<<0)
+
 ///! from base of atom/handle_atom_del(): (atom/deleted)
 #define COMSIG_ATOM_CONTENTS_DEL "atom_contents_del"
 ///! from base of atom/has_gravity(): (turf/location, list/forced_gravities)
@@ -188,4 +202,4 @@
 ///signal sent out by an atom when it is no longer being pulled by something else : (atom/puller)
 #define COMSIG_ATOM_NO_LONGER_PULLED "movable_no_longer_pulled"
 ///signal sent out by an atom when it is no longer pulling something : (atom/pulling)
-//#define COMSIG_ATOM_NO_LONGER_PULLING "movable_no_longer_pulling"
+#define COMSIG_ATOM_NO_LONGER_PULLING "movable_no_longer_pulling"

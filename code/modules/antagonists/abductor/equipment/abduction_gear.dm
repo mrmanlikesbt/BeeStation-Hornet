@@ -94,7 +94,6 @@
 		var/mob/living/carbon/human/M = loc
 		new /obj/effect/temp_visual/dir_setting/ninja/cloak(get_turf(M), M.dir)
 		RegisterSignal(M, COMSIG_HUMAN_GET_VISIBLE_NAME, PROC_REF(return_disguise_name))
-		M.name_override = disguise.name
 		M.icon = disguise.icon
 		M.icon_state = disguise.icon_state
 		M.cut_overlays()
@@ -116,7 +115,6 @@
 		var/mob/living/carbon/human/M = loc
 		new /obj/effect/temp_visual/dir_setting/ninja(get_turf(M), M.dir)
 		UnregisterSignal(M, COMSIG_HUMAN_GET_VISIBLE_NAME)
-		M.name_override = null
 		M.cut_overlays()
 		M.regenerate_icons()
 
@@ -158,7 +156,7 @@
 
 /obj/item/clothing/suit/armor/abductor/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	for(var/obj/machinery/abductor/console/C in GLOB.machines)
+	for(var/obj/machinery/abductor/console/C as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/abductor/console))
 		if(C.vest == src)
 			C.vest = null
 			break
@@ -173,6 +171,7 @@
 	atom_storage.max_total_storage = 30
 
 /obj/item/abductor
+	abstract_type = /obj/item/abductor
 	icon = 'icons/obj/abductor.dmi'
 	lefthand_file = 'icons/mob/inhands/antag/abductor_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/antag/abductor_righthand.dmi'
@@ -441,13 +440,15 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	worn_icon_state = "classic_baton"
 
 	force = 7
-	stamina_damage = 140
 
 	w_class = WEIGHT_CLASS_LARGE
 	slot_flags = ITEM_SLOT_BELT
 
 	actions_types = list(/datum/action/item_action/toggle_mode)
 
+	cooldown = 0 SECONDS
+	stamina_damage = 0
+	knockdown_time = 14 SECONDS
 	on_stun_sound = 'sound/weapons/egloves.ogg'
 	affect_cyborg = TRUE
 
@@ -468,9 +469,12 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 		return
 	mode = (mode+1)%BATON_MODES
 	var/txt
+	//Reset stamina damage to baseline
+	stamina_damage = initial(stamina_damage)
 	switch(mode)
 		if(BATON_STUN)
 			txt = "stunning"
+			stamina_damage = 140
 		if(BATON_SLEEP)
 			txt = "sleep inducement"
 		if(BATON_CUFF)
@@ -528,7 +532,14 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 /obj/item/melee/baton/abductor/baton_effect(mob/living/target, mob/living/user, modifiers, stun_override)
 	switch (mode)
 		if(BATON_STUN)
-			return ..()
+			target.visible_message(span_danger("[user] stuns [target] with [src]!"),
+				span_userdanger("[user] stuns you with [src]!"))
+			target.set_jitter_if_lower(40 SECONDS)
+			target.set_confusion_if_lower(10 SECONDS)
+			target.set_stutter_if_lower(16 SECONDS)
+			SEND_SIGNAL(target, COMSIG_LIVING_MINOR_SHOCK)
+			target.adjustStaminaLoss(stamina_damage)
+			target.Knockdown(knockdown_time * (HAS_TRAIT(target, TRAIT_BATON_RESISTANCE) ? 0.1 : 1))
 		if(BATON_SLEEP)
 			SleepAttack(target,user)
 		if(BATON_CUFF)
@@ -693,10 +704,9 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	. = ..()
 	make_syndie()
 
-/obj/item/radio/headset/abductor/attackby(obj/item/W, mob/user, params)
-	if(W.tool_behaviour == TOOL_SCREWDRIVER)
-		return // Stops humans from disassembling abductor headsets.
-	return ..()
+// Stops humans from disassembling abductor headsets.
+/obj/item/radio/headset/abductor/screwdriver_act(mob/living/user, obj/item/tool)
+	return TOOL_ACT_TOOLTYPE_SUCCESS
 
 /obj/item/abductor_machine_beacon
 	name = "machine beacon"

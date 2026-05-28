@@ -44,10 +44,7 @@
 	skinned_type = /obj/item/stack/sheet/iron{amount = 10}
 
 	//IPCs are extremely fragile, but do not go into softcrit and can be repaired with relative ease
-	burnmod = 1.5
-	brutemod = 1.5
 	clonemod = 0
-	staminamod = 0 //IPCs don't get tired
 	siemens_coeff = 1.5
 	reagent_tag = PROCESS_SYNTHETIC
 	species_gibs = GIB_TYPE_ROBOTIC
@@ -135,7 +132,7 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	H.dna.features["ipc_screen"] = screen_choice
-	H.eye_color = sanitize_hexcolor(color_choice)
+	H.eye_color_left = sanitize_hexcolor(color_choice)
 	H.update_body()
 
 /obj/item/apc_powercord

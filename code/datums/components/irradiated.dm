@@ -117,6 +117,7 @@
 
 	if (HAS_TRAIT(human_parent, TRAIT_RADHEALER))
 		intensity = max(intensity - RAD_HEALER_DECREASE_PER_SECOND * delta_time, 0)
+		return
 
 	if (intensity >= RADIATION_BURN_THRESHOLD && !trying_to_burn)
 		start_burn_splotch_timer()
@@ -147,6 +148,8 @@
 
 /datum/component/irradiated/proc/mutate_human_parent(mob/living/carbon/human/human_parent)
 	COOLDOWN_START(src, irradiated_mutation, rand(45, 120) SECONDS)
+	if(!human_parent.can_mutate())
+		return
 	if(prob(75)) //usually a mutation, sometimes a total appearance change instead
 		human_parent.easy_random_mutate()
 	else
@@ -169,12 +172,15 @@
 
 	start_burn_splotch_timer()
 
-	var/mob/living/carbon/human/human_parent = parent
-
 	if (should_halt_effects(parent))
 		return
 
-	var/obj/item/bodypart/affected_limb = human_parent.get_bodypart(ran_zone(probability = 0))
+	var/mob/living/carbon/human/human_parent = parent
+
+	var/obj/item/bodypart/affected_limb = human_parent.get_bodypart(human_parent.get_random_valid_zone())
+	if(QDELETED(affected_limb))
+		return
+
 	human_parent.visible_message(
 		span_boldwarning("[human_parent]'s [affected_limb.plaintext_zone] bubbles unnaturally, then bursts into blisters!"),
 		span_boldwarning("Your [affected_limb.plaintext_zone] bubbles unnaturally, then bursts into blisters!"),

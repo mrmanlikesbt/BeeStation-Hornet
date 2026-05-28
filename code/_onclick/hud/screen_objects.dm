@@ -576,6 +576,7 @@ CREATION_TEST_IGNORE_SUBTYPES(/atom/movable/screen/storage)
 	if(choice != selecting)
 		selecting = choice
 		update_icon()
+		SEND_SIGNAL(user, COMSIG_MOB_SELECTED_ZONE_SET, choice)
 
 	return TRUE
 
@@ -725,10 +726,11 @@ CREATION_TEST_IGNORE_SUBTYPES(/atom/movable/screen/splash)
 
 	holder.screen += src
 
-/atom/movable/screen/splash/proc/Fade(out, qdel_after = TRUE)
+/atom/movable/screen/splash/proc/fade(out, qdel_after = TRUE)
 	if(QDELETED(src))
 		return
 	if(out)
+		mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 		animate(src, alpha = 0, time = 30)
 	else
 		alpha = 0

@@ -10,6 +10,16 @@
 		/obj/item/camera_bug,
 	)
 
+/obj/effect/spawner/random/exotic/languagebook
+	name = "language book spawner"
+	icon_state = "book"
+	loot = list( // A single roundstart species language book.
+		/obj/item/language_manual/roundstart_species = 96,
+		/obj/item/language_manual/piratespeak = 4,
+		/obj/item/language_manual/roundstart_species/five = 3,
+		/obj/item/language_manual/roundstart_species/unlimited = 1,
+	)
+
 /obj/effect/spawner/random/exotic/tool
 	name = "exotic tool spawner"
 	icon_state = "wrench"
@@ -111,5 +121,5 @@
 	icon_state = "ripley"
 	loot = list(
 		/obj/structure/mecha_wreckage/ripley = 3,
-		/obj/vehicle/sealed/mecha/working/ripley/mining = 1,
+		/obj/vehicle/sealed/mecha/ripley/mining = 1,
 	)

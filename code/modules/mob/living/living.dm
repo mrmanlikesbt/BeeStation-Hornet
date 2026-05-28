@@ -22,10 +22,14 @@
 		addtimer(CALLBACK(src, PROC_REF(set_playable)), 2 SECONDS) //announce playable mobs to ghosts
 		// this should be delayed because some 'playable=TRUE' mobs are not actually playable because mob key is automatically given
 		// it prevents 'GLOB.poi_list' being glitched. without this, it will show xeno(or some mobs) twice in orbit panel.
+
 	//color correction
-	RegisterSignal(src, COMSIG_MOVABLE_ENTERED_AREA, PROC_REF(apply_color_correction))
+	RegisterSignal(src, COMSIG_ENTER_AREA, PROC_REF(apply_color_correction))
+	become_area_sensitive()
+
 	gravity_setup()
 	AddElement(/datum/element/movetype_handler)
+
 
 /mob/living/prepare_huds()
 	..()
@@ -420,13 +424,17 @@
 	stop_pulling()
 
 //same as above
-/mob/living/pointed(atom/A as mob|obj|turf in view())
+/mob/living/pointed(atom/A as mob|obj|turf in view(client.view, src))
 	if(incapacitated)
 		return FALSE
+
+	return ..()
+
+/mob/living/_pointed(atom/pointing_at)
 	if(!..())
 		return FALSE
-	visible_message("<b>[src]</b> points at [A].", span_notice("You point at [A]."))
-	return TRUE
+	log_message("points at [pointing_at]", LOG_EMOTE)
+	visible_message(span_infoplain("[span_name("[src]")] points at [pointing_at]."), span_notice("You point at [pointing_at]."))
 
 
 /mob/living/verb/succumb(whispered as null)
@@ -920,6 +928,22 @@
 	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss()*200/maxHealth))
 		makeTrail(newloc, T, old_direction)
 
+/**
+ * Called by mob/living attackby()
+ * Checks if there's active surgery on the mob that can be continued with the item
+ */
+/mob/living/proc/can_perform_surgery(mob/living/user, params)
+	for(var/datum/surgery/operations as anything in surgeries)
+		if(user.combat_mode)
+			break
+		if(IS_IN_INVALID_SURGICAL_POSITION(src, operations))
+			continue
+		if(!(operations.surgery_flags & SURGERY_SELF_OPERABLE) && (user == src))
+			continue
+		var/list/modifiers = params2list(params)
+		if(operations.next_step(user, modifiers))
+			return TRUE
+	return FALSE
 
 ///Called by mob Move() when the lying_angle is different than zero, to better visually simulate crawling.
 /mob/living/proc/lying_angle_on_movement(direct)
@@ -1336,14 +1360,14 @@
 				/mob/living/basic/pet/dog/corgi,
 				/mob/living/simple_animal/crab,
 				/mob/living/basic/pet/dog/pug,
-				/mob/living/simple_animal/pet/cat,
+				/mob/living/basic/pet/cat,
 				/mob/living/basic/mouse,
 				/mob/living/simple_animal/chicken,
 				/mob/living/basic/cow,
 				/mob/living/simple_animal/hostile/lizard,
 				/mob/living/simple_animal/pet/fox,
 				/mob/living/simple_animal/butterfly,
-				/mob/living/simple_animal/pet/cat/cak,
+				/mob/living/basic/pet/cat/cak,
 				/mob/living/simple_animal/chick,
 				/mob/living/simple_animal/slime/random,
 				/mob/living/carbon/monkey,
@@ -1595,6 +1619,9 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 
 /// Called when mob changes from a standing position into a prone while lacking the ability to stand up at the moment.
 /mob/living/proc/on_fall()
+	SHOULD_CALL_PARENT(TRUE)
+	SEND_SIGNAL(src, COMSIG_LIVING_THUD)
+	loc?.handle_fall(src)//it's loc so it doesn't call the mob's handle_fall which does nothing
 	return
 
 /mob/living/forceMove(atom/destination)
@@ -1606,8 +1633,10 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	refresh_gravity()
 	. = ..()
 	if(.)
-		if(client)
-			reset_perspective()
+		if(isturf(destination))
+			set_mob_eye_to(MOB_EYE_SELF)
+		else
+			set_mob_eye_to(destination)
 
 
 /mob/living/set_stat(new_stat)
@@ -1804,16 +1833,21 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 		result += static_virus
 	return result
 
-/mob/living/reset_perspective(atom/A)
-	if(!..())
-		return
+/mob/living/set_mob_eye_to(atom/A)
+	. = ..()
+	update_eye_features()
+
+/mob/proc/update_eye_features()
 	update_sight()
+
+/mob/living/update_eye_features()
+	..()
 	update_fullscreen()
 	update_pipe_vision()
 
-/// Proc used to handle the fullscreen overlay updates, realistically meant for the reset_perspective() proc.
+/// Proc used to handle the fullscreen overlay updates, realistically meant for the set_mob_eye_to(MOB_EYE_SELF) proc.
 /mob/living/proc/update_fullscreen()
-	if(client.eye && client.eye != src)
+	if(client?.eye && client.eye != src)
 		var/atom/client_eye = client.eye
 		client_eye.get_remote_view_fullscreens(src)
 	else
@@ -2242,13 +2276,15 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 		else
 			target_hostile.attack_same = FALSE //Will only attack non-passive mobs
 			if(prob(10)) //chance of sentience without loyaltyAdd commentMore actions
-				var/datum/poll_config/config = new()
-				config.question = "Do you want to play as \a [src] being revived by [reviver]?"
-				config.check_jobban = ROLE_SENTIENCE
-				config.poll_time = 15 SECONDS
-				config.jump_target = src
-				config.role_name_text = "lazarus revived mob"
-				config.alert_pic = src
+				var/datum/poll_config/config = new(
+					question = "Do you want to play as \a [src] being revived by [reviver]?",
+					check_jobban = ROLE_SENTIENCE,
+					poll_time = 15 SECONDS,
+					jump_target = src,
+					role_name_text = "lazarus revived mob",
+					alert_pic = src,
+					amount_to_pick = 1,
+				)
 				var/mob/dead/observer/candidate = SSpolling.poll_ghosts_one_choice(config)
 				if(candidate)
 					src.key = candidate.key
@@ -2259,6 +2295,15 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	target.do_jitter_animation(10)
 	addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, do_jitter_animation), 10), 5 SECONDS)
 	addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, revive), HEAL_ALL, TRUE), 10 SECONDS)
+
+/**
+ * Proc used by different station pets such as Ian and Poly so that some of their data can persist between rounds.
+ * This base definition only contains a trait and comsig to stop memory from being (over)written.
+ * Specific behavior is defined on subtypes that use it.
+ */
+/mob/living/proc/write_memory(dead, gibbed)
+	SHOULD_CALL_PARENT(TRUE)
+	return !HAS_TRAIT(src, TRAIT_DONT_WRITE_MEMORY) //always prevent data from being written.
 
 /// Admin only proc for giving a certain speech impediment to this mob
 /mob/living/proc/admin_give_speech_impediment(mob/admin)
@@ -2339,3 +2384,168 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_UNFRIENDED, old_friend)
 	return TRUE
+
+/obj/effect/overlay/combat_indicator
+	icon = 'icons/misc/combat_indicator.dmi'
+	icon_state = "combat"
+	layer = FLY_LAYER
+	appearance_flags = APPEARANCE_UI | KEEP_APART
+	mouse_opacity = 0
+
+GLOBAL_DATUM_INIT(combat_indicator_vis, /obj/effect/overlay/combat_indicator, new)
+
+/**
+ * Called whenever a mob's stat changes.
+ * Checks if the mob's stat is greater than SOFT_CRIT, and if it is, it will disable CI.
+ *
+ * Arguments:
+ * * source -- The mob in question that toggled CI status.
+ * * new_stat -- The new stat of the mob.
+ */
+
+/mob/living/proc/ci_on_stat_change(mob/source, new_stat)
+	SIGNAL_HANDLER
+	if(new_stat <= SOFT_CRIT)
+		return
+
+	//set_combat_mode will already run set_combat_indicator, but we need to ensure involuntary is passed :)
+	set_combat_indicator(FALSE, involuntary = TRUE)
+	set_combat_mode(FALSE)
+
+/**
+ * Called whenever a mob's CI status changes for any reason.
+ *
+ * Checks if the mob is dead, if config disallows CI, or if the current CI status is the same as state, and if it is, it will change CI status to state.
+ *
+ * Arguments:
+ * * state -- Boolean. Inherited from the procs that call this, basically it's what that proc wants CI to change to - true or false, on or off.
+ * * involuntary -- Boolean. If true, the mob is dead or unconscious, and the log will reflect that.
+ */
+
+/mob/living/proc/set_combat_indicator(state, involuntary = FALSE)
+	if(!CONFIG_GET(flag/combat_indicator))
+		return
+
+	if(combat_indicator == state) // If the mob is dead (should not happen) or if the combat_indicator is the same as state (also shouldnt happen) kill the proc.
+		return
+
+	if(stat == DEAD)
+		disable_combat_indicator(involuntary)
+
+	combat_indicator = state
+
+	SEND_SIGNAL(src, COMSIG_MOB_CI_TOGGLED)
+
+	if(combat_indicator)
+		enable_combat_indicator()
+	else
+		disable_combat_indicator()
+
+/**
+ * Called whenever a mob enables CI.
+ *
+ * Plays a sound, sents a message to chat, updates their overlay, and sets the mob's CI status to true.
+ */
+
+/mob/living/proc/enable_combat_indicator()
+	if(COOLDOWN_FINISHED(src, nextcombatpopup))
+		COOLDOWN_START(src, nextcombatpopup, combat_notice_cooldown)
+		var/turf/sound_turf = get_turf(src)
+		var/maxdistance = SOUND_RANGE - 10
+		var/sound_channel = SSsounds.random_available_channel()
+		var/sound/chime = sound('sound/machines/chime.ogg')
+		for(var/mob/M in get_hearers_in_view(maxdistance, sound_turf))
+			if(M == src)
+				continue
+			M.playsound_local(sound_turf, 'sound/machines/chime.ogg', 5, FALSE, null, 4, sound_channel, FALSE, chime, maxdistance, 1)
+		flick_emote_popup_on_mob("combat", 1 SECONDS)
+		var/ciweapon
+		if(get_active_held_item())
+			ciweapon = get_active_held_item()
+			if(istype(ciweapon, /obj/item/gun))
+				visible_message(span_boldwarning("[src] raises \the [ciweapon] with [p_their()] finger on the trigger!"))
+			else
+				visible_message(span_boldwarning("[src] readies \the [ciweapon] with a tightened grip!"))
+		else
+			if(issilicon(src))
+				visible_message(span_boldwarning("[src] shifts its armour plating into a defensive stance!"))
+			if(ishuman(src))
+				visible_message(span_boldwarning("[src] raises [p_their()] fists!"))
+			if(isalien(src))
+				visible_message(span_boldwarning("[src] hisses in a terrifying stance!"))
+			else
+				visible_message(span_boldwarning("[src] gets ready for combat!"))
+	combat_indicator = TRUE
+	apply_status_effect(/datum/status_effect/grouped/surrender, src)
+	log_message("<font color='red'>[src] has turned ON the combat indicator!</font>", LOG_ATTACK)
+	RegisterSignal(src, COMSIG_MOB_STATCHANGE , PROC_REF(ci_on_stat_change))
+	vis_contents += GLOB.combat_indicator_vis
+
+/**
+ * Called whenever a mob disables CI. Or when they die or fall unconscious.
+ *
+ * Arguments:
+ * * involuntary -- Boolean. If true, the mob is dead or unconscious, and the log will reflect that.
+ */
+
+/mob/living/proc/disable_combat_indicator(involuntary = FALSE)
+	combat_indicator = FALSE
+	remove_status_effect(/datum/status_effect/grouped/surrender, src)
+	if(involuntary)
+		log_message("<font color='cyan'>[src] has fallen unconsious or has died, and lost their combat indicator!</font>", LOG_ATTACK)
+	else
+		log_message("<font color='cyan'>[src] has turned OFF the combat indicator!</font>", LOG_ATTACK)
+	UnregisterSignal(src, COMSIG_MOB_STATCHANGE)
+	vis_contents -= GLOB.combat_indicator_vis
+
+/**
+ * Called whenever a mob enters a vehicle/sealed, after everything else.
+ *
+ * Sets the vehicle's CI status to that of the mob if the mob is a driver and there are no other drivers, or if the mob is a passenger and there are no drivers.
+ *
+ * Arguments:
+ * * user -- mob/living, the mob that is entering the vehicle.
+ */
+
+/obj/vehicle/sealed/proc/handle_ci_migration(mob/living/user)
+	if(!typesof(user.loc, /obj/vehicle/sealed)) //Sanity check: If the mob's location (not the tile they are on) is NOT a type of vehicle/sealed, kill the proc.
+		return
+	//If the vehicle can have more passenger seats than driver seats (note: each driver seat counts as a passenger seat) AND both: The mob is not a driver, and the vehicle has a driver, return.
+	if ((src.max_occupants > src.max_drivers) && ((!(user in return_drivers())) && (src.driver_amount() > 0)))
+		return
+	if (user.combat_indicator && !combat_indicator_vehicle) // Finally, if all conditions prior are not met, and the mob has CI enabled and the vehicle doesn't, enable CI.
+		combat_indicator_vehicle = TRUE
+		vis_contents += GLOB.combat_indicator_vis
+
+/**
+ * Called whenever a mob exits a vehicle/sealed, after everything else.
+ *
+ * Disables the vehicle's CI if it was enabled, and if it was the only occupant (or there was noone else in the mech with CI enabled).
+ *
+ * Arguments:
+ * * user -- mob/living, the mob that is exiting the vehicle.
+ */
+
+/obj/vehicle/sealed/proc/disable_ci(mob/living/user)
+	// If the vehicle can have more occupants than drivers, and either 1. The mob is not a driver and the vehicle has drivers, or 2. The user IS a driver but there is an occupant (drivers count as occupants), return.
+	if ((src.max_occupants > src.max_drivers) && ((!(user in return_drivers()) && (src.driver_amount() > 0)) || ((user in return_drivers()) && (src.occupant_amount() > 0))))
+		return
+	// If the preceding conditions are not met, and the vehicle has CI, look at each occupant to see if there is a non-driver with CI enabled. If yes, stop the proc, if no, disable CI.
+	if (combat_indicator_vehicle)
+		var/has_occupant_with_ci = FALSE
+		if (src.occupant_amount() > src.driver_amount())
+			for (var/mob/living/vehicle_occupant in return_occupants())
+				if (vehicle_occupant in return_drivers()) //this for loop does not account for multiple clowns in clown cars. i will not account for that. fuck that.
+					continue
+				if (vehicle_occupant.combat_indicator)
+					has_occupant_with_ci = TRUE
+					break
+		if (!has_occupant_with_ci)
+			combat_indicator_vehicle = FALSE
+			vis_contents -= GLOB.combat_indicator_vis
+
+//#undef COMBAT_NOTICE_COOLDOWN
+
+/mob/living/mouse_buckle_handling(mob/living/M, mob/living/user)
+	if(can_buckle && isliving(user) && isliving(M) && !(M in buckled_mobs))
+		return user_buckle_mob(M, user, check_loc = FALSE)

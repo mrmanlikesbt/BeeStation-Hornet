@@ -13,7 +13,7 @@
 	melee_damage = 10
 	see_in_dark = 8
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
-	deathmessage = "splatters into a pile of black gunk!"
+	death_message = "splatters into a pile of black gunk!"
 	del_on_death = TRUE
 
 	speed = 3
@@ -40,7 +40,7 @@
 	gold_core_spawnable = NO_SPAWN
 	hardattacks = TRUE
 
-	discovery_points = 8000
+	discovery_points = TECHWEB_TIER_4_POINTS
 
 	var/static/list/blacklist_typecache = typecacheof(list(
 		/atom/movable/screen,
