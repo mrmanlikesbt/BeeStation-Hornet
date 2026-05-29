@@ -1,0 +1,4 @@
+author: mrmanlikesbt
+delete-after: true
+changes:
+  - code_imp: The FAST_REFERENCE_TRACKING define no longer causes a compiler error
