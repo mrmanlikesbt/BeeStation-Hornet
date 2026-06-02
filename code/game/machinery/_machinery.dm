@@ -354,16 +354,17 @@
 	power_change()
 
 /**
-  * Opens the machine.
-  *
-  * Will update the machine icon and any user interfaces currently open.
-  * Arguments:
-  * * drop - Boolean. Whether to drop any stored items in the machine. Does not include components.
-  */
-/obj/machinery/proc/open_machine(drop = TRUE)
+ * Opens the machine.
+ *
+ * Will update the machine icon and any user interfaces currently open.
+ * Arguments:
+ * * drop - Boolean. Whether to drop any stored items in the machine. Does not include components.
+ * * density_to_set - Boolean. Whether to make the object dense when it's open.
+ */
+/obj/machinery/proc/open_machine(drop = TRUE, density_to_set = FALSE)
 	SEND_SIGNAL(src, COMSIG_MACHINE_OPEN, drop)
 	state_open = TRUE
-	set_density(FALSE)
+	set_density(density_to_set)
 	if(drop)
 		dump_inventory_contents()
 	update_icon()
@@ -389,13 +390,13 @@
 	LAZYCLEARLIST(component_parts)
 
 /**
-  * Drop every movable atom in the machine's contents list that is not a component_part.
-  *
-  * Proc does not drop components and will skip over anything in the component_parts list.
-  * Call dump_contents() to drop all contents including components.
-  * Arguments:
-  * * subset - If this is not null, only atoms that are also contained within the subset list will be dropped.
-  */
+ * Drop every movable atom in the machine's contents list that is not a component_part.
+ *
+ * Proc does not drop components and will skip over anything in the component_parts list.
+ * Call dump_contents() to drop all contents including components.
+ * Arguments:
+ * * subset - If this is not null, only atoms that are also contained within the subset list will be dropped.
+ */
 /obj/machinery/proc/dump_inventory_contents(list/subset = null)
 	var/turf/this_turf = get_turf(src)
 	for(var/atom/movable/movable_atom in contents)
@@ -427,9 +428,9 @@
 /obj/machinery/proc/can_be_occupant(atom/movable/am)
 	return occupant_typecache ? is_type_in_typecache(am, occupant_typecache) : isliving(am)
 
-/obj/machinery/proc/close_machine(atom/movable/target = null)
+/obj/machinery/proc/close_machine(atom/movable/target, density_to_set = TRUE)
 	state_open = FALSE
-	set_density(TRUE)
+	set_density(density_to_set)
 	if(!target)
 		for(var/am in loc)
 			if (!(can_be_occupant(am)))
@@ -623,35 +624,36 @@
 	return TRUE // If we pass all these checks, woohoo! We can interact
 
 /obj/machinery/proc/check_nap_violations()
-	if(!SSeconomy.full_ancap)
+	if(!SSeconomy.full_ancap || !ishuman(occupant) || state_open)
 		return TRUE
-	if(occupant && !state_open)
-		if(ishuman(occupant))
-			var/mob/living/carbon/human/H = occupant
-			var/obj/item/card/id/I = H.get_idcard(TRUE)
-			if(I)
-				var/datum/bank_account/insurance = I.registered_account
-				if(!insurance)
-					say("[market_verb] NAP Violation: No bank account found.")
-					nap_violation(H)
-					return FALSE
-				else
-					if(!insurance.adjust_money(-fair_market_price))
-						say("[market_verb] NAP Violation: Unable to pay.")
-						nap_violation(H)
-						return FALSE
 
-					// each department (seller_department) will earn the profit
-					if(fair_market_price && seller_department)
-						var/list/dept_list = SSeconomy.get_dept_id_by_bitflag(seller_department)
-						if(length(dept_list))
-							fair_market_price = round(fair_market_price/length(dept_list))
-							for(var/datum/bank_account/department/D in dept_list)
-								D.adjust_money(fair_market_price)
-			else
-				say("[market_verb] NAP Violation: No ID card found.")
-				nap_violation(H)
-				return FALSE
+	var/mob/living/carbon/human/human_occupant = occupant
+	var/obj/item/card/id/idcard = human_occupant.get_idcard(TRUE)
+	if(isnull(idcard))
+		say("[market_verb] NAP Violation: No ID card found.")
+		nap_violation(human_occupant)
+		return FALSE
+
+	var/datum/bank_account/insurance = idcard.registered_account
+	if(!insurance)
+		say("[market_verb] NAP Violation: No bank account found.")
+		nap_violation(human_occupant)
+		return FALSE
+
+	if(!fair_market_price)
+		return TRUE
+
+	if(!insurance.adjust_money(-fair_market_price))
+		say("[market_verb] NAP Violation: Unable to pay.")
+		nap_violation(human_occupant)
+		return FALSE
+	// each department (seller_department) will earn the profit
+	if(seller_department)
+		var/list/dept_list = SSeconomy.get_dept_id_by_bitflag(seller_department)
+		if(length(dept_list))
+			fair_market_price = round(fair_market_price / length(dept_list))
+			for(var/datum/bank_account/department/department_budget in dept_list)
+				department_budget.adjust_money(fair_market_price)
 	return TRUE
 
 /obj/machinery/proc/nap_violation(mob/violator)
@@ -665,7 +667,7 @@
 		user.set_machine(src)
 	. = ..()
 
-/obj/machinery/ui_act(action, params)
+/obj/machinery/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	add_fingerprint(usr)
 	if(isliving(usr) && in_range(src, usr))
 		play_click_sound()
@@ -758,11 +760,12 @@
 		visible_message(span_notice("[usr] pries open \the [src]."), span_notice("You pry open \the [src]."))
 		open_machine()
 
-/obj/machinery/proc/default_deconstruction_crowbar(obj/item/tool, ignore_panel = FALSE)
+/obj/machinery/proc/default_deconstruction_crowbar(obj/item/tool, ignore_panel = FALSE, custom_deconstruct = FALSE)
 	. = (panel_open || ignore_panel) && !(flags_1 & NODECONSTRUCT_1) && tool.tool_behaviour == TOOL_CROWBAR
-	if(.)
-		tool.play_tool_sound(src, 50)
-		deconstruct(TRUE)
+	if(!. || custom_deconstruct)
+		return
+	tool.play_tool_sound(src, 50)
+	deconstruct(TRUE)
 
 /obj/machinery/deconstruct(disassembled = TRUE)
 	if(flags_1 & NODECONSTRUCT_1)

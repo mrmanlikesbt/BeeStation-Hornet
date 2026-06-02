@@ -69,7 +69,7 @@
 		else
 			SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "suffocation")
 	else
-		if(istype(loc, /obj/))
+		if(isobj(loc))
 			var/obj/location_as_object = loc
 			location_as_object.handle_internal_lifeform(src,0)
 
@@ -97,7 +97,7 @@
 		losebreath--
 		if(prob(10))
 			emote("gasp")
-		if(istype(loc, /obj/))
+		if(isobj(loc))
 			var/obj/loc_as_obj = loc
 			loc_as_obj.handle_internal_lifeform(src,0)
 	else
