@@ -3,6 +3,8 @@
   - rscadd: Readded the blast cannon to the traitor uplink
   - bugfix: Fixed the blast cannon being unable to compute bomb strength
 2026-06-02:
+  EvilDragonfiend:
+  - code_imp: improved /icon vv
   Isaacnml:
   - bugfix: Lavaland syndicate base is no longer unpowered 24/7
   - rscadd: You can buy the springlock module from the Uplink at the cost of 2 TC
