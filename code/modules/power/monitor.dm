@@ -10,7 +10,6 @@
 	idle_power_usage = 20
 	active_power_usage = 100
 	circuit = /obj/item/circuitboard/computer/powermonitor
-	tgui_id = "PowerMonitor"
 
 
 
