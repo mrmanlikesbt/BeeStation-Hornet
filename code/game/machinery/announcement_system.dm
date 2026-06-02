@@ -1,5 +1,3 @@
-GLOBAL_LIST_EMPTY(announcement_systems)
-
 /obj/machinery/announcement_system
 	density = TRUE
 	name = "\improper Automated Announcement System"
@@ -33,7 +31,6 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	config_entries = init_subtypes(/datum/aas_config_entry, list())
 	. = ..()
 	radio = new radio_type(src)
-	GLOB.announcement_systems += src
 	update_appearance()
 
 /obj/machinery/announcement_system/randomize_language_if_on_station()
@@ -42,7 +39,6 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 /obj/machinery/announcement_system/Destroy()
 	QDEL_NULL(radio)
 	QDEL_LAZYLIST(config_entries)
-	GLOB.announcement_systems -= src // "OH GOD WHY ARE THERE 100,000 LISTED ANNOUNCEMENT SYSTEMS?!!"
 	return ..()
 
 /obj/machinery/announcement_system/update_icon_state()
