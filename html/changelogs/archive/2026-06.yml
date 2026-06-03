@@ -9,5 +9,9 @@
   - bugfix: Lavaland syndicate base is no longer unpowered 24/7
   - rscadd: You can buy the springlock module from the Uplink at the cost of 2 TC
 2026-06-03:
+  BotTierPC:
+  - rscadd: Added a toggle for moth players to join with burnt and crippled wings.
+  - tweak: Swapped the "Domestic" and "Default" moth eyes, Plus Shaped Eyes are now
+      the Default.
   WhiskeyMarten:
   - bugfix: fixed explorer access across several maps

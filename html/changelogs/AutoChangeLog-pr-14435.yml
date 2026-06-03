@@ -1,6 +1,0 @@
-author: BotTierPC
-delete-after: true
-changes:
-  - rscadd: Added a toggle for moth players to join with burnt and crippled wings.
-  - tweak: Swapped the "Domestic" and "Default" moth eyes, Plus Shaped Eyes are now
-      the Default.
