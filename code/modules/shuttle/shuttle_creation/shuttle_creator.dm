@@ -211,16 +211,16 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 
 	if(!create_shuttle_area(user))
 		return FALSE
-	if(loggedTurfs.len == 0 || !recorded_shuttle_area)
+	if(!length(loggedTurfs) || !recorded_shuttle_area)
 		to_chat(user, span_warning("Invalid shuttle, restarting bluespace systems..."))
 		return FALSE
 
 	var/datum/map_template/shuttle/new_shuttle = new /datum/map_template/shuttle()
 
-	var/obj/docking_port/stationary/stationary_port = new /obj/docking_port/stationary(get_turf(target))
+	var/obj/docking_port/stationary/stationary_port = new(get_turf(target))
 	stationary_port.delete_after = TRUE
 	stationary_port.name = "[recorded_shuttle_area.name] Custom Shuttle construction site"
-	var/obj/docking_port/mobile/port = new /obj/docking_port/mobile(get_turf(target))
+	var/obj/docking_port/mobile/port = new(get_turf(target))
 	port.shuttle_object_type = /datum/orbital_object/shuttle/custom_shuttle
 	port.callTime = 50
 	port.dir = 1	//Point away from space.
@@ -236,8 +236,8 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 	var/invertedDir = invertDir(portDirection)
 	if(!portDirection || !invertedDir)
 		to_chat(usr, span_warning("Shuttle creation aborted, docking airlock must be on an external wall. Please select a new airlock."))
-		port.Destroy()
-		stationary_port.Destroy()
+		qdel(port)
+		qdel(stationary_port)
 		linkedShuttleId = null
 		return FALSE
 	port.dir = invertedDir
@@ -246,8 +246,8 @@ GLOBAL_LIST_EMPTY(custom_shuttle_machines)		//Machines that require updating (He
 
 	if(!calculate_bounds(port))
 		to_chat(usr, span_warning("Bluespace calculations failed, please select a new airlock."))
-		port.Destroy()
-		stationary_port.Destroy()
+		qdel(port)
+		qdel(stationary_port)
 		linkedShuttleId = null
 		return FALSE
 
