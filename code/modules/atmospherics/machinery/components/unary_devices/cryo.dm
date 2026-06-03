@@ -206,6 +206,7 @@
 	SSair.stop_processing_machine(src)
 	soundloop?.stop()
 	machine_hum?.stop()
+	cold_squeaks?.stop()
 
 /obj/machinery/cryo_cell/get_remote_view_fullscreens(mob/user)
 	user.overlay_fullscreen("remote_view", /atom/movable/screen/fullscreen/impaired, 1)
