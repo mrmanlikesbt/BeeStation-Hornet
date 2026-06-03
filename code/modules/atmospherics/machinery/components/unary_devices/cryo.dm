@@ -97,8 +97,9 @@
 	var/on = FALSE
 	/// The sound loop that can be heard when the generator is processing.
 	var/datum/looping_sound/cryo_cell/soundloop
-
-
+	var/datum/looping_sound/cold_machine_squeaks/cold_squeaks
+	var/datum/looping_sound/cold_machine_hum/machine_hum
+	/// Holder for our foggy cold particles
 	var/obj/emitter/fog_particles
 
 /datum/armor/cryo_cell
@@ -112,6 +113,8 @@
 	vis_contents += occupant_vis
 	internal_connector = new(loc, src, dir, CELL_VOLUME * 0.5)
 	soundloop = new(src)
+	cold_squeaks = new(src)
+	machine_hum = new(src)
 // Setup fog particles
 	fog_particles = add_emitter(/obj/emitter/snow/fog, "snow", 10)
 	fog_particles.pixel_y = 8
@@ -127,6 +130,9 @@
 	QDEL_NULL(beaker)
 	QDEL_NULL(internal_connector)
 	QDEL_NULL(soundloop)
+	QDEL_NULL(cold_squeaks)
+	QDEL_NULL(machine_hum)
+	QDEL_NULL(fog_particles)
 	return ..()
 
 /obj/machinery/cryo_cell/add_context_self(datum/screentip_context/context, mob/user)
@@ -193,11 +199,13 @@
 	. = ..()
 	SSair.start_processing_machine(src)
 	soundloop?.start()
+	machine_hum?.start()
 
 /obj/machinery/cryo_cell/end_processing()
 	. = ..()
 	SSair.stop_processing_machine(src)
 	soundloop?.stop()
+	machine_hum?.stop()
 
 /obj/machinery/cryo_cell/get_remote_view_fullscreens(mob/user)
 	user.overlay_fullscreen("remote_view", /atom/movable/screen/fullscreen/impaired, 1)
@@ -278,8 +286,10 @@
 		if(mob_occupant.bodytemperature < T0C) // Sleepytime. Why? More cryo magic.
 			mob_occupant.Unconscious(sleep_factor)
 			vis_contents |= fog_particles
+			cold_squeaks?.start()
 		else
 			vis_contents -= fog_particles
+			cold_squeaks?.stop()
 		if(!QDELETED(beaker))
 			beaker.reagents.trans_to(
 				occupant,
