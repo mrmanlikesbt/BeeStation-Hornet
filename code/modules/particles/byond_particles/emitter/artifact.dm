@@ -55,7 +55,7 @@
 
 //Fog- Like snow but for realism
 /obj/emitter/snow/fog
-	alpha = 190
+	alpha = 195
 	particles = new/particles/snow/fog
 
 /particles/snow/fog
