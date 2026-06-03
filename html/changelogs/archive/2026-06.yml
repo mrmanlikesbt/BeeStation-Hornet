@@ -8,3 +8,6 @@
   Isaacnml:
   - bugfix: Lavaland syndicate base is no longer unpowered 24/7
   - rscadd: You can buy the springlock module from the Uplink at the cost of 2 TC
+2026-06-03:
+  WhiskeyMarten:
+  - bugfix: fixed explorer access across several maps
