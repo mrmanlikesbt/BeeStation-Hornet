@@ -23,3 +23,5 @@
   - bugfix: Runtime has it's own sprite when held again
   - bugfix: Express Cargo Console uses it's own UI again
   - balance: Express Cargo Beacons will last about 6 drop-pods instead of 3
+  Isaacnml:
+  - rscadd: RPED has the functionality to drop certain tiered parts once again
