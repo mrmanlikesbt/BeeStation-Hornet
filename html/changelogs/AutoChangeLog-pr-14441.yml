@@ -1,0 +1,5 @@
+author: Isaac
+delete-after: true
+changes:
+  - bugfix: Express Cargo Console uses it's own UI again
+  - balance: Express Cargo Beacons will last about 6 drop-pods instead of 3
