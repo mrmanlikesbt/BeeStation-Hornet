@@ -55,7 +55,7 @@
 
 //Fog- Like snow but for realism
 /obj/emitter/snow/fog
-	alpha = 195
+	alpha = 150
 	particles = new/particles/snow/fog
 
 /particles/snow/fog
@@ -63,17 +63,17 @@
 	icon_state = list("steam_1" = 1, "steam_2" = 1, "steam_3" = 2)
 	color = "#DEF4EB"
 	count = 200
-	spawning = 10
-	lifespan = 20
-	fade = 20
+	spawning = 6
+	lifespan = 32
+	fade = 27
 	#ifndef SPACEMAN_DMM
 	fadein = 5
 	#endif
 	position = generator("box", list(-12, 5, -12), list(12, 10, 12), UNIFORM_RAND)
 	gravity = null
-	velocity = list(0, -1.5, 0)
+	velocity = list(0, -0.9, 0)
 	friction = list(0, 0.01, 0)
-	drift = generator("box", list(-0.1, 0, -0.1), list(0.1, 0, 0.1), UNIFORM_RAND)
+	drift = generator("box", list(-0.04, 0, 0), list(0.04, 0, 0), UNIFORM_RAND)
 
 ///Electrified
 /obj/emitter/electrified

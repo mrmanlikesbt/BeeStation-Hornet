@@ -117,11 +117,10 @@
 	machine_hum = new(src)
 // Setup fog particles
 	fog_particles = add_emitter(/obj/emitter/snow/fog, "snow", 10)
-	fog_particles.pixel_y = 8
+	fog_particles.pixel_y = 4
 	fog_particles.add_filter("tube_mask", 1, alpha_mask_filter(0, 15, icon('icons/obj/medical/cryogenics.dmi', "mask"), flags = MASK_INVERSE))
 	fog_particles.add_filter("fog_blur", 2, gauss_blur_filter(1.3))
 	fog_particles.add_filter("crunchy_outline", 3, outline_filter(1, "#00000044", flags = OUTLINE_SHARP))
-	vis_contents -= vis_contents[2] //TODO: Remnove this line, just remove smoke particle bug - Racc
 	vis_contents -= fog_particles // We add these back manually when things get chilly
 
 /obj/machinery/cryo_cell/Destroy()
