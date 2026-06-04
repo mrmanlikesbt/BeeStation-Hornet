@@ -1,5 +1,0 @@
-author: mrmanlikesbt, Absolucy
-delete-after: true
-changes:
-  - code_imp: Turret processing has been optimized substantially
-  - bugfix: Fixed turrets not targeting basic mobs
