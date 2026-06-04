@@ -1,4 +1,0 @@
-author: Isaac
-delete-after: true
-changes:
-  - bugfix: Runtime has it's own sprite when held again
