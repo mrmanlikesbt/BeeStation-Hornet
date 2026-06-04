@@ -1,0 +1,6 @@
+author: Isaac
+delete-after: true
+changes:
+  - bugfix: Ores placed by hand on the ORM will give points
+  - bugfix: Fixed lasers not contributing to the ORM's ore multiplier bonus. It can
+      now go up to 3x with fully upgraded parts.
