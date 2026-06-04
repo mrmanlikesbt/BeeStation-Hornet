@@ -1,0 +1,9 @@
+author: mrmanlikesbt, MrMelbert, RikuTheKiller
+delete-after: true
+changes:
+  - bugfix: Fixed various runtimes & harddels
+  - bugfix: Fixed autolathes not dropping their materials on destruction
+  - bugfix: Fixed circuit floors not emitting light
+  - bugfix: Status effects should now tick more consistently
+  - bugfix: Fixed two alert sounds playing when becoming a changeling
+  - code_imp: Stun absorptions have been refactored into a status effect
