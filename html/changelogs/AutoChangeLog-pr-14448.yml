@@ -1,0 +1,4 @@
+author: Isaacnml
+delete-after: true
+changes:
+  - rscadd: RPED has the functionality to drop certain tiered parts once again
