@@ -1,5 +1,0 @@
-author: EvilDragonfiend
-delete-after: true
-changes:
-  - code_imp: VV'ing mobs no longer throws a runtime unnecessarily. Also changed some
-      VV code
