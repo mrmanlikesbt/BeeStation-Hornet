@@ -87,3 +87,6 @@
   - bugfix: Status effects should now tick more consistently
   - bugfix: Fixed two alert sounds playing when becoming a changeling
   - code_imp: Stun absorptions have been refactored into a status effect
+2026-06-05:
+  DrDuckedGoose:
+  - bugfix: Fix particles smoking, again
