@@ -219,14 +219,14 @@
 		'sound/machines/cryo/cryo_9.ogg',
 		'sound/machines/cryo/cryo_10.ogg',
 	)
-	mid_length = 30 SECONDS
+	mid_length = 5 SECONDS
 	volume = 30
 
 /datum/looping_sound/cold_machine_squeaks
 	mid_sounds = list(
 		'sound/machines/cryo/cold_crack_track.ogg',
 	)
-	mid_length = 5 SECONDS
+	mid_length = 30 SECONDS
 	volume = 60
 
 /datum/looping_sound/cold_machine_hum
