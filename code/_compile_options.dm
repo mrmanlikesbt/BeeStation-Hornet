@@ -88,8 +88,10 @@
 
 /// Sets up the reftracker to be used locally, to hunt for hard deletions
 /// Errors are logged to [log_dir]/harddels.log
-//#define REFERENCE_TRACKING_STANDARD
+#define REFERENCE_TRACKING_STANDARD
 #ifdef REFERENCE_TRACKING_STANDARD
+// speed
+#define FAST_REFERENCE_TRACKING
 // compile the backend
 #define REFERENCE_TRACKING
 // actually look for refs
@@ -99,11 +101,6 @@
 // Log references in their own file
 #define REFERENCE_TRACKING_LOG_APART
 #endif // REFERENCE_TRACKING_STANDARD
-
-#ifdef REFERENCE_TRACKING_FAST
-#define REFERENCE_TRACKING
-#define REFERENCE_TRACKING_DEBUG
-#endif
 
 /// If this is uncommented, force our verb processing into just the 2% of a tick
 /// We normally reserve for it
