@@ -88,10 +88,8 @@
 
 /// Sets up the reftracker to be used locally, to hunt for hard deletions
 /// Errors are logged to [log_dir]/harddels.log
-#define REFERENCE_TRACKING_STANDARD
+//#define REFERENCE_TRACKING_STANDARD
 #ifdef REFERENCE_TRACKING_STANDARD
-// speed
-#define FAST_REFERENCE_TRACKING
 // compile the backend
 #define REFERENCE_TRACKING
 // actually look for refs
