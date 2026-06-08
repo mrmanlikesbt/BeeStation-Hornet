@@ -116,7 +116,7 @@
 	cold_squeaks = new(src)
 	machine_hum = new(src)
 // Setup fog particles
-	fog_particles = add_emitter(/obj/emitter/fog, "snow", 10)
+	fog_particles = add_emitter(/obj/emitter/fog, "fog", 10)
 	fog_particles.pixel_y = 4
 	fog_particles.add_filter("tube_mask", 1, alpha_mask_filter(0, 15, icon('icons/obj/medical/cryogenics.dmi', "mask"), flags = MASK_INVERSE))
 	fog_particles.add_filter("fog_blur", 2, gauss_blur_filter(1.3))
