@@ -1,0 +1,7 @@
+author: BotTierPC
+delete-after: true
+changes:
+  - rscadd: Adds a new Telescreen to observe Science Artifact Labs
+  - rscadd: Adds a Artifact Telescreen to Radstation, Flandstation, Cardinalstation,
+      Deltastation, and Boxstation
+  - tweak: The science/explab area gives new artsci network to its camera
