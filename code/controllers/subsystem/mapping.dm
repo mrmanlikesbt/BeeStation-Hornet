@@ -299,7 +299,7 @@ SUBSYSTEM_DEF(mapping)
 		++i
 	//Shared orbital body
 	var/datum/orbital_object/z_linked/orbital_body = new orbital_body_type()
-	for(var/datum/space_level/level as() in space_levels)
+	for(var/datum/space_level/level as anything in space_levels)
 		SSorbits.assoc_z_levels["[level.z_value]"] = orbital_body
 		orbital_body.link_to_z(level)
 
@@ -315,7 +315,7 @@ SUBSYSTEM_DEF(mapping)
 /datum/controller/subsystem/mapping/proc/LoadStationRooms()
 #ifndef UNIT_TESTS
 	var/start_time = REALTIMEOFDAY
-	for(var/obj/effect/spawner/room/R as() in random_room_spawners)
+	for(var/obj/effect/spawner/room/R as anything in random_room_spawners)
 		var/list/possibletemplates = list()
 		var/datum/map_template/random_room/candidate
 		shuffle_inplace(random_room_templates)

@@ -559,14 +559,14 @@
 					if(selected_reaction.mix_sound)
 						playsound(get_turf(cached_my_atom), selected_reaction.mix_sound, 80, 1)
 
-					for(var/mob/M as() in seen)
+					for(var/mob/M as anything in seen)
 						to_chat(M, span_notice("[iconhtml] [selected_reaction.mix_message]"))
 
 				if(istype(cached_my_atom, /obj/item/slime_extract))
 					var/obj/item/slime_extract/ME2 = my_atom
 					ME2.extract_uses--
 					if(ME2.extract_uses <= 0) // give the notification that the slime core is dead
-						for(var/mob/M as() in seen)
+						for(var/mob/M as anything in seen)
 							to_chat(M, span_notice("[iconhtml] \The [my_atom]'s power is consumed in the reaction."))
 							ME2.name = "used slime extract"
 							ME2.desc = "This extract has been used up."
