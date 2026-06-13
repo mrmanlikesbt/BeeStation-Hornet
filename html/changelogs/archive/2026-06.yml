@@ -125,5 +125,7 @@
       Deltastation, and Boxstation
   - tweak: The science/explab area gives new artsci network to its camera
 2026-06-13:
+  llol111:
+  - rscadd: Adds a verb for admins to change what laws the AI will spawn with
   mrmanlikesbt, TealSeer:
   - code_imp: The codebase now supports compilation on the latest byond version
