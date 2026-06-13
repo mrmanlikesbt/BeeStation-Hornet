@@ -1,0 +1,4 @@
+author: mrmanlikesbt, TealSeer
+delete-after: true
+changes:
+  - code_imp: The codebase now supports compilation on the latest byond version
