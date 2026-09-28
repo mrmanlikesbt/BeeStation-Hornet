@@ -193,9 +193,8 @@ SUBSYSTEM_DEF(atoms)
 
 /datum/controller/subsystem/atoms/proc/InitLog()
 	. = ""
-	for(var/path in BadInitializeCalls)
+	for(var/path, fails in BadInitializeCalls)
 		. += "Path : [path] \n"
-		var/fails = BadInitializeCalls[path]
 		if(fails & BAD_INIT_DIDNT_INIT)
 			. += "- Didn't call atom/Initialize(mapload)\n"
 		if(fails & BAD_INIT_NO_HINT)

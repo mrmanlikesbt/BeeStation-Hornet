@@ -59,7 +59,7 @@
 	// =====================================================
 	// Initialise data
 	// =====================================================
-	var/screentip_message = "<span style='line-height: 0' class='maptext extremelybig'>[CENTER(capitalize(format_text(name)))]</span>"
+	var/screentip_message = "<span style='line-height: 0' class='context'>[CENTER(capitalize(format_text(name)))]</span>"
 	var/datum/screentip_cache/cache = GLOB.screentips_cache["[type]"]
 	var/obj/item/held_item = user.get_active_held_item()
 	// =====================================================

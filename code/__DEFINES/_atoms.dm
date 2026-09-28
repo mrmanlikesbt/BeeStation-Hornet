@@ -1,7 +1,7 @@
-#define BAD_INIT_QDEL_BEFORE 1
-#define BAD_INIT_DIDNT_INIT 2
-#define BAD_INIT_SLEPT 4
-#define BAD_INIT_NO_HINT 8
+#define BAD_INIT_QDEL_BEFORE (1<<0)
+#define BAD_INIT_DIDNT_INIT (1<<1)
+#define BAD_INIT_SLEPT (1<<2)
+#define BAD_INIT_NO_HINT (1<<3)
 
 #ifdef PROFILE_MAPLOAD_INIT_ATOM
 #define PROFILE_INIT_ATOM_BEGIN(...) var/__profile_stat_time = TICK_USAGE

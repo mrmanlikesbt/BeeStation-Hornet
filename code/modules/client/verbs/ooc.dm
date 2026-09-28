@@ -79,7 +79,7 @@ AUTH_CLIENT_VERB(ooc, msg as text)
 	var/keyname = display_name
 	var/ooccolor = prefs?.read_player_preference(/datum/preference/color/ooc_color) || DEFAULT_BONUS_OOC_COLOR
 	if(prefs.unlock_content && prefs.read_player_preference(/datum/preference/toggle/member_public))
-		keyname = "<font color='[ooccolor ? ooccolor : GLOB.normal_ooc_colour]'>[icon2html('icons/member_content.dmi', world, "blag")][keyname]</font>"
+		keyname = "<font color='[ooccolor ? ooccolor : GLOB.normal_ooc_colour]'>[icon2html('icons/ui/chat/member_content.dmi', world, "blag")][keyname]</font>"
 	//Get client badges
 	var/badge_data = badge_parse(get_badges())
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url

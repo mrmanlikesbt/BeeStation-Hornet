@@ -1,24 +1,24 @@
 /// How long the chat message's spawn-in animation will occur for
-#define CHAT_MESSAGE_SPAWN_TIME		0.2 SECONDS
+#define CHAT_MESSAGE_SPAWN_TIME (0.2 SECONDS)
 /// How long the chat message will exist prior to any exponential decay
-#define CHAT_MESSAGE_LIFESPAN		5.4 SECONDS
+#define CHAT_MESSAGE_LIFESPAN (5.4 SECONDS)
 /// How long the chat message's end of life fading animation will occur for
-#define CHAT_MESSAGE_EOL_FADE		0.3 SECONDS
+#define CHAT_MESSAGE_EOL_FADE (0.3 SECONDS)
 /// Factor of how much the message index (number of messages) will account to exponential decay
-#define CHAT_MESSAGE_EXP_DECAY		0.7
+#define CHAT_MESSAGE_EXP_DECAY 0.7
 /// Factor of how much height will account to exponential decay
-#define CHAT_MESSAGE_HEIGHT_DECAY	0.9
+#define CHAT_MESSAGE_HEIGHT_DECAY 0.9
 /// Max width of chat message in pixels
-#define CHAT_MESSAGE_WIDTH			128
+#define CHAT_MESSAGE_WIDTH 112
 /// Max length of chat message in characters
-#define CHAT_MESSAGE_MAX_LENGTH		140
+#define CHAT_MESSAGE_MAX_LENGTH 140
 /// The dimensions of the chat message icons
-#define CHAT_MESSAGE_ICON_SIZE		7
+#define CHAT_MESSAGE_ICON_SIZE 9
 /// How much the message moves up before fading out.
 #define MESSAGE_FADE_PIXEL_Y 10
 /// An appropriate estimation of the number of characters per line
 /// Extremely inaccurate, but doesn't need to be
-#define MESSAGE_LINE_LENGTH_ESTIMATE 28
+#define MESSAGE_LINE_LENGTH_ESTIMATE 11
 /// The buffer zone between where the actual message is rendered
 /// and where the hidden message used for spacing is rendered
 /// This just needs to be high enough such that it is off screen
@@ -205,18 +205,26 @@
 		qdel(src)
 		return
 
+	// Non mobs speakers can be small
+	if (!ismob(target))
+		extra_classes |= "small"
+
+	// Why are you yelling?
+	if(copytext_char(text, -2) == "!!")
+		extra_classes |= SPAN_YELL
+
 	var/list/prefixes
 
 	// Append radio icon if from a virtual speaker
 	if (extra_classes.Find("virtual-speaker"))
-		var/image/r_icon = image('icons/ui_icons/chat/chat_icons.dmi', icon_state = "radio")
+		var/image/r_icon = image('icons/ui/chat/chat_icons.dmi', icon_state = "radio")
 		LAZYADD(prefixes, "\icon[r_icon]")
 	else if (extra_classes.Find("emote"))
-		var/image/r_icon = image('icons/ui_icons/chat/chat_icons.dmi', icon_state = "emote")
+		var/image/r_icon = image('icons/ui/chat/chat_icons.dmi', icon_state = "emote")
 		LAZYADD(prefixes, "\icon[r_icon]")
 		tgt_color = COLOR_CHAT_EMOTE
 	else if (extra_classes.Find("looc"))
-		var/image/r_icon = image('icons/ui_icons/chat/chat_icons.dmi', icon_state = "looc")
+		var/image/r_icon = image('icons/ui/chat/chat_icons.dmi', icon_state = "looc")
 		LAZYADD(prefixes, "\icon[r_icon]")
 		tgt_color = COLOR_CHAT_LOOC
 
@@ -234,7 +242,7 @@
 	text = "[prefixes?.Join("&nbsp;")][text]"
 
 	// Approximate text height
-	complete_text = "<span class='center [extra_classes.Join(" ")]' style='color: [tgt_color]'>[target.apply_message_emphasis(text)]</span>"
+	complete_text = "<span style='color: [tgt_color]'><span class='center [extra_classes.Join(" ")]'>[target.apply_message_emphasis(text)]</span></span>"
 	approx_lines = length(text) / MESSAGE_LINE_LENGTH_ESTIMATE
 
 	// Translate any existing messages upwards, apply exponential decay factors to timers

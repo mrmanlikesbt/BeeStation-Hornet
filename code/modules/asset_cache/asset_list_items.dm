@@ -62,14 +62,14 @@
 
 /datum/asset/simple/circuit_assets
 	assets = list(
-		"grid_background.png" = 'icons/ui_icons/tgui/grid_background.png'
+		"grid_background.png" = 'icons/ui/tgui/grid_background.png'
 	)
 
 /datum/asset/simple/radar_assets
 	assets = list(
-		"ntosradarbackground.png"	= 'icons/ui_icons/tgui/ntosradar_background.png',
-		"ntosradarpointer.png"		= 'icons/ui_icons/tgui/ntosradar_pointer.png',
-		"ntosradarpointerS.png"		= 'icons/ui_icons/tgui/ntosradar_pointer_S.png'
+		"ntosradarbackground.png"	= 'icons/ui/tgui/ntosradar_background.png',
+		"ntosradarpointer.png"		= 'icons/ui/tgui/ntosradar_pointer.png',
+		"ntosradarpointerS.png"		= 'icons/ui/tgui/ntosradar_pointer_S.png'
 	)
 
 /datum/asset/spritesheet/simple/stamps
@@ -144,8 +144,8 @@
 	name = "emoji"
 
 /datum/asset/spritesheet_batched/emoji/create_spritesheets()
-	for (var/icon_state_name in icon_states('icons/emoji.dmi'))
-		var/datum/universal_icon/u_icon = uni_icon('icons/emoji.dmi', icon_state_name, SOUTH)
+	for (var/icon_state_name in icon_states(EMOJI_SET))
+		var/datum/universal_icon/u_icon = uni_icon(EMOJI_SET, icon_state_name, SOUTH)
 		u_icon.scale(48, 48)
 		insert_icon("[icon_state_name]", u_icon)
 
@@ -180,43 +180,43 @@
 
 /datum/asset/simple/arcade
 	assets = list(
-		"boss1.gif" = 'icons/ui_icons/Arcade/boss1.gif',
-		"boss2.gif" = 'icons/ui_icons/Arcade/boss2.gif',
-		"boss3.gif" = 'icons/ui_icons/Arcade/boss3.gif',
-		"boss4.gif" = 'icons/ui_icons/Arcade/boss4.gif',
-		"boss5.gif" = 'icons/ui_icons/Arcade/boss5.gif',
-		"boss6.gif" = 'icons/ui_icons/Arcade/boss6.gif',
+		"boss1.gif" = 'icons/ui/arcade//boss1.gif',
+		"boss2.gif" = 'icons/ui/arcade//boss2.gif',
+		"boss3.gif" = 'icons/ui/arcade//boss3.gif',
+		"boss4.gif" = 'icons/ui/arcade//boss4.gif',
+		"boss5.gif" = 'icons/ui/arcade//boss5.gif',
+		"boss6.gif" = 'icons/ui/arcade//boss6.gif',
 		)
 
 /datum/asset/spritesheet/simple/achievements
 	name ="achievements"
 	assets = list(
-		"default" = 'icons/ui_icons/Achievements/default.png'
+		"default" = 'icons/ui/achievements/default.png'
 	)
 
 /datum/asset/spritesheet/simple/condiments
 	name = "condiments"
 	assets = list(
-		CONDIMASTER_STYLE_FALLBACK = 'icons/ui_icons/condiments/bottle.png',
-		"flour" = 'icons/ui_icons/condiments/flour.png',
-		"rice" = 'icons/ui_icons/condiments/rice.png',
-		"sugar" = 'icons/ui_icons/condiments/sugar.png',
-		"milk" = 'icons/ui_icons/condiments/milk.png',
-		"enzyme" = 'icons/ui_icons/condiments/enzyme.png',
-		"capsaicin" = 'icons/ui_icons/condiments/hotsauce.png',
-		"frostoil" = 'icons/ui_icons/condiments/coldsauce.png',
-		"bbqsauce" = 'icons/ui_icons/condiments/bbqsauce.png',
-		"soymilk" = 'icons/ui_icons/condiments/soymilk.png',
-		"soysauce" = 'icons/ui_icons/condiments/soysauce.png',
-		"ketchup" = 'icons/ui_icons/condiments/ketchup.png',
-		"mayonnaise" = 'icons/ui_icons/condiments/mayonnaise.png',
-		"oliveoil" = 'icons/ui_icons/condiments/oliveoil.png',
-		"cooking_oil" = 'icons/ui_icons/condiments/cookingoil.png',
-		"peanut_butter" = 'icons/ui_icons/condiments/peanutbutter.png',
-		"cherryjelly" = 'icons/ui_icons/condiments/cherryjelly.png',
-		"honey" = 'icons/ui_icons/condiments/honey.png',
-		"blackpepper" = 'icons/ui_icons/condiments/peppermillsmall.png',
-		"sodiumchloride" = 'icons/ui_icons/condiments/saltshakersmall.png',
+		CONDIMASTER_STYLE_FALLBACK = 'icons/ui/condiments/bottle.png',
+		"flour" = 'icons/ui/condiments/flour.png',
+		"rice" = 'icons/ui/condiments/rice.png',
+		"sugar" = 'icons/ui/condiments/sugar.png',
+		"milk" = 'icons/ui/condiments/milk.png',
+		"enzyme" = 'icons/ui/condiments/enzyme.png',
+		"capsaicin" = 'icons/ui/condiments/hotsauce.png',
+		"frostoil" = 'icons/ui/condiments/coldsauce.png',
+		"bbqsauce" = 'icons/ui/condiments/bbqsauce.png',
+		"soymilk" = 'icons/ui/condiments/soymilk.png',
+		"soysauce" = 'icons/ui/condiments/soysauce.png',
+		"ketchup" = 'icons/ui/condiments/ketchup.png',
+		"mayonnaise" = 'icons/ui/condiments/mayonnaise.png',
+		"oliveoil" = 'icons/ui/condiments/oliveoil.png',
+		"cooking_oil" = 'icons/ui/condiments/cookingoil.png',
+		"peanut_butter" = 'icons/ui/condiments/peanutbutter.png',
+		"cherryjelly" = 'icons/ui/condiments/cherryjelly.png',
+		"honey" = 'icons/ui/condiments/honey.png',
+		"blackpepper" = 'icons/ui/condiments/peppermillsmall.png',
+		"sodiumchloride" = 'icons/ui/condiments/saltshakersmall.png',
 	)
 
 /datum/asset/spritesheet_batched/medicine_containers
@@ -616,14 +616,14 @@
 	name = "chat"
 
 /datum/asset/spritesheet_batched/chat/create_spritesheets()
-	insert_all_icons("emoji", 'icons/emoji.dmi')
-	insert_all_icons("badge", 'icons/badges.dmi')
+	insert_all_icons("emoji", EMOJI_SET)
+	insert_all_icons("badge", 'icons/ui/chat/badges.dmi')
 	// pre-loading all lanugage icons also helps to avoid meta
-	insert_all_icons("language", 'icons/misc/language.dmi')
+	insert_all_icons("language", 'icons/ui/chat/language.dmi')
 	// catch languages which are pulling icons from another file
 	for(var/datum/language/L as anything in subtypesof(/datum/language))
 		var/icon = initial(L.icon)
-		if (icon != 'icons/misc/language.dmi')
+		if (icon != 'icons/ui/chat/language.dmi')
 			var/icon_state = initial(L.icon_state)
 			insert_icon("language-[icon_state]", uni_icon(icon, icon_state))
 

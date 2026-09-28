@@ -1,5 +1,5 @@
-#define HINT_ICON_FILE 'icons/ui_icons/screentips/cursor_hints.dmi'
-#define HINT_TOOL_ICON_FILE 'icons/ui_icons/screentips/tool_hints.dmi'
+#define HINT_ICON_FILE 'icons/ui/screentips/cursor_hints.dmi'
+#define HINT_TOOL_ICON_FILE 'icons/ui/screentips/tool_hints.dmi'
 
 /// Stores the cursor hint icons for screentip context.
 GLOBAL_LIST_INIT_TYPED(screentip_context_icons, /image, prepare_screentip_context_icons())
